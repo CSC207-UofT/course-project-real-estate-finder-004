@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public class Property {
     private String streetAddress;
     private String city;
@@ -8,11 +10,11 @@ public class Property {
     private int sqft;
     private int numberOfRoom;
     private int numberOfBathrooms;
-    private Map<String, boolean> Amenities;
-    //private RealEstateAgent agent;
+    private Map<String, Boolean> Amenities;
+    private RealEstateAgent agent;
+    private Seller owner;
 
-
-    public property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities){
+    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Seller owner) {
         this.streetAddress = streetAddress;
         this.city = city;
         this.province = province;
@@ -23,11 +25,11 @@ public class Property {
         this.numberOfRoom = numberOfRoom;
         this.numberOfBathrooms = numberOfBathrooms;
         this.Amenities = amenities;
-        //this.agent = new RealEstateAgent();
-
+        this.owner = owner;
+        this.agent = new RealEstateAgent(this.owner);
     }
 
-    public String getStreetAddress(){
+    public String getStreetAddress() {
         return streetAddress;
     }
 
@@ -63,7 +65,7 @@ public class Property {
         return numberOfBathrooms;
     }
 
-    public Map<String, boolean> getAmenities() {
+    public Map<String, Boolean> getAmenities() {
         return Amenities;
     }
 
@@ -95,8 +97,8 @@ public class Property {
         this.sqft = sqft;
     }
 
-    public float pricepersqft(){
-        return this.price/this.sqft;
+    public float pricepersqft() {
+        return this.price / this.sqft;
     }
 
     public void setNumberOfRoom(int numberOfRoom) {
@@ -107,7 +109,7 @@ public class Property {
         this.numberOfBathrooms = numberOfBathrooms;
     }
 
-    public void setAmenities(Map<String, boolean> amenities) {
+    public void setAmenities(Map<String, Boolean> amenities) {
         Amenities = amenities;
     }
 }

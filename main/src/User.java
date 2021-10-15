@@ -45,6 +45,3 @@ public class User {
 
 }
 
-
-// number of bathroom
-// amenities
