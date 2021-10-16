@@ -13,27 +13,4 @@ public class UserTest {
     public void TestUserGetPassword() {
         assert users[0].getPassword().equals("1234");
     }
-//
-//    @RunCLI(timeout = 50)
-//    public void TestEnhanceBagsTrue() {
-//        BagMain.enhanceBags(bags, true);
-//        assertEquals(4, bags[0].getCapacity());
-//        assertEquals(5, bags[1].getCapacity());
-//        assertEquals(6, bags[2].getCapacity());
-//        assertEquals(7, bags[3].getCapacity());
-//    }
-//    @RunCLI(timeout = 50)
-//    public void TestEnhanceBagsFalse() {
-//        BagMain.enhanceBags(bags, false);
-//        assertEquals(3, bags[0].getCapacity());
-//        assertEquals(5, bags[1].getCapacity());
-//        assertEquals(5, bags[2].getCapacity());
-//        assertEquals(7, bags[3].getCapacity());
-//    }
-//
-//    @RunCLI(timeout = 50)
-//    public void TestCountCrossbodyStraps() {
-//        assertEquals(6, BagMain.countCrossbodyStraps(bags));
-//    }
-
 }
