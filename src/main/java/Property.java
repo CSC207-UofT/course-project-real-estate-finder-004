@@ -127,7 +127,7 @@ public class Property {
         Amenities = amenities;
     }
 
-    public void updateavailability(Boolean availability) {
-        this.avaliability = availability;
+    public void updateAvailability(Boolean availability) {
+        this.availability = availability;
     }
 }
