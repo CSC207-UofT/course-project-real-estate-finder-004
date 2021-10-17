@@ -88,6 +88,7 @@ public class CommandLine {
         // Check if password corresponds to the right username
         if (users.containsKey(login_username) && users.get(login_username).getPassword().equals(login_password)) {
             System.out.println("Login successful!");
+            chooseAfterLogin((Seller) users.get(login_username));
         } else {
             System.out.println("Your username or password is not recognized, please try again.");
             choose();
@@ -106,8 +107,9 @@ public class CommandLine {
 
             } else{
                 for (Property myProperty : user.getProperties()){
-                    System.out.println("Property");
-
+                    System.out.println("Address: " + myProperty.getStreetAddress() + " " + myProperty.getCity() + " " + myProperty.getProvince());
+                    System.out.println(myProperty.getSqft() + " square feet");
+                    System.out.println("Price: $" + myProperty.getPrice());
                 }
             }
         }
