@@ -9,11 +9,12 @@ public class CommandLine {
     /*
      */
     private HashMap<String, User> users = new HashMap<>();
-    public void createUser(User user){
+
+    public void createUser(User user) {
         users.put(user.getUsername(), user);
     }
 
-    public void choose () throws IOException{
+    public void choose() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Hi! If you would like to signup, please type in 1. If you would like to login, " +
@@ -21,15 +22,14 @@ public class CommandLine {
 
         String choice = reader.readLine();
 
-        if (choice.equals("1")){
+        if (choice.equals("1")) {
             signup();
-        }
-        else {
+        } else {
             login();
         }
     }
 
-    public void signup() throws IOException{
+    public void signup() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Sign up here!");
@@ -62,22 +62,21 @@ public class CommandLine {
         //System.out.println(password.equals(password_confirm));
 
         boolean password_confirmed = password.equals(password_confirm);
-        if (password_confirmed == false){
+        if (password_confirmed == false) {
             System.out.println("Password does not match. Please enter your password again. Thanks!");
             password_confirm = reader.readLine();
         }
 
         // Confirm of creating an account
-        users.put(username, new User(name, username, email, phone, password));
+        users.put(username, new Seller(name, username, email, phone, password));
         System.out.println("Thank you for signing up, " + name + " login to begin");
-
 
 
         // Call login()
         login();
     }
 
-    public void login() throws IOException{
+    public void login() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Welcome back! Please enter your username");
@@ -94,4 +93,22 @@ public class CommandLine {
             choose();
         }
     }
-}
+
+    public void chooseAfterLogin(Seller user) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Select 1 to add a listing, select 2 to view your listings.");
+        String seller_mode = reader.readLine();
+        if (seller_mode.equals("1")) {
+            //    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Seller owner) {
+            System.out.println("");
+
+//            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, numberOfRoom, numberOfBathrooms, amenities, owner) {
+
+            } else{
+                for (Property myProperty : user.getProperties()){
+                    System.out.println("Property");
+
+                }
+            }
+        }
+    }
