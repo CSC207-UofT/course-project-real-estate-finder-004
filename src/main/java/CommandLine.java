@@ -103,10 +103,11 @@ public class CommandLine {
             //    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Seller owner) {
             System.out.println("");
 
-//            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, numberOfRoom, numberOfBathrooms, amenities, owner) {
+
 
             } else{
                 for (Property myProperty : user.getProperties()){
+                    System.out.println("Property: ");
                     System.out.println("Address: " + myProperty.getStreetAddress() + " " + myProperty.getCity() + " " + myProperty.getProvince());
                     System.out.println(myProperty.getSqft() + " square feet");
                     System.out.println("Price: $" + myProperty.getPrice());
