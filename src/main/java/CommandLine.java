@@ -100,10 +100,22 @@ public class CommandLine {
         System.out.println("Select 1 to add a listing, select 2 to view your listings.");
         String seller_mode = reader.readLine();
         if (seller_mode.equals("1")) {
-            //    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Seller owner) {
-            System.out.println("");
-
-
+            System.out.println("Enter Street Address:");
+            String streetAddress = reader.readLine();
+            System.out.println("Enter City:");
+            String city = reader.readLine();
+            System.out.println("Enter Province:");
+            String province = reader.readLine();
+            System.out.println("Enter Country:");
+            String country = reader.readLine();
+            System.out.println("Enter Postal Code:");
+            String postalCode = reader.readLine();
+            System.out.println("Enter Price:");
+            float price = Float.parseFloat(reader.readLine());
+            System.out.println("Enter Street Total Square Feet:");
+            int sqft = Integer.parseInt(reader.readLine());
+            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user);
+            user.addProperty(property);
 
             } else{
                 for (Property myProperty : user.getProperties()){
@@ -113,5 +125,6 @@ public class CommandLine {
                     System.out.println("Price: $" + myProperty.getPrice());
                 }
             }
+            chooseAfterLogin(user);
         }
     }
