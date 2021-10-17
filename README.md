@@ -1,6 +1,5 @@
-## Replace this README.md!
+# Real Estate Finder
 
-This is a standard README.md file for you to replace. You'll want to include your own content here!
+We will be using a register and login system.
 
-MD (Markdown) files use [Markdown formatting](https://guides.github.com/features/mastering-markdown/): 
-these look very much like .txt files, so you can write them in a very similar way.
+Agent is a helper class for Property and users?
