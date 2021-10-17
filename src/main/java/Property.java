@@ -11,10 +11,11 @@ public class Property {
     private int numberOfRoom;
     private int numberOfBathrooms;
     private Map<String, Boolean> Amenities;
+    private boolean availability;
     private RealEstateAgent agent;
     private Seller owner;
 
-    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Seller owner) {
+    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
         this.streetAddress = streetAddress;
         this.city = city;
         this.province = province;
@@ -26,6 +27,7 @@ public class Property {
         this.numberOfBathrooms = numberOfBathrooms;
         this.Amenities = amenities;
         this.owner = owner;
+        this.availability = availability;
         this.agent = new RealEstateAgent(this.owner);
     }
 
@@ -123,5 +125,9 @@ public class Property {
 
     public void setAmenities(Map<String, Boolean> amenities) {
         Amenities = amenities;
+    }
+
+    public void updateavailability(Boolean availability) {
+        this.avaliability = availability;
     }
 }
