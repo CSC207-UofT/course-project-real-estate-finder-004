@@ -29,6 +29,18 @@ public class Property {
         this.agent = new RealEstateAgent(this.owner);
     }
 
+    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner){
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.price = price;
+        this.sqft = sqft;
+        this.owner = owner;
+        this.agent = new RealEstateAgent(this.owner);
+    }
+
     public String getStreetAddress() {
         return streetAddress;
     }
