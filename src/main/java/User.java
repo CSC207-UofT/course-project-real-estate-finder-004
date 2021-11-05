@@ -6,6 +6,9 @@ public class User {
     private String password;
 
     public User(String name, String username, String email, String phone, String password) {
+        if (phone.length() != 10) {
+            throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
+        }
         this.name = name;
         this.username = username;
         this.email = email;
@@ -15,10 +18,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -33,8 +32,10 @@ public class User {
         return password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhone() { return phone; }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String email) {
@@ -50,8 +51,9 @@ public class User {
     }
 
     public void setPhone(String phone) {
+        if (phone.length() != 10) {
+            throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
+        }
         this.phone = phone;
     }
-
 }
-
