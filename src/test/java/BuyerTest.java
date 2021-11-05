@@ -23,7 +23,7 @@ public class BuyerTest {
         Property p1 = new Property("75 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 450000, 350, 1, 1, a, true, s);
         Property p2 = new Property("85 St. George St", "Toronto", "Ontario", "Canada",
-                "M5S 2E5", 350000, 400, s);
+                "M5S 2E5", 350000, 400, s, true);
         assertTrue(b.getInterestedProperties().isEmpty());
         b.shortListProperty(p1);
         assertTrue(b.getInterestedProperties().contains(p1));
@@ -41,7 +41,7 @@ public class BuyerTest {
         Property p1 = new Property("75 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 450000, 350, 1, 1, a, true, s);
         Property p2 = new Property("85 St. George St", "Toronto", "Ontario", "Canada",
-                "M5S 2E5", 350000, 400, s);
+                "M5S 2E5", 350000, 400, s, true);
         b.shortListProperty(p1);
         assertTrue(b.getInterestedProperties().contains(p1));
         b.shortListProperty(p2);
