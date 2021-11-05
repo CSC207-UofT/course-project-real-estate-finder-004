@@ -1,11 +1,13 @@
 import java.io.IOException;
+import java.util.HashMap;
 
 public class RunCLI {
     public static void main(String[] args) throws IOException {
-        CommandLine test_command = new CommandLine();
-        Seller user1 = new Seller("John Smith", "jsmith", "1234@gmail.com", "1234567890", "1234");
-        user1.addProperty(new Property("6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, user1, true));
-        test_command.createUser(user1);
+        UserStorage myHashMapStorage = new HashMapUserStorage();
+        CreateUser myCreateUser = new CreateUser(myHashMapStorage);
+        myCreateUser.createSeller("John Smith", "jsmith", "1234@gmail.com", "1234567890", "1234");
+        CreateProperty.createProperty((Seller) myHashMapStorage.getUser("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        CommandLine test_command = new CommandLine(System.in, myHashMapStorage);
         test_command.choose();
     }
 }

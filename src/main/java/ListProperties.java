@@ -1,5 +1,5 @@
 public class ListProperties {
-    public String getListOfProperties(Seller user) {
+    public static String getListOfProperties(Seller user) {
         StringBuilder returnString = new StringBuilder();
         for (Property property: user.getProperties()) {
             returnString.append("Property: \n");

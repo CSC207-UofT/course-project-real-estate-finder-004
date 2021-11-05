@@ -1,6 +1,6 @@
 public class CreateProperty {
-    public void createProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft) {
-        Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user, false);
+    public static void createProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
+        Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user, availability);
         user.addProperty(property);
     }
 }

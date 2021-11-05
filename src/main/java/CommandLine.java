@@ -8,14 +8,16 @@ import java.util.HashMap;
 public class CommandLine {
     /*
      */
-    private HashMap<String, User> users = new HashMap<>();
+    private final InputStream input;
+    private final UserStorage users;
 
-    public void createUser(User user) {
-        users.put(user.getUsername(), user);
+    public CommandLine(InputStream input, UserStorage users) {
+        this.input = input;
+        this.users = users;
     }
 
     public void choose() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Hi! If you would like to signup, please type in 1. If you would like to login, " +
                 "please type in 2.");
@@ -30,7 +32,7 @@ public class CommandLine {
     }
 
     public void signup() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Sign up here!");
         // Input name
@@ -62,13 +64,15 @@ public class CommandLine {
         //System.out.println(password.equals(password_confirm));
 
         boolean password_confirmed = password.equals(password_confirm);
-        if (password_confirmed == false) {
+        if (!password_confirmed) {
             System.out.println("Password does not match. Please enter your password again. Thanks!");
             password_confirm = reader.readLine();
         }
 
         // Confirm of creating an account
-        users.put(username, new Seller(name, username, email, phone, password));
+//        users.put(username, new Seller(name, username, email, phone, password));
+        CreateUser myCreateUser = new CreateUser(users);
+        myCreateUser.createSeller(name, username, email, phone, password);
         System.out.println("Thank you for signing up, " + name + " login to begin");
 
 
@@ -77,7 +81,7 @@ public class CommandLine {
     }
 
     public void login() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Welcome back! Please enter your username");
         String login_username = reader.readLine();
@@ -85,18 +89,25 @@ public class CommandLine {
         System.out.println("Please enter your password.");
         String login_password = reader.readLine();
 
-        // Check if password corresponds to the right username
-        if (users.containsKey(login_username) && users.get(login_username).getPassword().equals(login_password)) {
-            System.out.println("Login successful!");
-            chooseAfterLogin((Seller) users.get(login_username));
-        } else {
+
+        LoginUser myLogin = new LoginUser();
+        User myUser = users.getUser(login_username);
+        if (myUser == null) {
             System.out.println("Your username or password is not recognized, please try again.");
             choose();
+        } else {
+            if (myLogin.loginUser(myUser, login_password)) {
+                System.out.println("Login successful!");
+                chooseAfterLogin((Seller) users.getUser(login_username));
+            } else {
+                System.out.println("Your username or password is not recognized, please try again.");
+                choose();
+            }
         }
     }
 
     public void chooseAfterLogin(Seller user) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         System.out.println("Select 1 to add a listing, select 2 to view your listings.");
         String seller_mode = reader.readLine();
         if (seller_mode.equals("1")) {
@@ -114,17 +125,11 @@ public class CommandLine {
             float price = Float.parseFloat(reader.readLine());
             System.out.println("Enter Street Total Square Feet:");
             int sqft = Integer.parseInt(reader.readLine());
-            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user, false);
-            user.addProperty(property);
 
-            } else{
-                for (Property myProperty : user.getProperties()){
-                    System.out.println("Property: ");
-                    System.out.println("Address: " + myProperty.getStreetAddress() + " " + myProperty.getCity() + " " + myProperty.getProvince());
-                    System.out.println(myProperty.getSqft() + " square feet");
-                    System.out.println("Price: $" + myProperty.getPrice());
-                }
-            }
-            chooseAfterLogin(user);
+            CreateProperty.createProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
+        } else {
+            System.out.println(ListProperties.getListOfProperties(user));
         }
+        chooseAfterLogin(user);
     }
+}
