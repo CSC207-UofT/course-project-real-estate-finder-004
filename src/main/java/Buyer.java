@@ -11,4 +11,8 @@ public class Buyer extends User {
         interestedProperties.add(property);
     }
 
+    public ArrayList<Property> getInterestedProperties() {
+        return interestedProperties;
+    }
+
 }
