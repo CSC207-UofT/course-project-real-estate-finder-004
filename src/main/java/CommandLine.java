@@ -114,7 +114,7 @@ public class CommandLine {
             float price = Float.parseFloat(reader.readLine());
             System.out.println("Enter Street Total Square Feet:");
             int sqft = Integer.parseInt(reader.readLine());
-            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user);
+            Property property = new Property(streetAddress, city, province, country, postalCode, price, sqft, user, false);
             user.addProperty(property);
 
             } else{
