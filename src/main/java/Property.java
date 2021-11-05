@@ -31,7 +31,7 @@ public class Property {
         this.agent = new RealEstateAgent(this.owner);
     }
 
-    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner){
+    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner, boolean availability){
         this.streetAddress = streetAddress;
         this.city = city;
         this.province = province;
@@ -41,6 +41,7 @@ public class Property {
         this.sqft = sqft;
         this.owner = owner;
         this.agent = new RealEstateAgent(this.owner);
+        this.availability = availability;
     }
 
     public String getStreetAddress() {
@@ -78,9 +79,14 @@ public class Property {
     public int getNumberOfBathrooms() {
         return numberOfBathrooms;
     }
+    public Seller getOwner() {return owner;}
 
     public Map<String, Boolean> getAmenities() {
         return Amenities;
+    }
+
+    public boolean getAvaliability() {
+        return availability;
     }
 
     public void setStreetAddress(String streetAddress) {
@@ -127,7 +133,9 @@ public class Property {
         Amenities = amenities;
     }
 
-    public void updateAvailability(Boolean availability) {
+    public void setOwner(Seller owner) {this.owner = owner;}
+
+    public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
 }
