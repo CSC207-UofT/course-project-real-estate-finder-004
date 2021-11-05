@@ -9,8 +9,11 @@ public class UserTest {
         User user2 = new User("Paul Gries", "pgries", "adsfsgrdhtjyt", "1234567", "csc207");
         users = new User[]{user1, user2};
     }
-    @Test(timeout = 50)
+    @Test(timeout=50)
     public void TestUserGetPassword() {
         assert users[0].getPassword().equals("1234");
     }
+
+    @Test(timeout=50)
+    public void TestUserGetName(){ assert users[0].getName().equals("John Smith"); }
 }
