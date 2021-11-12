@@ -112,7 +112,7 @@ public class PropertyTest {
     }
 
     @Test(timeout = 50)
-    public void TestUpdateAvaliability(){
+    public void TestUpdateAvailability(){
         properties[0].setAvailability(false);
         assert ! properties[0].getAvaliability();
     }
