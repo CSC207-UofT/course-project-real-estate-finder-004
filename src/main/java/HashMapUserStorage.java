@@ -1,6 +1,7 @@
 import java.util.HashMap;
 
 public class HashMapUserStorage implements UserStorage{
+    // Key - UserName
     private final HashMap<String, User> users = new HashMap<>();
     @Override
     public void addUser(User user) {
