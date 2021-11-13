@@ -16,4 +16,6 @@ public class HashMapUserStorage implements UserStorage{
     public void removeUser(String username) {
         users.remove(username);
     }
+
+    public HashMap<String, User> getUsers(){return users;}
 }
