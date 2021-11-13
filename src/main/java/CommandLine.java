@@ -66,8 +66,7 @@ public class CommandLine {
         boolean password_confirmed = password.equals(password_confirm);
         if (!password_confirmed) {
             System.out.println("Password does not match. Please enter your password again. Thanks!");
-            password_confirm = reader.readLine();
-        }
+            }
 
         // Confirm of creating an account
 //        users.put(username, new Seller(name, username, email, phone, password));
@@ -108,7 +107,8 @@ public class CommandLine {
 
     public void chooseAfterLogin(Seller user) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-        System.out.println("Select 1 to add a listing, select 2 to view your listings.");
+        System.out.println("Select 1 to add a listing, select 2 to view your listings. You have"
+                + user.noOfUnreadMessages() + "unread messages. Select 3 to view your messages.");
         String seller_mode = reader.readLine();
         if (seller_mode.equals("1")) {
             System.out.println("Enter Street Address:");
@@ -127,8 +127,17 @@ public class CommandLine {
             int sqft = Integer.parseInt(reader.readLine());
 
             CreateProperty.createProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
-        } else {
+        } else if (seller_mode.equals("2")) {
             System.out.println(ListProperties.getListOfProperties(user));
+        } else if (seller_mode.equals("3")) {
+            if (user.noOfUnreadMessages() == 0) {
+                System.out.println("You have no unread messages.");
+            } else {
+                System.out.println(user.getUnreadMessagesString(user.getUnreadMessages()));
+                System.out.println("Enter the corresponding message number if you would like to mark it as read.");
+                int messageNumber = Integer.parseInt(reader.readLine());
+                user.messageRead(user.getUnreadMessages().get(messageNumber - 1));
+            } // May be violating single responsibility principle, look into it later.
         }
         chooseAfterLogin(user);
     }
