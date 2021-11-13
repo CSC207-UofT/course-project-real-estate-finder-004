@@ -7,7 +7,12 @@ public class User {
 
     public User(String name, String username, String email, String phone, String password) {
         if (phone.length() != 10) {
-            throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
+            throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again.");
+        }
+        try {
+            double d = Double.parseDouble(phone);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("Your phone number should only contain numeric values. Please input again.");
         }
         this.name = name;
         this.username = username;
@@ -53,6 +58,11 @@ public class User {
     public void setPhone(String phone) {
         if (phone.length() != 10) {
             throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
+        }
+        try {
+            double d = Double.parseDouble(phone);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("Your phone number should only contain numeric values. Please input again.");
         }
         this.phone = phone;
     }
