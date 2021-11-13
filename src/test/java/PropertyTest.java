@@ -2,10 +2,12 @@ import org.junit.*;
 
 public class PropertyTest {
     Property[] properties;
+    Seller user1;
+    Seller user2;
     @Before
     public void setUp(){
-        Seller user1 = (Seller) new User("Tony Stark", "tstark", "tonystark@gmail.com", "2129704133", "starkindustries");
-        Seller user2 = (Seller) new User("Paul Gries", "pgries", "pgries@cs.toronto.edu", "1231231231", "csc207");
+        user1 = new Seller("Tony Stark", "tstark", "tonystark@gmail.com", "2129704133", "starkindustries");
+        user2 = new Seller("Paul Gries", "pgries", "pgries@cs.toronto.edu", "1231231231", "csc207");
         Property property1 = new Property("10880 Malibu Point", "Malibu", "California", "United States", "90265", 620000, 500, user1, true);
         Property property2 = new Property("RM4234, 40 St. George St", "Toronto", "ON", "Canada", "M5S 2E4", 1142000, 1000, user2, true);
         properties = new Property[]{property1, property2};
@@ -47,13 +49,12 @@ public class PropertyTest {
 
     @Test(timeout = 50)
     public void TestPropertyGetOwner() {
-        Seller user1 = (Seller) new User("Tony Stark", "tstark", "tonystark@gmail.com", "2129704133", "starkindustries");
         assert properties[0].getOwner().equals(user1);
     }
 
     @Test(timeout = 50)
     public void TestPropertyGetAvailability() {
-        assert ! properties[0].getAvaliability();
+        assert properties[0].getAvaliability();
     }
 
     @Test(timeout = 50)
@@ -83,24 +84,24 @@ public class PropertyTest {
     @Test(timeout = 50)
     public void TestPropertySetPostalCode() {
         properties[1].setPostalCode("90569");
-        assert properties[0].getPostalCode().equals("90569");
+        assert properties[1].getPostalCode().equals("90569");
     }
 
     @Test(timeout = 50)
     public void TestPropertySetPrice() {
         properties[1].setPrice(5000000);
-        assert properties[0].getPrice() == 5000000;
+        assert properties[1].getPrice() == 5000000;
     }
 
     @Test(timeout = 50)
     public void TestPropertySetSqft() {
         properties[1].setSqft(1000);
-        assert properties[0].getSqft() == 1000;
+        assert properties[1].getSqft() == 1000;
     }
 
     @Test(timeout = 50)
     public void TestPropertySetOwner() {
-        Seller user3 = (Seller) new User("Steve Roger", "sroger", "steveroger@gmail.com", "6781367092", "captainamerica");
+        Seller user3 = new Seller("Steve Roger", "sroger", "steveroger@gmail.com", "6781367092", "captainamerica");
         properties[1].setOwner(user3);
         assert properties[1].getOwner().equals(user3);
     }
@@ -111,7 +112,7 @@ public class PropertyTest {
     }
 
     @Test(timeout = 50)
-    public void TestUpdateAvaliability(){
+    public void TestUpdateAvailability(){
         properties[0].setAvailability(false);
         assert ! properties[0].getAvaliability();
     }
