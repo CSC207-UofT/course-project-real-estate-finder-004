@@ -8,9 +8,6 @@ public class User implements Serializable {
     private String password;
 
     public User(String name, String username, String email, String phone, String password) {
-        if (phone.length() != 10) {
-            throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
-        }
         this.name = name;
         this.username = username;
         this.email = email;

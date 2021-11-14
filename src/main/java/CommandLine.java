@@ -1,5 +1,9 @@
+import Exceptions.LoginUserNotFoundException;
+import Exceptions.LoginWrongPasswordException;
+import Exceptions.SignUpPasswordMatchException;
+import Exceptions.SignUpPhoneNumberLengthException;
+
 import java.io.*;
-import java.util.HashMap;
 
 // Edits:
 /*
@@ -9,14 +13,14 @@ public class CommandLine {
     /*
      */
     private final InputStream input;
-    private final UserStorage users;
+    private final DatabaseManager manager;
 
-    public CommandLine(InputStream input, UserStorage users) {
+    public CommandLine(InputStream input, DatabaseManager manager) {
         this.input = input;
-        this.users = users;
+        this.manager = manager;
     }
 
-    public void choose() throws IOException {
+    public void main_menu() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Hi! If you would like to signup, please type in 1. If you would like to login, " +
@@ -39,6 +43,10 @@ public class CommandLine {
         System.out.println("Please enter your name");
         String name = reader.readLine();
 
+        // Input user type
+        System.out.println("Are you a buyer or seller? enter B/S");
+        String user_type = reader.readLine().toLowerCase();
+
         //Input username
         System.out.println("Please enter your username");
         String username = reader.readLine();
@@ -60,24 +68,18 @@ public class CommandLine {
         String password_confirm = reader.readLine();
 
 
-        // Check if password matches
-        //System.out.println(password.equals(password_confirm));
+        try {
+            // Verify info
+            manager.signUpVerify(name, user_type, username, email , phone, password, password_confirm);
+            manager.signUp(name, user_type, username, email, phone, password);
+            System.out.println("Thank you for signing up, " + name + " login to begin");
 
-        boolean password_confirmed = password.equals(password_confirm);
-        if (!password_confirmed) {
-            System.out.println("Password does not match. Please enter your password again. Thanks!");
-            password_confirm = reader.readLine();
+            // Call login()
+            login();
+        } catch (SignUpPasswordMatchException | SignUpPhoneNumberLengthException e) {
+            System.out.println(e.getMessage());
+            main_menu();
         }
-
-        // Confirm of creating an account
-//        users.put(username, new Seller(name, username, email, phone, password));
-        CreateUser myCreateUser = new CreateUser(users);
-        myCreateUser.createSeller(name, username, email, phone, password);
-        System.out.println("Thank you for signing up, " + name + " login to begin");
-
-
-        // Call login()
-        login();
     }
 
     public void login() throws IOException {
@@ -89,24 +91,22 @@ public class CommandLine {
         System.out.println("Please enter your password.");
         String login_password = reader.readLine();
 
-
-        LoginUser myLogin = new LoginUser();
-        User myUser = users.getUser(login_username);
-        if (myUser == null) {
-            System.out.println("Your username or password is not recognized, please try again.");
-            choose();
-        } else {
-            if (myLogin.loginUser(myUser, login_password)) {
-                System.out.println("Login successful!");
-                chooseAfterLogin((Seller) users.getUser(login_username));
-            } else {
-                System.out.println("Your username or password is not recognized, please try again.");
-                choose();
-            }
+        try {
+            User user = manager.loginUser(login_username, login_password);
+            System.out.println("Login successful!");
+            after_login_menu(user);
+        } catch (LoginUserNotFoundException | LoginWrongPasswordException e){
+            System.out.println(e.getMessage());
+            main_menu();
         }
     }
 
-    public void chooseAfterLogin(Seller user) throws IOException {
+    public void after_login_menu(User user) throws IOException{
+        // TODO must check if it's seller or buyer and then show the appropriate menu
+        after_login_menu_seller((Seller) user);
+    }
+
+    public void after_login_menu_seller(Seller user) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         System.out.println("Select 1 to add a listing, select 2 to view your listings.");
         String seller_mode = reader.readLine();
@@ -130,6 +130,6 @@ public class CommandLine {
         } else {
             System.out.println(ListProperties.getListOfProperties(user));
         }
-        chooseAfterLogin(user);
+        after_login_menu(user);
     }
 }
