@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 
 public class CommandLineSeller extends CommandLine {
 
-    public CommandLineSeller(InputStream input, UserStorage users) {
-        super(input, users);
+    public CommandLineSeller(InputStream input, DatabaseManager manager) {
+        super(input, manager);
     }
 
     public void choicesUser(Seller user) throws IOException {
