@@ -2,9 +2,9 @@ import java.io.IOException;
 
 public class UserCreator {
     private UserStorage userStorage;
-    private UserStorageReadWriter readWriter;
+    private StorageReadWriter readWriter;
 
-    public UserCreator(UserStorage userStorage, UserStorageReadWriter readWriter) {
+    public UserCreator(UserStorage userStorage, StorageReadWriter readWriter) {
         this.userStorage = userStorage;
         this.readWriter = readWriter;
     }
@@ -23,7 +23,7 @@ public class UserCreator {
         if (newUser != null){
             this.userStorage.addUser(newUser);
             try {
-                readWriter.saveToFile("src/users.ser", userStorage);
+                readWriter.saveToFile(userStorage);
             }catch (IOException e){
                 System.out.println(e.getMessage());
             }
