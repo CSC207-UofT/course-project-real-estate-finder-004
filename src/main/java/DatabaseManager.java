@@ -1,13 +1,12 @@
 import Exceptions.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class DatabaseManager {
 
     private UserStorage userStorage;
     private UserCreator userCreator;
-    private UserStorageReadWriter readWriter;
+    private UserStorageReadWriter userReadWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if(! password.equals(password_confirm)){
@@ -42,14 +41,14 @@ public class DatabaseManager {
     }
 
     public DatabaseManager(){
-        this.readWriter = new UserStorageReadWriter();
+        this.userReadWriter = new UserStorageReadWriter();
         try {
-            this.userStorage = readWriter.readFromFile("src/users.ser");
+            this.userStorage = userReadWriter.readFromFile();
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
 
-        this.userCreator = new UserCreator(this.userStorage, this.readWriter);
+        this.userCreator = new UserCreator(this.userStorage, this.userReadWriter);
         this.userCreator.createUser("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
         CreateProperty.createProperty((Seller) this.userStorage.getUser("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
     }
