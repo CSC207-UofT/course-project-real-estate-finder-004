@@ -1,7 +1,13 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RealEstateAgent {
-    private ArrayList<Buyer> buyers = new ArrayList<>();
+// <<<<<<< Serializable_added
+public class RealEstateAgent implements Serializable {
+    private ArrayList<Buyer> buyers = new ArrayList<Buyer>();
+// =======
+// public class RealEstateAgent {
+//     private ArrayList<Buyer> buyers = new ArrayList<>();
+// >>>>>>> main
     private Seller client;
     private Property property;
 

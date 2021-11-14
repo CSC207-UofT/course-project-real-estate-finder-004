@@ -1,6 +1,7 @@
 import java.util.Map;
+import java.io.Serializable;
 
-public class Property {
+public class Property implements Serializable {
     private String streetAddress;
     private String city;
     private String province;
@@ -12,7 +13,7 @@ public class Property {
     private int numberOfBathrooms;
     private Map<String, Boolean> Amenities;
     private boolean availability;
-    private RealEstateAgent agent;
+    private final RealEstateAgent agent;
     private Seller owner;
 
     public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
