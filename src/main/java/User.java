@@ -8,6 +8,17 @@ public class User implements Serializable {
     private String password;
 
     public User(String name, String username, String email, String phone, String password) {
+// <<<<<<< Serializable_added
+// =======
+//         if (phone.length() != 10) {
+//             throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again.");
+//         }
+//         try {
+//             double d = Double.parseDouble(phone);
+//         } catch (NumberFormatException nfe) {
+//             throw new IllegalArgumentException("Your phone number should only contain numeric values. Please input again.");
+//         }
+// >>>>>>> main
         this.name = name;
         this.username = username;
         this.email = email;
@@ -52,6 +63,11 @@ public class User implements Serializable {
     public void setPhone(String phone) {
         if (phone.length() != 10) {
             throw new IllegalArgumentException("Your phone number should be exactly 10 digits long. Please input again");
+        }
+        try {
+            double d = Double.parseDouble(phone);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("Your phone number should only contain numeric values. Please input again.");
         }
         this.phone = phone;
     }

@@ -20,10 +20,14 @@ public class HashMapUserStorage implements UserStorage, Serializable {
         users.remove(username);
     }
 
+// <<<<<<< Serializable_added
     @Override
     public String toString() {
         return "HashMapUserStorage{" +
                 "users=" + users.toString() +
                 '}';
     }
+// =======
+    public HashMap<String, User> getUsers(){return users;}
+// >>>>>>> main
 }
