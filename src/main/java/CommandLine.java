@@ -5,7 +5,7 @@ import java.util.HashMap;
 /*
 1. Need a username
  */
-public class CommandLine {
+public class CommandLine extends UserInterface {
     /*
      */
     private final InputStream input;
@@ -16,7 +16,9 @@ public class CommandLine {
         this.users = users;
     }
 
-    public void choose() throws IOException {
+    protected InputStream getInput() {return input; }
+
+    public boolean choose() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Hi! If you would like to signup, please type in 1. If you would like to login, " +
@@ -24,14 +26,10 @@ public class CommandLine {
 
         String choice = reader.readLine();
 
-        if (choice.equals("1")) {
-            signup();
-        } else {
-            login();
-        }
+        return !choice.equals("1");
     }
 
-    public void signup() throws IOException {
+    public void signUp() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Sign up here!");
@@ -59,27 +57,17 @@ public class CommandLine {
         System.out.println("Please enter your password again for confirmation");
         String password_confirm = reader.readLine();
 
-
-        // Check if password matches
-        //System.out.println(password.equals(password_confirm));
-
         boolean password_confirmed = password.equals(password_confirm);
         if (!password_confirmed) {
             System.out.println("Password does not match. Please enter your password again. Thanks!");
             }
 
-        // Confirm of creating an account
-//        users.put(username, new Seller(name, username, email, phone, password));
         CreateUser myCreateUser = new CreateUser(users);
         myCreateUser.createSeller(name, username, email, phone, password);
-        System.out.println("Thank you for signing up, " + name + " login to begin");
-
-
-        // Call login()
-        login();
+        System.out.println("Thank you for signing up, " + name + ", please login to begin");
     }
 
-    public void login() throws IOException {
+    public User logIn() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Welcome back! Please enter your username");
@@ -88,56 +76,29 @@ public class CommandLine {
         System.out.println("Please enter your password.");
         String login_password = reader.readLine();
 
-
         LoginUser myLogin = new LoginUser();
         User myUser = users.getUser(login_username);
         if (myUser == null) {
             System.out.println("Your username or password is not recognized, please try again.");
-            choose();
+            return null;
         } else {
             if (myLogin.loginUser(myUser, login_password)) {
                 System.out.println("Login successful!");
-                chooseAfterLogin((Seller) users.getUser(login_username));
+                return myUser;
             } else {
                 System.out.println("Your username or password is not recognized, please try again.");
-                choose();
+                return null;
             }
         }
     }
 
-    public void chooseAfterLogin(Seller user) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-        System.out.println("Select 1 to add a listing, select 2 to view your listings. You have"
-                + user.noOfUnreadMessages() + "unread messages. Select 3 to view your messages.");
-        String seller_mode = reader.readLine();
-        if (seller_mode.equals("1")) {
-            System.out.println("Enter Street Address:");
-            String streetAddress = reader.readLine();
-            System.out.println("Enter City:");
-            String city = reader.readLine();
-            System.out.println("Enter Province:");
-            String province = reader.readLine();
-            System.out.println("Enter Country:");
-            String country = reader.readLine();
-            System.out.println("Enter Postal Code:");
-            String postalCode = reader.readLine();
-            System.out.println("Enter Price:");
-            float price = Float.parseFloat(reader.readLine());
-            System.out.println("Enter Street Total Square Feet:");
-            int sqft = Integer.parseInt(reader.readLine());
-
-            CreateProperty.createProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
-        } else if (seller_mode.equals("2")) {
-            System.out.println(ListProperties.getListOfProperties(user));
-        } else if (seller_mode.equals("3")) {
-            if (user.noOfUnreadMessages() == 0) {
-                System.out.println("You have no unread messages.");
-            } else {
-                System.out.println(user.getUnreadMessagesString(user.getUnreadMessages()));
-                System.out.println("Enter the corresponding message number if you would like to mark it as read.");
-                int messageNumber = Integer.parseInt(reader.readLine());
-                user.messageRead(user.getUnreadMessages().get(messageNumber - 1));
-            } // May be violating single responsibility principle, look into it later.
+    public void chooseAfterLogin(User user) throws IOException {
+        if (user instanceof Seller) {
+            CommandLineSeller cLSeller = new CommandLineSeller(input, users);
+            cLSeller.choicesUser((Seller) user);
+        } else if (user instanceof Buyer) {
+            CommandLineBuyer cLBuyer = new CommandLineBuyer(input, users);
+            cLBuyer.choicesUser((Buyer) user);
         }
         chooseAfterLogin(user);
     }
