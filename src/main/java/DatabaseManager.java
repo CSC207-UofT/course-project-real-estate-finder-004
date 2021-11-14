@@ -1,11 +1,13 @@
 import Exceptions.*;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class DatabaseManager {
 
     private UserStorage userStorage;
     private UserCreator userCreator;
+    private UserStorageReadWriter readWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if(! password.equals(password_confirm)){
@@ -40,9 +42,15 @@ public class DatabaseManager {
     }
 
     public DatabaseManager(){
-        userStorage = new HashMapUserStorage();
-        userCreator = new UserCreator(userStorage);
-        userCreator.createUser("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
-        CreateProperty.createProperty((Seller) userStorage.getUser("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        this.readWriter = new UserStorageReadWriter();
+        try {
+            this.userStorage = readWriter.readFromFile("src/users.ser");
+        } catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        this.userCreator = new UserCreator(this.userStorage, this.readWriter);
+        this.userCreator.createUser("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
+        CreateProperty.createProperty((Seller) this.userStorage.getUser("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
     }
 }

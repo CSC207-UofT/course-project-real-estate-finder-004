@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class HashMapUserStorage implements UserStorage{
+public class HashMapUserStorage implements UserStorage, Serializable {
+    private static final long serialVersionUID = 4631559705365505190L;
     // Key - UserName
     private final HashMap<String, User> users = new HashMap<>();
     @Override
@@ -16,5 +18,12 @@ public class HashMapUserStorage implements UserStorage{
     @Override
     public void removeUser(String username) {
         users.remove(username);
+    }
+
+    @Override
+    public String toString() {
+        return "HashMapUserStorage{" +
+                "users=" + users.toString() +
+                '}';
     }
 }
