@@ -1,24 +1,24 @@
 import java.io.*;
 
-public class StorageReadWriter implements ReadWriter {
+public class StorageReadWriter<T, K> implements ReadWriter {
 
     private String filePath;
+    private Storage<T, K> storage;
 
     /**
      * Writes the users to file at filePath.
      *
-     * @param object object to be written
      * @throws IOException
      */
     @Override
-    public void saveToFile(Object object) throws IOException {
+    public void saveToFile() throws IOException {
 
         OutputStream file = new FileOutputStream(this.filePath);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
 
         // serialize the Map
-        output.writeObject(object);
+        output.writeObject(storage);
         output.close();
     }
 
@@ -30,7 +30,7 @@ public class StorageReadWriter implements ReadWriter {
      * @throws IOException
      */
     @Override
-    public Object readFromFile() throws IOException, ClassNotFoundException {
+    public Storage<T, K> readFromFile() throws IOException, ClassNotFoundException {
 
         InputStream file = new FileInputStream(this.filePath);
         InputStream buffer = new BufferedInputStream(file);
@@ -39,10 +39,12 @@ public class StorageReadWriter implements ReadWriter {
         // serialize the Map
         Object object = input.readObject();
         input.close();
-        return object;
+        this.storage = (Storage<T, K>) object;
+        return this.storage;
     }
 
-    public StorageReadWriter(String filePath){
+    public StorageReadWriter(String filePath, Storage<T, K> storage){
         this.filePath = filePath;
+        this.storage = storage;
     }
 }

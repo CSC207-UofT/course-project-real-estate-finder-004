@@ -2,6 +2,8 @@ import java.util.Map;
 import java.io.Serializable;
 
 public class Property implements Serializable {
+    public final int propertyId;
+
     private String streetAddress;
     private String city;
     private String province;
@@ -16,7 +18,8 @@ public class Property implements Serializable {
     private final RealEstateAgent agent;
     private Seller owner;
 
-    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
+    public Property(int propertyId, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
+        this.propertyId = propertyId;
         this.streetAddress = streetAddress;
         this.city = city;
         this.province = province;
@@ -32,7 +35,8 @@ public class Property implements Serializable {
         this.agent = new RealEstateAgent(this.owner);
     }
 
-    public Property(String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner, boolean availability){
+    public Property(int propertyId, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner, boolean availability) {
+        this.propertyId = propertyId;
         this.streetAddress = streetAddress;
         this.city = city;
         this.province = province;
@@ -43,6 +47,10 @@ public class Property implements Serializable {
         this.owner = owner;
         this.agent = new RealEstateAgent(this.owner);
         this.availability = availability;
+    }
+
+    public int getPropertyId() {
+        return propertyId;
     }
 
     public String getStreetAddress() {
@@ -80,7 +88,10 @@ public class Property implements Serializable {
     public int getNumberOfBathrooms() {
         return numberOfBathrooms;
     }
-    public Seller getOwner() {return owner;}
+
+    public Seller getOwner() {
+        return owner;
+    }
 
     public Map<String, Boolean> getAmenities() {
         return Amenities;
@@ -134,7 +145,9 @@ public class Property implements Serializable {
         Amenities = amenities;
     }
 
-    public void setOwner(Seller owner) {this.owner = owner;}
+    public void setOwner(Seller owner) {
+        this.owner = owner;
+    }
 
     public void setAvailability(Boolean availability) {
         this.availability = availability;

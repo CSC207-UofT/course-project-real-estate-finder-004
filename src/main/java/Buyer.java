@@ -15,4 +15,5 @@ public class Buyer extends User {
         return interestedProperties;
     }
 
+
 }
