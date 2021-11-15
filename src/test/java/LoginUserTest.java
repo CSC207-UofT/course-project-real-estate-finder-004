@@ -1,14 +1,25 @@
-/*import org.junit.*;
+import Exceptions.LoginUserNotFoundException;
+import Exceptions.LoginWrongPasswordException;
+import org.junit.*;
 import static org.junit.Assert.*;
 
 public class LoginUserTest {
-    @Test (timeout = 50)
+    @Test ()
     public void testLoginUser(){
-        Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
+        DatabaseManager myDatabaseManager = new DatabaseManager();
+        myDatabaseManager.signUp("Alexis Tassone", "b","alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
-        LoginUser myLogin = new LoginUser();
-        assertTrue(myLogin.loginUser(b, "1234"));
-        assertFalse(myLogin.loginUser(b, "4321"));
+        try {
+            User logged_in_user = myDatabaseManager.loginUser("alexistassone", "1234");
+        } catch(LoginUserNotFoundException | LoginWrongPasswordException e) {
+            fail();
+        }
+        try{
+            User myUser = myDatabaseManager.loginUser("alexistassone", "4321");
+            fail();
+        } catch (LoginUserNotFoundException | LoginWrongPasswordException ignored) {
+
+        }
     }
-}*/
+}
 
