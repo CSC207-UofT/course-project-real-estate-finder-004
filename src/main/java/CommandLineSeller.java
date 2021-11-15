@@ -4,13 +4,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class CommandLineSeller extends CommandLine {
-
     public CommandLineSeller(InputStream input, DatabaseManager manager) {
         super(input, manager);
     }
 
     public void choicesUser(Seller user) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(super.getInput()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.input));
 
         System.out.println("Select 1 to add a listing, select 2 to view your listings. You have"
                 + user.noOfUnreadMessages() + "unread messages. Select 3 to view your messages. " +
@@ -19,7 +18,7 @@ public class CommandLineSeller extends CommandLine {
         if (seller_mode.equals("1")) {
             addListing(reader, user);
         } else if (seller_mode.equals("2")) {
-            System.out.println(ListProperties.getListOfProperties(user));
+            System.out.println(manager.propertiesToString(user));
         } else if (seller_mode.equals("3")) {
             checkMessages(reader, user);
         } else if (seller_mode.equals("4")) {
@@ -43,7 +42,7 @@ public class CommandLineSeller extends CommandLine {
         System.out.println("Enter Street Total Square Feet:");
         int sqft = Integer.parseInt(reader.readLine());
 
-        CreateProperty.createProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
+        manager.addProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
     }
 
     public void checkMessages(BufferedReader reader, Seller user) throws IOException {

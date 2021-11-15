@@ -12,8 +12,8 @@ import java.io.*;
 public class CommandLine extends UserInterface {
     /*
      */
-    private final InputStream input;
-    private final DatabaseManager manager;
+    final InputStream input;
+    final DatabaseManager manager;
 
     public CommandLine(InputStream input, DatabaseManager manager) {
         this.input = input;

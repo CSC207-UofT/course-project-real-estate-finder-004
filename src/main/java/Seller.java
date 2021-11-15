@@ -1,27 +1,32 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Seller extends User {
-    private ArrayList<Property> properties = new ArrayList<>();
+    private ArrayList<Integer> properties = new ArrayList<>();
     private LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
 
     public Seller(String name, String username, String email, String phone, String password) {
         super(name, username, email, phone, password);
     }
 
-    public void addMessage(String message) { messages.put(message, false); }
-
-    public void messageRead(String message) {messages.put(message, true); }
-
-    public void addProperty(Property property) {
-        properties.add(property);
+    public void addMessage(String message) {
+        messages.put(message, false);
     }
 
-    public ArrayList<Property> getProperties() {
+    public void messageRead(String message) {
+        messages.put(message, true);
+    }
+
+    public void addProperty(Integer propertyId) {
+        properties.add(propertyId);
+    }
+
+    public ArrayList<Integer> getProperties() {
         return properties;
     }
 
-    public LinkedHashMap<String, Boolean> getMessages() {return messages; }
+    public LinkedHashMap<String, Boolean> getMessages() {
+        return messages;
+    }
 
     public ArrayList<String> getUnreadMessages() {
         ArrayList<String> unreadMessagesList = new ArrayList<>();
@@ -54,7 +59,7 @@ public class Seller extends User {
         return counter;
     }
 
-    public Property removeProperty(int index) {
-        return properties.remove(index);
+    public boolean removeProperty(Integer propertyId) {
+        return properties.remove(propertyId);
     }
 }
