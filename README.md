@@ -13,4 +13,4 @@
 6. Access our progress report on Google Slides with [this link](https://docs.google.com/presentation/d/1oNdV-nw-VKgX509FwUFzya7Wf3CHYTNlH2xfX2xgvPQ/edit?usp=sharing).
 7. See the specification at [/phase0/specification.md](phase0/specification.md).
 8. See the walkthrough at [/phase0/walkthrough.md](phase0/walkthrough.md).
-9. Access our Design Document with [this link](https://docs.google.com/document/d/1ORXrvka8cJgjdwfaZGMPgx_wBiLA-3c3-NhZXgj-_WA/edit?usp=sharing).
+9. Access our Phase 1 Design Document with [this link](https://docs.google.com/document/d/1ORXrvka8cJgjdwfaZGMPgx_wBiLA-3c3-NhZXgj-_WA/edit?usp=sharing).
