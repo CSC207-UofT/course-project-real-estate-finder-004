@@ -1,15 +1,12 @@
 import java.io.IOException;
 
-public class UserCreator {
-    private UserStorage userStorage;
-    private StorageReadWriter readWriter;
+public class UserCreator extends Creator {
 
-    public UserCreator(UserStorage userStorage, StorageReadWriter readWriter) {
-        this.userStorage = userStorage;
-        this.readWriter = readWriter;
+    public UserCreator(HashMapUserStorage userStorage, UserStorageReadWriter userStorageReadWriter, HashMapPropertyStorage propertyStorage, PropertyStorageReadWriter propertyStorageReadWriter) {
+        super(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
     }
 
-    public void createUser(String name, String user_type, String username, String email, String phone, String password){
+    public void create(String name, String user_type, String username, String email, String phone, String password){
         User newUser = null;
 
         switch (user_type){
@@ -21,11 +18,13 @@ public class UserCreator {
                 break;
         }
         if (newUser != null){
-            this.userStorage.addUser(newUser);
-            try {
-                readWriter.saveToFile(userStorage);
-            }catch (IOException e){
-                System.out.println(e.getMessage());
+            this.userStorage.add(newUser);
+            if(writeToFile) {
+                try {
+                    userStorageReadWriter.saveToFile();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }

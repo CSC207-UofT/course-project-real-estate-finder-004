@@ -4,9 +4,12 @@ import java.io.IOException;
 
 public class DatabaseManager {
 
-    private UserStorage userStorage;
+    private HashMapUserStorage userStorage;
+    private HashMapPropertyStorage propertyStorage;
     private UserCreator userCreator;
-    private UserStorageReadWriter userReadWriter;
+    private PropertyCreator propertyCreator;
+    private UserStorageReadWriter userStorageReadWriter;
+    private PropertyStorageReadWriter propertyStorageReadWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if(! password.equals(password_confirm)){
@@ -26,11 +29,11 @@ public class DatabaseManager {
     }
 
     public void signUp(String name, String user_type, String username, String email, String phone, String password){
-        userCreator.createUser(name,user_type,username,email,phone,password);
+        userCreator.create(name,user_type,username,email,phone,password);
     }
 
     public User loginUser(String username, String password) throws IllegalArgumentException{
-        User user = userStorage.getUser(username);
+        User user = userStorage.get(username);
         if (user == null){
             throw new LoginUserNotFoundException();
         }
@@ -40,16 +43,35 @@ public class DatabaseManager {
         return user;
     }
 
+    public void addProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
+        this.propertyCreator.create(user, streetAddress, city, province, country, postalCode, price, sqft, availability);
+    }
+
+    public String propertiesToString(Seller seller) {
+        StringBuilder returnString = new StringBuilder();
+        for (Integer propertyId: seller.getProperties()) {
+            Property property = propertyStorage.get(propertyId);
+            returnString.append("Property: \n");
+            returnString.append("Address: ").append(property.getStreetAddress()).append(" ").append(property.getCity()).append(" ").append(property.getProvince()).append('\n');
+            returnString.append(property.getSqft()).append(" square feet\n");
+            returnString.append("Price: $").append(property.getPrice()).append("\n\n");
+        }
+        return returnString.toString();
+    }
+
     public DatabaseManager(){
-        this.userReadWriter = new UserStorageReadWriter();
+        this.userStorageReadWriter = new UserStorageReadWriter(null);
+        this.propertyStorageReadWriter = new PropertyStorageReadWriter(null);
         try {
-            this.userStorage = userReadWriter.readFromFile();
+            this.userStorage = (HashMapUserStorage) userStorageReadWriter.readFromFile();
+            this.propertyStorage = (HashMapPropertyStorage) this.propertyStorageReadWriter.readFromFile();
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
 
-        this.userCreator = new UserCreator(this.userStorage, this.userReadWriter);
-        this.userCreator.createUser("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
-        CreateProperty.createProperty((Seller) this.userStorage.getUser("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        this.propertyCreator = new PropertyCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
+        this.userCreator = new UserCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
+        this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
+        this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
     }
 }
