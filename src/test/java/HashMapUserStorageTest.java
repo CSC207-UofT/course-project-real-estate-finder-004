@@ -1,3 +1,5 @@
+import entities.User;
+import externalinterfaces.HashMapUserStorage;
 import org.junit.*;
 
 public class HashMapUserStorageTest {

@@ -1,7 +1,13 @@
+package externalinterfaces;
+
 import Exceptions.LoginUserNotFoundException;
 import Exceptions.LoginWrongPasswordException;
 import Exceptions.SignUpPasswordMatchException;
 import Exceptions.SignUpPhoneNumberLengthException;
+import controllers.DatabaseManager;
+import entities.Buyer;
+import entities.Seller;
+import entities.User;
 
 import java.io.*;
 

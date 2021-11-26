@@ -1,3 +1,8 @@
+import controllers.UserCreator;
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
 import org.junit.*;
 import static org.junit.Assert.*;
 

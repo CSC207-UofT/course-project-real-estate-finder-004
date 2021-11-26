@@ -1,3 +1,10 @@
+package controllers;
+
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
+
 public class Creator {
     HashMapUserStorage userStorage;
     UserStorageReadWriter userStorageReadWriter;

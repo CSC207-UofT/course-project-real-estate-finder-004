@@ -1,3 +1,13 @@
+package controllers;
+
+import entities.Buyer;
+import entities.Seller;
+import entities.User;
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
+
 import java.io.IOException;
 
 public class UserCreator extends Creator {
@@ -19,7 +29,7 @@ public class UserCreator extends Creator {
         }
         if (newUser != null){
             this.userStorage.add(newUser);
-            if(writeToFile) {
+            if(Creator.writeToFile) {
                 try {
                     userStorageReadWriter.saveToFile();
                 } catch (IOException e) {

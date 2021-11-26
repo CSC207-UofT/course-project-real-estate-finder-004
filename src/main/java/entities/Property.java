@@ -1,3 +1,5 @@
+package entities;
+
 import java.util.Map;
 import java.io.Serializable;
 

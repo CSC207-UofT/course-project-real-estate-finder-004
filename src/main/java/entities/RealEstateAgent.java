@@ -1,3 +1,9 @@
+package entities;
+
+import entities.Buyer;
+import entities.Property;
+import entities.Seller;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -5,8 +11,8 @@ import java.util.ArrayList;
 public class RealEstateAgent implements Serializable {
     private ArrayList<Buyer> buyers = new ArrayList<Buyer>();
 // =======
-// public class RealEstateAgent {
-//     private ArrayList<Buyer> buyers = new ArrayList<>();
+// public class entities.RealEstateAgent {
+//     private ArrayList<entities.Buyer> buyers = new ArrayList<>();
 // >>>>>>> main
     private Seller client;
     private Property property;
@@ -15,9 +21,9 @@ public class RealEstateAgent implements Serializable {
         this.client = client;
     }
 
-    /** This function is called when a Buyer is interested in a property and would like to speak to the Seller.
-     * The function sends a message to the seller that contains the Buyer's contact details and
-     * informs the Seller that the Buyer is interested.
+    /** This function is called when a entities.Buyer is interested in a property and would like to speak to the entities.Seller.
+     * The function sends a message to the seller that contains the entities.Buyer's contact details and
+     * informs the entities.Seller that the entities.Buyer is interested.
      */
     public void connectBuyersAndSeller(String custom_message, Buyer buyer) {
         // Not yet working.... Need to figure out how to communicate with it.

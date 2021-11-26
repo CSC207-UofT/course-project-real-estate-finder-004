@@ -1,3 +1,7 @@
+package usecases;
+
+import externalinterfaces.*;
+
 import java.io.IOException;
 
 public class ShowDatabase {

@@ -1,4 +1,13 @@
+package controllers;
+
 import Exceptions.*;
+import entities.Property;
+import entities.Seller;
+import entities.User;
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
 
 import java.io.IOException;
 
@@ -51,7 +60,7 @@ public class DatabaseManager {
         StringBuilder returnString = new StringBuilder();
         for (Integer propertyId: seller.getProperties()) {
             Property property = propertyStorage.get(propertyId);
-            returnString.append("Property: \n");
+            returnString.append("entities.Property: \n");
             returnString.append("Address: ").append(property.getStreetAddress()).append(" ").append(property.getCity()).append(" ").append(property.getProvince()).append('\n');
             returnString.append(property.getSqft()).append(" square feet\n");
             returnString.append("Price: $").append(property.getPrice()).append("\n\n");

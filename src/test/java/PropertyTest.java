@@ -1,3 +1,5 @@
+import entities.Property;
+import entities.Seller;
 import org.junit.*;
 
 public class PropertyTest {

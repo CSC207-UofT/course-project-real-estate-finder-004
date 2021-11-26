@@ -1,3 +1,9 @@
+import controllers.PropertyCreator;
+import entities.Seller;
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
 import org.junit.*;
 import static org.junit.Assert.*;
 

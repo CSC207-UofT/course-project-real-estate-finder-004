@@ -1,3 +1,7 @@
+package externalinterfaces;
+
+import entities.User;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -23,7 +27,7 @@ public class HashMapUserStorage implements Storage<String, User>, Serializable {
 
     @Override
     public String toString() {
-        return "HashMapUserStorage{" +
+        return "externalinterfaces.HashMapUserStorage{" +
                 "users=" + users.toString() +
                 '}';
     }

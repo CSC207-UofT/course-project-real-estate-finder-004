@@ -1,3 +1,7 @@
+package externalinterfaces;
+
+import controllers.DatabaseManager;
+
 import java.io.IOException;
 
 public class RunCLI {

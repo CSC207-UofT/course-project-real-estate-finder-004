@@ -1,5 +1,8 @@
+package externalinterfaces;
+
+import entities.User;
+
 import java.io.IOException;
-import java.util.Objects;
 
 abstract class UserInterface {
 
@@ -29,6 +32,6 @@ abstract class UserInterface {
     }
 
     // For sellers, they can add properties, view properties, and view messages after logging in
-    // For buyers, they can search properties, shortlist properties, join RealEstateAgent and send messages to
+    // For buyers, they can search properties, shortlist properties, join entities.RealEstateAgent and send messages to
     // the seller.
 }

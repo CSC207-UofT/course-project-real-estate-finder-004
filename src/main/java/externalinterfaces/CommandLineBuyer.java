@@ -1,4 +1,9 @@
-import java.io.IOException;
+package externalinterfaces;
+
+import controllers.DatabaseManager;
+import entities.Buyer;
+import externalinterfaces.CommandLine;
+
 import java.io.InputStream;
 
 public class CommandLineBuyer extends CommandLine {

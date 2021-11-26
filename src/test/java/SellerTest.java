@@ -1,3 +1,6 @@
+import entities.Property;
+import entities.Seller;
+import entities.User;
 import org.junit.*;
 
 import static org.junit.Assert.*;

@@ -1,3 +1,4 @@
+import entities.User;
 import org.junit.*;
 
 public class UserTest {

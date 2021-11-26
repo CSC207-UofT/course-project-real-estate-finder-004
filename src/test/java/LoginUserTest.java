@@ -1,5 +1,7 @@
 import Exceptions.LoginUserNotFoundException;
 import Exceptions.LoginWrongPasswordException;
+import controllers.DatabaseManager;
+import entities.User;
 import org.junit.*;
 import static org.junit.Assert.*;
 

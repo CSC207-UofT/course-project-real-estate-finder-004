@@ -1,3 +1,5 @@
+package externalinterfaces;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -88,7 +90,7 @@ public class loginGUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] a) {
-        // Create object for loginGUI class and set properties
+        // Create object for externalinterfaces.loginGUI class and set properties
         loginGUI frame = new loginGUI();
         frame.setTitle("Login Form");
         frame.setVisible(true);

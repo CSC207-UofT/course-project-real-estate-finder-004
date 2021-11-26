@@ -1,5 +1,5 @@
 package Exceptions;
 
 public class SignUpUserTypeException extends IllegalArgumentException{
-    public SignUpUserTypeException() {super("User type must be Buyer or Seller (B/S).");}
+    public SignUpUserTypeException() {super("entities.User type must be entities.Buyer or entities.Seller (B/S).");}
 }

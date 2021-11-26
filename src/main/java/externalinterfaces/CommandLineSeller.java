@@ -1,3 +1,9 @@
+package externalinterfaces;
+
+import controllers.DatabaseManager;
+import entities.Seller;
+import externalinterfaces.CommandLine;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

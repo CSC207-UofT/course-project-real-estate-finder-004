@@ -1,3 +1,12 @@
+package controllers;
+
+import entities.Property;
+import entities.Seller;
+import externalinterfaces.HashMapPropertyStorage;
+import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.UserStorageReadWriter;
+
 import java.io.IOException;
 
 public class PropertyCreator extends Creator {
@@ -15,7 +24,7 @@ public class PropertyCreator extends Creator {
         user.addProperty(property.getPropertyId());
 
         this.propertyStorage.add(property);
-        if(writeToFile) {
+        if(Creator.writeToFile) {
             try {
                 propertyStorageReadWriter.saveToFile();
                 userStorageReadWriter.saveToFile();

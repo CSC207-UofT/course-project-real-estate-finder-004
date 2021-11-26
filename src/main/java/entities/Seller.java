@@ -1,3 +1,5 @@
+package entities;
+
 import java.util.*;
 
 public class Seller extends User {

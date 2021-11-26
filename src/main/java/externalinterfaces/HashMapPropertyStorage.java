@@ -1,3 +1,7 @@
+package externalinterfaces;
+
+import entities.Property;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +28,7 @@ public class HashMapPropertyStorage implements Storage<Integer, Property>, Seria
 
     @Override
     public String toString() {
-        return "HashMapPropertyStorage{" +
+        return "externalinterfaces.HashMapPropertyStorage{" +
                 "properties=" + properties.toString() +
                 '}';
     }

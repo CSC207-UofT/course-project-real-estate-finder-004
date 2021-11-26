@@ -1,3 +1,5 @@
+package externalinterfaces;
+
 import java.io.*;
 
 public class StorageReadWriter<T, K> implements ReadWriter {
