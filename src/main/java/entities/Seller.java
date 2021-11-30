@@ -18,10 +18,18 @@ public class Seller extends User {
         super(name, username, email, phone, password);
     }
 
+    /**
+     * Adds a message object to the Seller, which will be displayed to the user when checking their unread messages.
+     * @param message The message that will be passed to the user, as a string.
+     */
     public void addMessage(String message) {
         messages.put(message, false);
     }
 
+    /**
+     * Marks a message as read, so it will not be displayed to the user when checking their unread messages.
+     * @param message The message to mark as read.
+     */
     public void messageRead(String message) {
         messages.put(message, true);
     }
