@@ -3,9 +3,17 @@ package entities;
 import java.util.*;
 
 public class Seller extends User {
-    private ArrayList<Integer> properties = new ArrayList<>();
-    private LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
+    private final ArrayList<Integer> properties = new ArrayList<>();
+    private final LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
 
+    /**
+     * Constructs a new user given the relevant details.
+     * @param name The user's given name.
+     * @param username The user's username, which will be used for authentication. Note that this must be unique for all users.
+     * @param email The user's email, for getting in contact with the buyers.
+     * @param phone The user's phone number, for getting in contact with the buyers.
+     * @param password The user's password, used for authentication.
+     */
     public Seller(String name, String username, String email, String phone, String password) {
         super(name, username, email, phone, password);
     }
@@ -42,10 +50,10 @@ public class Seller extends User {
     }
 
     public StringBuilder getUnreadMessagesString(ArrayList<String> unreadMessagesList) {
-        StringBuilder unreadMessages = null;
+        StringBuilder unreadMessages = new StringBuilder();
         int counter = 1;
         for (String message : unreadMessagesList) {
-            unreadMessages.append(counter + ". " + message + "\n");
+            unreadMessages.append(counter).append(". ").append(message).append("\n");
         }
         return unreadMessages;
     }
