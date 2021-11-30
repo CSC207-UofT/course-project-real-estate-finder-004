@@ -60,7 +60,8 @@ public class UserTest {
     @Test(timeout=50)
     public void TestConstructorLengthOfPhoneException() {
         Assert.assertThrows(IllegalArgumentException.class,
-                ()->{User test_exception = new User("a", "b", "c", "d", "e");
+                ()->{
+            User test_exception = new User("a", "b", "c", "d", "e");
                 });
     }
 
