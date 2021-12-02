@@ -12,13 +12,7 @@ import entities.User;
 
 import java.io.*;
 
-// Edits:
-/*
-1. Need a username
- */
 public class CommandLine extends UserInterface {
-    /*
-     */
     final InputStream input;
     final DatabaseManager manager;
 
