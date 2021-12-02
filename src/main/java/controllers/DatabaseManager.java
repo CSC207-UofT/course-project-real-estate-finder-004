@@ -10,11 +10,12 @@ import externalinterfaces.PropertyStorageReadWriter;
 import externalinterfaces.UserStorageReadWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DatabaseManager {
 
     private HashMapUserStorage userStorage;
-    private HashMapPropertyStorage propertyStorage;
+    public HashMapPropertyStorage propertyStorage;
     private UserCreator userCreator;
     private PropertyCreator propertyCreator;
     private UserStorageReadWriter userStorageReadWriter;
@@ -56,14 +57,11 @@ public class DatabaseManager {
         this.propertyCreator.create(user, streetAddress, city, province, country, postalCode, price, sqft, availability);
     }
 
-    public String propertiesToString(Seller seller) {
+    public String propertiesToString(ArrayList<Integer> propertyIds) {
         StringBuilder returnString = new StringBuilder();
-        for (Integer propertyId: seller.getProperties()) {
+        for (Integer propertyId: propertyIds) {
             Property property = propertyStorage.get(propertyId);
-            returnString.append("entities.Property: \n");
-            returnString.append("Address: ").append(property.getStreetAddress()).append(" ").append(property.getCity()).append(" ").append(property.getProvince()).append('\n');
-            returnString.append(property.getSqft()).append(" square feet\n");
-            returnString.append("Price: $").append(property.getPrice()).append("\n\n");
+            returnString.append(property.toString());
         }
         return returnString.toString();
     }

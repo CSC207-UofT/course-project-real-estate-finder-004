@@ -85,7 +85,6 @@ public class loginGUI extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*');
             }
 
-
         }
     }
 

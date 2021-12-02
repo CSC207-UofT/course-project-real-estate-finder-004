@@ -1,6 +1,7 @@
 package externalinterfaces;
 
 import controllers.DatabaseManager;
+import controllers.PropertyViewer;
 import entities.Seller;
 import externalinterfaces.CommandLine;
 
@@ -24,7 +25,7 @@ public class CommandLineSeller extends CommandLine {
         if (seller_mode.equals("1")) {
             addListing(reader, user);
         } else if (seller_mode.equals("2")) {
-            System.out.println(manager.propertiesToString(user));
+            System.out.println(manager.propertiesToString(user.getProperties()));
         } else if (seller_mode.equals("3")) {
             checkMessages(reader, user);
         } else if (seller_mode.equals("4")) {

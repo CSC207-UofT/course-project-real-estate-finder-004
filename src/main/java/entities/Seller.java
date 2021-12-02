@@ -3,6 +3,7 @@ package entities;
 import java.util.*;
 
 public class Seller extends User {
+    // properties stores the propertyIds of all the properties
     private ArrayList<Integer> properties = new ArrayList<>();
     private LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
 
@@ -45,7 +46,7 @@ public class Seller extends User {
         StringBuilder unreadMessages = null;
         int counter = 1;
         for (String message : unreadMessagesList) {
-            unreadMessages.append(counter + ". " + message + "\n");
+            unreadMessages.append(counter).append(". ").append(message).append("\n");
         }
         return unreadMessages;
     }
