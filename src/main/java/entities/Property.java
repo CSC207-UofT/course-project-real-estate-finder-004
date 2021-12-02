@@ -154,4 +154,14 @@ public class Property implements Serializable {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+
+    public String toString() {
+        String returnString = "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+                "Floor area: " + sqft + " square feet\n" +
+                "Price: $" + price + "\n\n";
+        return returnString;
+    }
+
+    // TODO: Implement long toString that returns all information about property. The above toString only returns
+    // important information required when displaying properties in search or shortlist.
 }
