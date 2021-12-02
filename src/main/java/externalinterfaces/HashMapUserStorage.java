@@ -4,6 +4,7 @@ import entities.User;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMapUserStorage implements Storage<String, User>, Serializable {
     private static final long serialVersionUID = 4631559705365505190L;
@@ -23,6 +24,11 @@ public class HashMapUserStorage implements Storage<String, User>, Serializable {
     @Override
     public void remove(String username) {
         users.remove(username);
+    }
+
+    @Override
+    public Set<String> keySet(){
+        return users.keySet();
     }
 
     @Override
