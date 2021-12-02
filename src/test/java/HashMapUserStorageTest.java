@@ -15,13 +15,13 @@ public class HashMapUserStorageTest {
         users.add(user2);
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void TestGetUser() {
         System.out.println(users.get("user1"));
         assert users.get("jsmith").getName().equals("John Smith");
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void TestAddUser() {
         User user3 = new User("Sebastian", "origamii", "myemail@gmail.com", "1234567890", "mypass");
         users.add(user3);

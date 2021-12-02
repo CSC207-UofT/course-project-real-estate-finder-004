@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BuyerTest {
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testBuyer(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
@@ -17,13 +17,13 @@ public class BuyerTest {
                 "0987654321", "4321");
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testGetInterestedProperties(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
         Seller s = new Seller("John Smith", "johnsmith", "john.smith@gmail.com",
                 "0987654321", "4321");
-        Map<String, Boolean> a = new HashMap<String, Boolean>();
+        Map<String, Boolean> a = new HashMap<>();
         Property p1 = new Property(1, "75 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 450000, 350, 1, 1, a, true, s);
         Property p2 = new Property(2, "85 St. George St", "Toronto", "Ontario", "Canada",
@@ -35,13 +35,13 @@ public class BuyerTest {
         assertTrue(b.getInterestedProperties().contains(p2));
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testShortListProperty(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
         Seller s = new Seller("John Smith", "johnsmith", "john.smith@gmail.com",
                 "0987654321", "4321");
-        Map<String, Boolean> a = new HashMap<String, Boolean>();
+        Map<String, Boolean> a = new HashMap<>();
         Property p1 = new Property(3, "75 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 450000, 350, 1, 1, a, true, s);
         Property p2 = new Property(4, "85 St. George St", "Toronto", "Ontario", "Canada",
