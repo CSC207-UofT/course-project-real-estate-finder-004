@@ -1,9 +1,12 @@
 package externalinterfaces;
 
+import Exceptions.LoginUserNotFoundException;
+import Exceptions.LoginWrongPasswordException;
 import controllers.DatabaseManager;
 import entities.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUI extends UserInterface {
     static DatabaseManager manager;
@@ -24,8 +27,13 @@ public class GUI extends UserInterface {
 
     @Override
     User logIn() throws IOException {
-        loginGUI.main();
-        return null;
+        ArrayList<String> info = loginGUI.main();
+        try {
+            User user = manager.loginUser(info.get(0), info.get(1));
+            return user;
+        } catch (LoginUserNotFoundException | LoginWrongPasswordException e){
+            return null;
+        }
     }
 
     @Override
@@ -36,4 +44,6 @@ public class GUI extends UserInterface {
     public static boolean loginSuccess(String username, String password) {
         return (manager.loginUser(username, password) instanceof User);
     }
+
 }
+

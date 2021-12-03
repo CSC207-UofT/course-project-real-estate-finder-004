@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class loginGUI extends JFrame implements ActionListener {
     Container container = getContentPane();
@@ -14,7 +15,8 @@ public class loginGUI extends JFrame implements ActionListener {
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show Password");
-
+    private static String username = "";
+    private static String password = "";
 
     loginGUI() {
         setLayoutManager();
@@ -61,11 +63,13 @@ public class loginGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-            String userText;
-            String pwdText;
-            userText = userTextField.getText();
-            pwdText = passwordField.getText();
-            if (GUI.loginSuccess(userText, pwdText)) {
+//            String userText;
+//            String pwdText;
+//            userText = userTextField.getText();
+//            pwdText = passwordField.getText();
+            username = userTextField.getText();
+            password = passwordField.getText();
+            if (GUI.loginSuccess(username, password)) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
@@ -88,13 +92,17 @@ public class loginGUI extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] a) {
-        // Create object for externalinterfaces.loginGUI class and set properties
+    public static ArrayList<String> main() {
+        // Create object for loginGUI class and set properties
         loginGUI frame = new loginGUI();
         frame.setTitle("Login Form");
         frame.setVisible(true);
         frame.setBounds(10, 10, 370, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        ArrayList<String> info = new ArrayList<String>();
+        info.add(username);
+        info.add(password);
+        return info;
     }
 }
