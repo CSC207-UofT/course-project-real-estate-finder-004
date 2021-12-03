@@ -6,8 +6,10 @@ import entities.Seller;
 import entities.User;
 import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.HashMapAgentStorage;
 import externalinterfaces.PropertyStorageReadWriter;
 import externalinterfaces.UserStorageReadWriter;
+import externalinterfaces.AgentStorageReadWriter;
 
 import java.io.IOException;
 
@@ -15,10 +17,13 @@ public class DatabaseManager {
 
     private HashMapUserStorage userStorage;
     private HashMapPropertyStorage propertyStorage;
+    private HashMapAgentStorage agentStorage;
     private UserCreator userCreator;
     private PropertyCreator propertyCreator;
+    private AgentCreator agentCreator;
     private UserStorageReadWriter userStorageReadWriter;
     private PropertyStorageReadWriter propertyStorageReadWriter;
+    private AgentStorageReadWriter agentStorageReadWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if(! password.equals(password_confirm)){
@@ -71,9 +76,11 @@ public class DatabaseManager {
     public DatabaseManager(){
         this.userStorageReadWriter = new UserStorageReadWriter(null);
         this.propertyStorageReadWriter = new PropertyStorageReadWriter(null);
+        this.agentStorageReadWriter = new AgentStorageReadWriter(null);
         try {
             this.userStorage = (HashMapUserStorage) userStorageReadWriter.readFromFile();
-            this.propertyStorage = (HashMapPropertyStorage) this.propertyStorageReadWriter.readFromFile();
+            this.propertyStorage = (HashMapPropertyStorage) propertyStorageReadWriter.readFromFile();
+            this.agentStorage = (HashMapAgentStorage) agentStorageReadWriter.readFromFile();
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }

@@ -7,13 +7,11 @@ import entities.Seller;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-// <<<<<<< Serializable_added
+
 public class RealEstateAgent implements Serializable {
+    public final int agentId;
     private ArrayList<Buyer> buyers = new ArrayList<Buyer>();
-// =======
-// public class entities.RealEstateAgent {
-//     private ArrayList<entities.Buyer> buyers = new ArrayList<>();
-// >>>>>>> main
+
     private Seller client;
     private Property property;
 
@@ -30,6 +28,9 @@ public class RealEstateAgent implements Serializable {
         client.addMessage("New notification! A buyer is interested in your property at"
                 + property.getStreetAddress() + ". You can contact them at" + buyer.getEmail() + " or " +
                 buyer.getPhone() + ". Here is a message from the prospective buyer: " + custom_message);
+    }
+    public int getAgentId() {
+        return agentId;
     }
 
     public int getNumberOfBuyers() {
