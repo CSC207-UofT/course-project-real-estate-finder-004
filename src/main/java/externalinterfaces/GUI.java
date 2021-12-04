@@ -1,5 +1,8 @@
 package externalinterfaces;
 
+import Exceptions.SignUpPasswordMatchException;
+import Exceptions.SignUpPhoneNumberLengthException;
+import Exceptions.SignUpUserTypeException;
 import controllers.DatabaseManager;
 import entities.User;
 
@@ -36,4 +39,15 @@ public class GUI extends UserInterface {
     public static boolean loginSuccess(String username, String password) {
         return (manager.loginUser(username, password) instanceof User);
     }
+
+    public static boolean signUpSuccess(String name, String userType, String username, String email, String phone, String password, String passwordConfirm) {
+    try {
+        manager.signUpVerify(name, userType, username, email, phone, password, passwordConfirm);
+        manager.signUp(name, userType, username, email, phone, password);
+        return true;
+    } catch (SignUpPasswordMatchException| SignUpPhoneNumberLengthException | SignUpUserTypeException e) {
+        return false;
+        }
+    }
 }
+
