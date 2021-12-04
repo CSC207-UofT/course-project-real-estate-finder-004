@@ -102,7 +102,10 @@ public class CommandLineBuyer extends CommandLine {
         if (newInput.equals("s")) {
             currUser.shortListProperty(chosenPropertyId);
         } else if (newInput.equals("c")) {
-            manager.joinRealEstateAgent(chosenPropertyId, currUser.getUsername());
+            System.out.println("You can send a custom message to the owner of the property! Please input your " +
+                    "message here");
+            String customMessage = reader.readLine();
+            manager.joinRealEstateAgent(chosenPropertyId, currUser.getUsername(), customMessage);
         } else if (newInput.equals("main")) {
             choicesUser(currUser);
         } else {
@@ -110,13 +113,10 @@ public class CommandLineBuyer extends CommandLine {
         }
     }
 
-    public void viewInterestedProperties(Buyer user) {
-        // somehow get the property object OR the string representation of the property from the Property Storage
-        // probably violating clean architecture because there should be a controller PropertyViewer that
-        // can return string representation of properties given propertyIDs
-        System.out.println(manager.propertiesToString(user.getInterestedProperties()));
-        // still need to offer options on choosing individual properties, seeing more information and potentially
-        // joining making the offer (by joining the real estate agent)
+    public void viewInterestedProperties(Buyer user) throws IOException {
+        ArrayList<Integer> myProperties = user.getInterestedProperties();
+        System.out.println(manager.propertiesToString(myProperties));
+        viewSpecificProperty(myProperties);
     }
 
 }

@@ -1,10 +1,7 @@
 package controllers;
 
 import Exceptions.*;
-import entities.Property;
-import entities.RealEstateAgent;
-import entities.Seller;
-import entities.User;
+import entities.*;
 import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
 import externalinterfaces.PropertyStorageReadWriter;
@@ -135,10 +132,11 @@ public class DatabaseManager {
         return property.toStringLong();
     }
 
-    public void joinRealEstateAgent(Integer propertyId, String buyerId) {
+    public void joinRealEstateAgent(Integer propertyId, String buyerUsername, String customMessage) {
         Property property = propertyStorage.get(propertyId);
         RealEstateAgent agent = property.agent;
-        agent.addBuyer(buyerId);
+        agent.addBuyer(buyerUsername);
+        agent.connectBuyersAndSeller(customMessage, (Buyer) userStorage.get(buyerUsername));
     }
 
     public DatabaseManager() {

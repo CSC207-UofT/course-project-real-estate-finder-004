@@ -25,11 +25,10 @@ public class RealEstateAgent implements Serializable {
      * The function sends a message to the seller that contains the entities.Buyer's contact details and
      * informs the entities.Seller that the entities.Buyer is interested.
      */
-    public void connectBuyersAndSeller(String custom_message, Buyer buyer) {
-        // Not yet working.... Need to figure out how to communicate with it.
+    public void connectBuyersAndSeller(String customMessage, Buyer buyer) {
         client.addMessage("New notification! A buyer is interested in your property at"
                 + property.getStreetAddress() + ". You can contact them at" + buyer.getEmail() + " or " +
-                buyer.getPhone() + ". Here is a message from the prospective buyer: " + custom_message);
+                buyer.getPhone() + ". Here is a message from the prospective buyer: " + customMessage);
     }
 
     public int getNumberOfBuyers() {
