@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class welcomeGUI extends JFrame implements ActionListener {
+public class WelcomeGUI extends JFrame implements ActionListener {
     Container container = getContentPane();
 //    JLabel userLabel = new JLabel("USERNAME");
 //    JLabel passwordLabel = new JLabel("PASSWORD");
@@ -20,7 +20,7 @@ public class welcomeGUI extends JFrame implements ActionListener {
     JButton welcomeSignupButton = new JButton ("Signup");
 
 
-    welcomeGUI() {
+    WelcomeGUI() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -108,7 +108,7 @@ public class welcomeGUI extends JFrame implements ActionListener {
 
     public static void main(String[] a) {
         // Create object for externalinterfaces.loginGUI class and set properties
-        welcomeGUI frame = new welcomeGUI();
+        WelcomeGUI frame = new WelcomeGUI();
         frame.setTitle("Login Form");
         frame.setVisible(true);
         frame.setBounds(10, 10, 370, 600);
