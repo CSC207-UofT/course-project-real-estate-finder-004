@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class loginGUI extends JFrame implements ActionListener {
+    private final GUI Gui;
     Container container = getContentPane();
     JLabel userLabel = new JLabel("USERNAME");
     JLabel passwordLabel = new JLabel("PASSWORD");
@@ -15,15 +17,13 @@ public class loginGUI extends JFrame implements ActionListener {
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show Password");
-    private static String username = "";
-    private static String password = "";
 
-    loginGUI() {
+    public loginGUI(GUI Gui) {
+        this.Gui = Gui;
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
-
     }
 
     public void setLayoutManager() {
@@ -61,16 +61,12 @@ public class loginGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-//            String userText;
-//            String pwdText;
-//            userText = userTextField.getText();
-//            pwdText = passwordField.getText();
-            username = userTextField.getText();
-            password = passwordField.getText();
-            if (GUI.loginSuccess(username, password)) {
+            String username = userTextField.getText();
+            String password = passwordField.getText();
+            if (this.Gui.loginSuccess(username, password)) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
+                this.Gui.startAfterLogin();
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
@@ -92,17 +88,29 @@ public class loginGUI extends JFrame implements ActionListener {
         }
     }
 
-    public static ArrayList<String> main() {
-        // Create object for loginGUI class and set properties
-        loginGUI frame = new loginGUI();
-        frame.setTitle("Login Form");
-        frame.setVisible(true);
-        frame.setBounds(10, 10, 370, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        ArrayList<String> info = new ArrayList<String>();
-        info.add(username);
-        info.add(password);
-        return info;
+//    public static ArrayList<String> main() {
+//        // Create object for loginGUI class and set properties
+//        loginGUI frame = new loginGUI();
+//        frame.setTitle("Login Form");
+//        frame.setVisible(true);
+//        frame.setBounds(10, 10, 370, 600);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setResizable(false);
+//        ArrayList<String> info = new ArrayList<String>();
+//        info.add(username);
+//        info.add(password);
+//        return info;
+//    }
+
+    public void start() {
+        this.setTitle("Login Form");
+        this.setVisible(true);
+        this.setBounds(10, 10, 370, 600);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+    }
+
+    public void close() {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 }
