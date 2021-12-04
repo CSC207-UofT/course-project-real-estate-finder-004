@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class GUI extends UserInterface {
     public DatabaseManager manager;
-    User currUser;
+    private User currUser;
     boolean loginFrameActive = false;
     loginGUI frame;
 
