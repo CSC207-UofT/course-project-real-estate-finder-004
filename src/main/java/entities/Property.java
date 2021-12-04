@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.io.Serializable;
 
@@ -95,8 +96,16 @@ public class Property implements Serializable {
         return owner;
     }
 
-    public Map<String, Boolean> getAmenities() {
-        return Amenities;
+    public Map<String, Boolean> getAmenities() { return Amenities; }
+
+    public ArrayList<String> getAvailableAmenities() {
+        ArrayList<String> availableAmenities = new ArrayList<>();
+        for (String amenity : Amenities.keySet()) {
+            if (Amenities.get(amenity)) {
+                availableAmenities.add(amenity);
+            }
+        }
+        return availableAmenities;
     }
 
     public boolean getAvaliability() {
@@ -156,10 +165,19 @@ public class Property implements Serializable {
     }
 
     public String toString() {
-        String returnString = "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
                 "Floor area: " + sqft + " square feet\n" +
                 "Price: $" + price + "\n\n";
-        return returnString;
+    }
+
+    public String toStringLong() {
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+                "Postal code: " + postalCode + "\n" +
+                "Floor area: " + sqft + " square feet\n" +
+                "Price: $" + price + "\n" +
+                "Number of rooms: " + numberOfRoom + "\n" +
+                "Number of bathrooms: " + numberOfBathrooms + "\n" +
+                "Available amenities: " + getAvailableAmenities().toString() + "\n";
     }
 
     // TODO: Implement long toString that returns all information about property. The above toString only returns

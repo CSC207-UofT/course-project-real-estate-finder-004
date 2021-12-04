@@ -57,7 +57,7 @@ public class DatabaseManager {
     }
 
     public Map<Integer, Property> searchProperties(String postalCode) {
-        Map<Integer, Property> toReturn = new HashMap<Integer, Property>();
+        Map<Integer, Property> toReturn = new HashMap<>();
         Set<Integer> keys = this.propertyStorage.keySet();
         for (Integer key : keys) {
             Property property = this.propertyStorage.get(key);
@@ -74,11 +74,18 @@ public class DatabaseManager {
 
     public String propertiesToString(ArrayList<Integer> propertyIds) {
         StringBuilder returnString = new StringBuilder();
+        int propertyNumber = 1;
         for (Integer propertyId: propertyIds) {
             Property property = propertyStorage.get(propertyId);
-            returnString.append(property.toString());
+            returnString.append(propertyNumber).append(". ").append(property.toString()).append("\n");
+            propertyNumber++;
         }
         return returnString.toString();
+    }
+
+    public String specificPropertyToString(Integer propertyId) {
+        Property property = propertyStorage.get(propertyId);
+        return property.toStringLong();
     }
 
     public DatabaseManager() {
