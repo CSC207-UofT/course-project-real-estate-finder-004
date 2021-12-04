@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BuyerTest {
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testBuyer(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
@@ -17,7 +17,7 @@ public class BuyerTest {
                 "0987654321", "4321");
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testGetInterestedProperties(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
@@ -35,7 +35,7 @@ public class BuyerTest {
         assertTrue(b.getInterestedProperties().contains(p2.propertyId));
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testShortListProperty(){
         Buyer b = new Buyer("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");

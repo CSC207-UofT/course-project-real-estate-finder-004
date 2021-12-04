@@ -1,10 +1,12 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.io.Serializable;
 
 public class Property implements Serializable {
     public final int propertyId;
+    public final RealEstateAgent agent;
 
     private String streetAddress;
     private String city;
@@ -17,7 +19,6 @@ public class Property implements Serializable {
     private int numberOfBathrooms;
     private Map<String, Boolean> Amenities;
     private boolean availability;
-    private final RealEstateAgent agent;
     private Seller owner;
 
     public Property(int propertyId, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
@@ -95,8 +96,16 @@ public class Property implements Serializable {
         return owner;
     }
 
-    public Map<String, Boolean> getAmenities() {
-        return Amenities;
+    public Map<String, Boolean> getAmenities() { return Amenities; }
+
+    public ArrayList<String> getAvailableAmenities() {
+        ArrayList<String> availableAmenities = new ArrayList<>();
+        for (String amenity : Amenities.keySet()) {
+            if (Amenities.get(amenity)) {
+                availableAmenities.add(amenity);
+            }
+        }
+        return availableAmenities;
     }
 
     public boolean getAvaliability() {
@@ -156,12 +165,19 @@ public class Property implements Serializable {
     }
 
     public String toString() {
-        String returnString = "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
                 "Floor area: " + sqft + " square feet\n" +
                 "Price: $" + price + "\n\n";
-        return returnString;
     }
 
-    // TODO: Implement long toString that returns all information about property. The above toString only returns
-    // important information required when displaying properties in search or shortlist.
+    public String toStringLong() {
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+                "Postal code: " + postalCode + "\n" +
+                "Floor area: " + sqft + " square feet\n" +
+                "Price: $" + price + "\n" +
+                "Number of rooms: " + numberOfRoom + "\n" +
+                "Number of bathrooms: " + numberOfBathrooms + "\n" +
+                "Available amenities: " + getAvailableAmenities().toString() + "\n";
+    }
+
 }
