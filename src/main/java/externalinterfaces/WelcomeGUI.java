@@ -106,6 +106,7 @@ public class WelcomeGUI extends JFrame implements ActionListener {
         //TODO: Implement after clicking welcomeLoginButton and welcomeSignupButton, it goes to the next Frame
     }
 
+
     public static void main(String[] a) {
         // Create object for externalinterfaces.loginGUI class and set properties
         WelcomeGUI frame = new WelcomeGUI();
