@@ -4,11 +4,12 @@ import externalinterfaces.HashMapUserStorage;
 import externalinterfaces.PropertyStorageReadWriter;
 import externalinterfaces.UserStorageReadWriter;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class CreateUserTest {
-    @Test (timeout = 50)
-    public void testCreateBuyer(){
+    @Test(timeout = 500)
+    public void testCreateBuyer() {
         HashMapUserStorage myUserStorage = new HashMapUserStorage();
         UserStorageReadWriter rw = new UserStorageReadWriter(myUserStorage);
         HashMapPropertyStorage storage = new HashMapPropertyStorage();
@@ -21,8 +22,8 @@ public class CreateUserTest {
         assertFalse(myUserStorage.getUsers().isEmpty());
     }
 
-    @Test (timeout = 50)
-    public void testCreateSeller(){
+    @Test(timeout = 500)
+    public void testCreateSeller() {
         HashMapUserStorage myUserStorage = new HashMapUserStorage();
         UserStorageReadWriter rw = new UserStorageReadWriter(myUserStorage);
         HashMapPropertyStorage storage = new HashMapPropertyStorage();
