@@ -34,7 +34,7 @@ public class Property implements Serializable {
         this.Amenities = amenities;
         this.owner = owner;
         this.availability = availability;
-        this.agent = new RealEstateAgent(this.owner);
+        this.agent = new RealEstateAgent(owner, propertyId);
     }
 
     public Property(int propertyId, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, Seller owner, boolean availability) {
@@ -47,7 +47,7 @@ public class Property implements Serializable {
         this.price = price;
         this.sqft = sqft;
         this.owner = owner;
-        this.agent = new RealEstateAgent(this.owner);
+        this.agent = new RealEstateAgent(owner, propertyId);
         this.availability = availability;
     }
 
