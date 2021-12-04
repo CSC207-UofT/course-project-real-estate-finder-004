@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static java.lang.Integer.*;
+
 public class CommandLineBuyer extends CommandLine {
     private Buyer currUser = null;
 
@@ -60,35 +62,52 @@ public class CommandLineBuyer extends CommandLine {
                         "would not like to filter by the number of bathrooms in the property.");
         String noOfBathroomsStr = reader.readLine();
 
-        Float minPrice = Float.parseFloat(minPriceStr);
-        Float maxPrice = Float.parseFloat(maxPriceStr);
-        Integer minSqft = Integer.parseInt(minSqftStr);
-        Integer maxSqft = Integer.parseInt(maxSqftStr);
-        Integer noOfRooms = Integer.parseInt(noOfRoomsStr);
-        Integer noOfBathrooms = Integer.parseInt(noOfBathroomsStr);
+        float minPrice = Float.parseFloat(minPriceStr);
+        float maxPrice = Float.parseFloat(maxPriceStr);
+        int minSqft = parseInt(minSqftStr);
+        int maxSqft = parseInt(maxSqftStr);
+        int noOfRooms = parseInt(noOfRoomsStr);
+        int noOfBathrooms = parseInt(noOfBathroomsStr);
         ArrayList<Integer> filteredProperties = manager.searchProperties(postalCode, minPrice, maxPrice,
                 minSqft, maxSqft, noOfRooms, noOfBathrooms);
         System.out.println(manager.propertiesToString(filteredProperties));
+        viewSpecificProperty(filteredProperties);
+    }
+
+    public void viewSpecificProperty(ArrayList<Integer> filteredProperties) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.input));
         System.out.println("To view more information about a particular property, please type in the corresponding" +
                 "property number. To go back to the main menu, please input 'main'");
         String nextInput = reader.readLine();
         if (nextInput.equals("main")) {
             choicesUser(currUser);
         } else {
-            viewSpecificProperty(nextInput, filteredProperties);
+            try {
+                Integer.parseInt(nextInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid input");
+                viewSpecificProperty(filteredProperties);
+            }
         }
-    }
 
-    public void viewSpecificProperty(String nextInput, ArrayList<Integer> filteredProperties) {
-        Integer propertyChoice = Integer.parseInt(nextInput);
+        int propertyChoice = parseInt(nextInput);
         propertyChoice = propertyChoice - 1;
         Integer chosenPropertyId = filteredProperties.get(propertyChoice);
         System.out.println(manager.specificPropertyToString(chosenPropertyId));
         System.out.println("If you would like to shortlist this property, please input 's'. If you would" +
                 "like to contact the owner, please input 'c'. If you would like to view another property, " +
-                "please input the relevant property number. If you would like to go back to the main menu, " +
+                "please input 'p'. If you would like to go back to the main menu, " +
                 "please input 'main'.");
-
+        String newInput = reader.readLine();
+        if (newInput.equals("s")) {
+            currUser.shortListProperty(chosenPropertyId);
+        } else if (newInput.equals("c")) {
+            manager.joinRealEstateAgent(chosenPropertyId, currUser.getUsername());
+        } else if (newInput.equals("main")) {
+            choicesUser(currUser);
+        } else {
+            viewSpecificProperty(filteredProperties);
+        }
     }
 
     public void viewInterestedProperties(Buyer user) {

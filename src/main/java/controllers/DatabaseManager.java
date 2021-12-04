@@ -2,6 +2,7 @@ package controllers;
 
 import Exceptions.*;
 import entities.Property;
+import entities.RealEstateAgent;
 import entities.Seller;
 import entities.User;
 import externalinterfaces.HashMapPropertyStorage;
@@ -132,6 +133,12 @@ public class DatabaseManager {
     public String specificPropertyToString(Integer propertyId) {
         Property property = propertyStorage.get(propertyId);
         return property.toStringLong();
+    }
+
+    public void joinRealEstateAgent(Integer propertyId, String buyerId) {
+        Property property = propertyStorage.get(propertyId);
+        RealEstateAgent agent = property.agent;
+        agent.addBuyer(buyerId);
     }
 
     public DatabaseManager() {

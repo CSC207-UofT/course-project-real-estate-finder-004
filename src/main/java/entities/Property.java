@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Property implements Serializable {
     public final int propertyId;
+    public final RealEstateAgent agent;
 
     private String streetAddress;
     private String city;
@@ -18,7 +19,6 @@ public class Property implements Serializable {
     private int numberOfBathrooms;
     private Map<String, Boolean> Amenities;
     private boolean availability;
-    private final RealEstateAgent agent;
     private Seller owner;
 
     public Property(int propertyId, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, int numberOfRoom, int numberOfBathrooms, Map amenities, Boolean availability, Seller owner) {
@@ -180,6 +180,4 @@ public class Property implements Serializable {
                 "Available amenities: " + getAvailableAmenities().toString() + "\n";
     }
 
-    // TODO: Implement long toString that returns all information about property. The above toString only returns
-    // important information required when displaying properties in search or shortlist.
 }

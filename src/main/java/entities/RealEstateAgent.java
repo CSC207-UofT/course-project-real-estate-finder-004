@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 // <<<<<<< Serializable_added
 public class RealEstateAgent implements Serializable {
-    private ArrayList<Buyer> buyers = new ArrayList<Buyer>();
+    private ArrayList<String> buyers = new ArrayList<>();
 // =======
 // public class entities.RealEstateAgent {
 //     private ArrayList<entities.Buyer> buyers = new ArrayList<>();
@@ -36,8 +36,8 @@ public class RealEstateAgent implements Serializable {
         return buyers.size();
     }
 
-    public void addBuyer(Buyer buyer) {
-        this.buyers.add(buyer);
+    public void addBuyer(String buyerId) {
+        this.buyers.add(buyerId);
     }
 
 
