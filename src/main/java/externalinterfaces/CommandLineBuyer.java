@@ -28,12 +28,16 @@ public class CommandLineBuyer extends CommandLine {
         System.out.println("Select 1 to search for properties, select 2 to view your shortlisted properties." +
                 "Select 3 to log out");
         String seller_mode = reader.readLine();
-        if (seller_mode.equals("1")) {
-            searchProperties();
-        } else if (seller_mode.equals("2")) {
-            viewInterestedProperties(user);
-        } else if (seller_mode.equals("3")) {
-            logOut();
+        switch (seller_mode) {
+            case "1":
+                searchProperties();
+                break;
+            case "2":
+                viewInterestedProperties(user);
+                break;
+            case "3":
+                logOut();
+                break;
         }
     }
 
@@ -62,12 +66,46 @@ public class CommandLineBuyer extends CommandLine {
                         "would not like to filter by the number of bathrooms in the property.");
         String noOfBathroomsStr = reader.readLine();
 
-        float minPrice = Float.parseFloat(minPriceStr);
-        float maxPrice = Float.parseFloat(maxPriceStr);
-        int minSqft = parseInt(minSqftStr);
-        int maxSqft = parseInt(maxSqftStr);
-        int noOfRooms = parseInt(noOfRoomsStr);
-        int noOfBathrooms = parseInt(noOfBathroomsStr);
+        if (postalCode.equals("NA")) {
+            postalCode = null;
+        }
+
+        float minPrice;
+        if (minPriceStr.equals("NA")) {
+            minPrice = -1.0f;
+        } else {
+            minPrice = Float.parseFloat(minPriceStr);
+        }
+        float maxPrice;
+        if (maxPriceStr.equals("NA")) {
+            maxPrice = -1.0f;
+        } else {
+            maxPrice = Float.parseFloat(maxPriceStr);
+        }
+        int minSqft;
+        if (minSqftStr.equals("NA")) {
+            minSqft = -1;
+        } else {
+            minSqft = parseInt(minSqftStr);
+        }
+        int maxSqft;
+        if (maxSqftStr.equals("NA")) {
+            maxSqft = -1;
+        } else {
+            maxSqft = parseInt(maxSqftStr);
+        }
+        int noOfRooms;
+        if (noOfRoomsStr.equals("NA")) {
+            noOfRooms = -1;
+        } else {
+            noOfRooms = parseInt(noOfRoomsStr);
+        }
+        int noOfBathrooms;
+        if (noOfBathroomsStr.equals("NA")) {
+            noOfBathrooms = -1;
+        } else {
+            noOfBathrooms = parseInt(noOfBathroomsStr);
+        }
         ArrayList<Integer> filteredProperties = manager.searchProperties(postalCode, minPrice, maxPrice,
                 minSqft, maxSqft, noOfRooms, noOfBathrooms);
         System.out.println(manager.propertiesToString(filteredProperties));
@@ -79,19 +117,18 @@ public class CommandLineBuyer extends CommandLine {
         System.out.println("To view more information about a particular property, please type in the corresponding" +
                 "property number. To go back to the main menu, please input 'main'");
         String nextInput = reader.readLine();
+        int propertyChoice = 0;
         if (nextInput.equals("main")) {
             choicesUser(currUser);
         } else {
             try {
-                Integer.parseInt(nextInput);
+                propertyChoice = Integer.parseInt(nextInput);
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid input");
                 viewSpecificProperty(filteredProperties);
             }
         }
-
-        int propertyChoice = parseInt(nextInput);
-        propertyChoice = propertyChoice - 1;
+        propertyChoice--;
         Integer chosenPropertyId = filteredProperties.get(propertyChoice);
         System.out.println(manager.specificPropertyToString(chosenPropertyId));
         System.out.println("If you would like to shortlist this property, please input 's'. If you would" +
@@ -99,17 +136,22 @@ public class CommandLineBuyer extends CommandLine {
                 "please input 'p'. If you would like to go back to the main menu, " +
                 "please input 'main'.");
         String newInput = reader.readLine();
-        if (newInput.equals("s")) {
-            currUser.shortListProperty(chosenPropertyId);
-        } else if (newInput.equals("c")) {
-            System.out.println("You can send a custom message to the owner of the property! Please input your " +
-                    "message here");
-            String customMessage = reader.readLine();
-            manager.joinRealEstateAgent(chosenPropertyId, currUser.getUsername(), customMessage);
-        } else if (newInput.equals("main")) {
-            choicesUser(currUser);
-        } else {
-            viewSpecificProperty(filteredProperties);
+        switch (newInput) {
+            case "s":
+                currUser.shortListProperty(chosenPropertyId);
+                break;
+            case "c":
+                System.out.println("You can send a custom message to the owner of the property! Please input your " +
+                        "message here");
+                String customMessage = reader.readLine();
+                manager.joinRealEstateAgent(chosenPropertyId, currUser.getUsername(), customMessage);
+                break;
+            case "main":
+                choicesUser(currUser);
+                break;
+            default:
+                viewSpecificProperty(filteredProperties);
+                break;
         }
     }
 

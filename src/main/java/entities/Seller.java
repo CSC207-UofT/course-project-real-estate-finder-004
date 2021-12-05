@@ -48,9 +48,9 @@ public class Seller extends User {
     }
 
     /**
-     * Gets the list of user properties.
+     * Gets the list of user propertyIds.
      *
-     * @return An ArrayList of the user's properties.
+     * @return An ArrayList of the user's propertyIds.
      */
     public ArrayList<Integer> getProperties() {
         return properties;
