@@ -22,5 +22,14 @@ public class ShowDatabase {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        StorageReadWriter agentStorageReadWriter = new AgentStorageReadWriter(null);
+        HashMapAgentStorage agentStorage = null;
+        try {
+            agentStorage = (HashMapAgentStorage) agentStorageReadWriter.readFromFile();
+            System.out.println(agentStorage.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
