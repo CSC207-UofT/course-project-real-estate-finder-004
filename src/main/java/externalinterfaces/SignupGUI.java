@@ -6,14 +6,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 public class SignupGUI extends JFrame implements ActionListener {
+    private final GUI Gui; 
     static DatabaseManager manager;
     JLabel signUpFormLabel, nameLabel, userTypeLabel, emailLabel, createPasswordLabel, confirmPasswordLabel, usernameLabel, countryLabel, phoneNumberLabel;
     JTextField nameTextField, emailTextField, usernameTextField, countryTextField, phoneNumberTextField;
     JButton submitButton, clearButton;
     JRadioButton buyerButton, sellerButton;
     JPasswordField createPasswordTextField, confirmPasswordTextField;
-    SignupGUI()
-    {
+
+    public SignupGUI(GUI Gui) {
         setVisible(true);
         setSize(700, 700);
         setLayout(null);
@@ -87,6 +88,7 @@ public class SignupGUI extends JFrame implements ActionListener {
         add(submitButton);
         add(clearButton);
 
+        this.Gui = Gui;
     }
     public void actionPerformed(ActionEvent e)
     {
@@ -116,7 +118,7 @@ public class SignupGUI extends JFrame implements ActionListener {
                     ps.setString(5, country);
                     ps.setString(6, phoneNumber);
                     ResultSet rs = ps.executeQuery();
-                    if (GUI.signUpSuccess(name, userType, username, email, phoneNumber, password, confirmPassword))
+                    if (Gui.signUpSuccess(name, userType, username, email, phoneNumber, password, confirmPassword))
                     {
                         JOptionPane.showMessageDialog(submitButton, "Data Saved Successfully");
                     }
@@ -153,7 +155,7 @@ public class SignupGUI extends JFrame implements ActionListener {
     }
     public static void main(String args[])
     {
-        new SignupGUI();
+        SignupGUI signupGUI = new SignupGUI(new GUI(manager));
     }
 
 }
