@@ -1,12 +1,14 @@
 package controllers;
 
 import entities.Property;
+import entities.RealEstateAgent;
 import entities.Seller;
 import externalinterfaces.*;
 
 import java.io.IOException;
 
 public class PropertyCreator extends Creator {
+
 
     public PropertyCreator(HashMapUserStorage userStorage,
                            UserStorageReadWriter userStorageReadWriter,
@@ -27,6 +29,7 @@ public class PropertyCreator extends Creator {
         this.propertyStorage.add(property);
         if(Creator.writeToFile) {
             try {
+                agentStorageReadWriter.saveToFile();
                 propertyStorageReadWriter.saveToFile();
                 userStorageReadWriter.saveToFile();
             } catch (IOException e) {
