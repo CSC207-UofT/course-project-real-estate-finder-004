@@ -68,6 +68,10 @@ public class DatabaseManager {
         return returnString.toString();
     }
 
+    public Property getProperty(Integer propertyID){
+        return propertyStorage.get(propertyID);
+    }
+
     public DatabaseManager(){
         this.userStorageReadWriter = new UserStorageReadWriter(null);
         this.propertyStorageReadWriter = new PropertyStorageReadWriter(null);
