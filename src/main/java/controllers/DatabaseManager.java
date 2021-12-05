@@ -38,8 +38,18 @@ public class DatabaseManager {
             throw new SignUpUserTypeException();
         }
 
-        // TODO: check if username/email/phone number already exist or not
-        // TODO: check if email is valid or not
+        // check if username/email/phone number already exist or not
+        for(User user: userStorage.getUsers().values()) {
+            if (user.getUsername() == username) {
+                throw new SignUpUserNameInUseException();
+            }
+            if (user.getEmail() == email) {
+                throw new SignUpEmailInUseException();
+            }
+            if (user.getPhone() == phone) {
+                throw new SignUpPhoneNumberInUseException();
+            }
+        }
     }
 
     public void signUp(String name, String user_type, String username, String email, String phone, String password){
@@ -77,6 +87,7 @@ public class DatabaseManager {
         this.userStorageReadWriter = new UserStorageReadWriter(null);
         this.propertyStorageReadWriter = new PropertyStorageReadWriter(null);
         this.agentStorageReadWriter = new AgentStorageReadWriter(null);
+
         try {
             this.userStorage = (HashMapUserStorage) userStorageReadWriter.readFromFile();
             this.propertyStorage = (HashMapPropertyStorage) propertyStorageReadWriter.readFromFile();
@@ -86,8 +97,11 @@ public class DatabaseManager {
         }
 
         this.propertyCreator = new PropertyCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
+        this.agentCreator = new AgentCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
         this.userCreator = new UserCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
+
         this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
         this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        this.agentCreator.create((Seller) this.userStorage.get("jsmith"), this.propertyStorage.get(1));
     }
 }
