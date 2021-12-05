@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.channels.SelectionKey;
 
 public class WelcomeGUI extends JFrame implements ActionListener {
     Container container = getContentPane();
@@ -102,8 +103,17 @@ public class WelcomeGUI extends JFrame implements ActionListener {
 //
 //
 //        }
-
         //TODO: Implement after clicking welcomeLoginButton and welcomeSignupButton, it goes to the next Frame
+        if (e.getSource() == welcomeLoginButton){
+            loginGUI login = new loginGUI();
+            login.setVisible(true);
+        }
+//        if (e.getSource() == welcomeSignupButton) {
+//            SignupGUI signup = new SignupGUI();
+//            signup.setVisible(true);
+//        }
+
+        //TODO: the above code will work if SignUpGUI class is merged successfully.
     }
 
 
