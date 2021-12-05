@@ -5,17 +5,18 @@ import java.util.ArrayList;
 
 public class RealEstateAgent implements Serializable {
     public final int agentId;
-    private ArrayList<Buyer> buyers = new ArrayList<>();
+    private ArrayList<String> buyers;
     private final Seller client;
 
     public RealEstateAgent(Seller client, int propertyId) {
         this.client = client;
         this.agentId = propertyId;
+        this.buyers = new ArrayList<>();
     }
 
-    /** This function is called when a entities.Buyer is interested in a property and would like to speak to the entities.Seller.
-     * The function sends a message to the seller that contains the entities.Buyer's contact details and
-     * informs the entities.Seller that the entities.Buyer is interested.
+    /** This function is called when a Buyer is interested in a property and would like to speak to the Seller.
+     * The function sends a message to the seller that contains the Buyer's contact details and
+     * informs the Seller that the Buyer is interested.
      */
     public void connectBuyersAndSeller(String custom_message, Buyer buyer, Property property) {
         client.addMessage("New notification! A buyer is interested in your property at"
@@ -26,14 +27,10 @@ public class RealEstateAgent implements Serializable {
         return agentId;
     }
 
-    public int getNumberOfBuyers() {
-        return buyers.size();
-    }
+    public int getNumberOfBuyers() { return buyers.size(); }
 
-    public void addBuyer(Buyer buyer) {
-        this.buyers.add(buyer);
-    }
+    public void addBuyer(String buyer) { buyers.add(buyer); }
 
-
+    public boolean removeBuyer(String Buyer) { return buyers.remove(Buyer); }
 
 }
