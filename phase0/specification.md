@@ -7,7 +7,7 @@ For properties:
 
 For "purchasing":
 	
-	- entities.Buyer(s) should be able to send an offer to seller for a given real estate.
+	- Buyer(s) should be able to send an offer to seller for a given real estate.
 	- A seller should be able to view their current offers and accept or reject a given offer.
 
 We also want to enable a buyer to join / leave a group of buyers.
