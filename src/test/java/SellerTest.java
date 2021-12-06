@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SellerTest {
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testSeller() {
         Seller s = new Seller("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
@@ -17,7 +17,7 @@ public class SellerTest {
                 "0987654321", "4321");
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testGetProperties() {
         Seller s = new Seller("John Smith", "johnsmith", "john.smith@gmail.com",
                 "0987654321", "4321");
@@ -33,7 +33,7 @@ public class SellerTest {
         assertEquals(2, (int) s.getProperties().get(1));
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testAddProperty() {
         Seller s = new Seller("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");
@@ -48,7 +48,7 @@ public class SellerTest {
         assertEquals(4, (int) s.getProperties().get(1));
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void testRemoveProperty() {
         Seller s = new Seller("Alexis Tassone", "alexistassone", "alexis.tassone@mail.utoronto.ca",
                 "1234567890", "1234");

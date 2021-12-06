@@ -3,7 +3,7 @@ import entities.Seller;
 import org.junit.*;
 
 public class ListPropertiesTest {
-    @Test(timeout = 150)
+    @Test(timeout = 500)
     public void testGetListOfProperties() {
         Seller s = new Seller("John Smith", "johnsmith", "john.smith@gmail.com",
                 "0987654321", "4321");

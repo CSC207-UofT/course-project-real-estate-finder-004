@@ -7,11 +7,12 @@ import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.UserStorageReadWriter;
 import externalinterfaces.HashMapUserStorage;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class CreatePropertyTest {
-    @Test (timeout = 50)
-    public void testCreateProperty(){
+    @Test(timeout = 500)
+    public void testCreateProperty() {
         Seller s = new Seller("John Smith", "johnsmith", "john.smith@gmail.com",
                 "0987654321", "4321");
         assertTrue(s.getProperties().isEmpty());
