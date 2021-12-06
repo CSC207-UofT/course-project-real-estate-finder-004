@@ -5,13 +5,8 @@ import entities.*;
 import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
 import externalinterfaces.HashMapAgentStorage;
-import externalinterfaces.PropertyStorageReadWriter;
-import externalinterfaces.UserStorageReadWriter;
-import externalinterfaces.AgentStorageReadWriter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.ArrayList;
 
@@ -20,12 +15,12 @@ public class DatabaseManager {
     private HashMapUserStorage userStorage;
     private HashMapPropertyStorage propertyStorage;
     private HashMapAgentStorage agentStorage;
-    private UserCreator userCreator;
-    private PropertyCreator propertyCreator;
-    private AgentCreator agentCreator;
-    private UserStorageReadWriter userStorageReadWriter;
-    private PropertyStorageReadWriter propertyStorageReadWriter;
-    private AgentStorageReadWriter agentStorageReadWriter;
+    private final UserCreator userCreator;
+    private final PropertyCreator propertyCreator;
+    private final AgentCreator agentCreator;
+    private final UserStorageReadWriter userStorageReadWriter;
+    private final PropertyStorageReadWriter propertyStorageReadWriter;
+    private final AgentStorageReadWriter agentStorageReadWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if (!password.equals(password_confirm)) {
@@ -42,13 +37,13 @@ public class DatabaseManager {
 
         // check if username/email/phone number already exist or not
         for(User user: userStorage.getUsers().values()) {
-            if (user.getUsername() == username) {
+            if (user.getUsername().equals(username)) {
                 throw new SignUpUserNameInUseException();
             }
-            if (user.getEmail() == email) {
+            if (user.getEmail().equals(email)) {
                 throw new SignUpEmailInUseException();
             }
-            if (user.getPhone() == phone) {
+            if (user.getPhone().equals(phone)) {
                 throw new SignUpPhoneNumberInUseException();
             }
         }

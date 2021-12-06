@@ -1,8 +1,10 @@
 package externalinterfaces;
 
+import controllers.AgentStorageReadWriter;
+
 import java.io.IOException;
 
-public class InitDatabseAgent {
+public class InitDatabaseAgent {
     public static void main(String[] args) {
         HashMapAgentStorage agentStorage = new HashMapAgentStorage();
         AgentStorageReadWriter agentStorageReadWriter = new AgentStorageReadWriter(agentStorage);

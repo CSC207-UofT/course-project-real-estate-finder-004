@@ -1,7 +1,6 @@
 package controllers;
 
 import entities.Property;
-import entities.RealEstateAgent;
 import entities.Seller;
 import externalinterfaces.*;
 
