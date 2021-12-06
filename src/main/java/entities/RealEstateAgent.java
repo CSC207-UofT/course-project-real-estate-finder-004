@@ -29,9 +29,9 @@ public class RealEstateAgent implements Serializable {
      * @param property      The property that the buyer wishes to contact the seller for
      */
     public void connectBuyersAndSeller(String customMessage, Buyer buyer, Property property) {
-        client.addMessage("New notification! A buyer is interested in your property at"
-                + property.getStreetAddress() + ". You can contact them at" + buyer.getEmail() + " or " +
-                buyer.getPhone() + ". Here is a message from the prospective buyer: " + customMessage);
+        client.addMessage("New notification! A buyer is interested in your property at "
+                + property.getStreetAddress() + ". You can contact them at " + buyer.getEmail() + " or " +
+                buyer.getPhone() + ". Here is a message from the interested buyer: " + customMessage);
     }
 
     public int getAgentId() {
