@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 public class Buyer extends User {
-    private ArrayList<Property> interestedProperties = new ArrayList<Property>();
+    private ArrayList<Integer> interestedProperties = new ArrayList<>();
 
     /**
      * Constructs a new user given the relevant details.
@@ -17,6 +17,7 @@ public class Buyer extends User {
     public Buyer(String name, String username, String email, String phone, String password) {
         super(name, username, email, phone, password);
     }
+
 
     /**
      * Adds a property to the user's list of interested properties.
@@ -35,6 +36,5 @@ public class Buyer extends User {
     public ArrayList<Property> getInterestedProperties() {
         return interestedProperties;
     }
-
 
 }

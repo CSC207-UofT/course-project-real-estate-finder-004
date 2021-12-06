@@ -1,10 +1,12 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.io.Serializable;
 
 public class Property implements Serializable {
     public final int propertyId;
+    public final RealEstateAgent agent;
 
     private String streetAddress;
     private String city;
@@ -17,7 +19,6 @@ public class Property implements Serializable {
     private int numberOfBathrooms;
     private Map<String, Boolean> Amenities;
     private boolean availability;
-    private final RealEstateAgent agent;
     private Seller owner;
 
     /**
@@ -186,8 +187,16 @@ public class Property implements Serializable {
      *
      * @return A Map of all amenities, where the value of the amenity is True if the property has the amenity.
      */
-    public Map<String, Boolean> getAmenities() {
-        return Amenities;
+    public Map<String, Boolean> getAmenities() { return Amenities; }
+
+    public ArrayList<String> getAvailableAmenities() {
+        ArrayList<String> availableAmenities = new ArrayList<>();
+        for (String amenity : Amenities.keySet()) {
+            if (Amenities.get(amenity)) {
+                availableAmenities.add(amenity);
+            }
+        }
+        return availableAmenities;
     }
 
     /**
@@ -315,4 +324,21 @@ public class Property implements Serializable {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+
+    public String toString() {
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+                "Floor area: " + sqft + " square feet\n" +
+                "Price: $" + price + "\n\n";
+    }
+
+    public String toStringLong() {
+        return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
+                "Postal code: " + postalCode + "\n" +
+                "Floor area: " + sqft + " square feet\n" +
+                "Price: $" + price + "\n" +
+                "Number of rooms: " + numberOfRoom + "\n" +
+                "Number of bathrooms: " + numberOfBathrooms + "\n" +
+                "Available amenities: " + getAvailableAmenities().toString() + "\n";
+    }
+
 }

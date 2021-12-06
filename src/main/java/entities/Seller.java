@@ -3,8 +3,9 @@ package entities;
 import java.util.*;
 
 public class Seller extends User {
-    private final ArrayList<Integer> properties = new ArrayList<>();
-    private final LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
+    // properties stores the propertyIds of all the properties
+    private ArrayList<Integer> properties = new ArrayList<>();
+    private LinkedHashMap<String, Boolean> messages = new LinkedHashMap<>();
 
     /**
      * Constructs a new user given the relevant details.
@@ -47,9 +48,9 @@ public class Seller extends User {
     }
 
     /**
-     * Gets the list of user properties.
+     * Gets the list of user propertyIds.
      *
-     * @return An ArrayList of the user's properties.
+     * @return An ArrayList of the user's propertyIds.
      */
     public ArrayList<Integer> getProperties() {
         return properties;
