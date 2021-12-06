@@ -39,7 +39,7 @@ public class SellerFrame extends JFrame {
             addListings();
         });
         signOutButton.addActionListener(e -> {
-
+            this.gui.signOut();
         });
     }
 
@@ -131,8 +131,21 @@ public class SellerFrame extends JFrame {
                 seller.removeProperty(propertyID);
                 viewListings();
             });
-
             propertyPanel.add(button);
+            JButton viewButton = new JButton("Details");
+            viewButton.addActionListener(e -> {
+                JPanel testPanel = new JPanel();
+                testPanel.setLayout(new BoxLayout(testPanel, BoxLayout.PAGE_AXIS));
+                testPanel.add(new JLabel("Address: " + property.getStreetAddress()));
+                testPanel.add(new JLabel("City: " + property.getCity()));
+                testPanel.add(new JLabel("Province: " + property.getProvince()));
+                testPanel.add(new JLabel("Country: " + property.getCountry()));
+                testPanel.add(new JLabel("Postal Code: " + property.getPostalCode()));
+                testPanel.add(new JLabel("Price: " + property.getPrice()));
+                testPanel.add(new JLabel("Square Feet: " + property.getSqft()));
+                JOptionPane.showMessageDialog(this, testPanel);
+            });
+            propertyPanel.add(viewButton);
 
             myPanel.add(propertyPanel);
         }
