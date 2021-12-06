@@ -79,65 +79,7 @@ public class DatabaseManager {
                 toReturn.remove(key);
             }
         }
-
-        /*if (postalCode != null){
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                if (property.getPostalCode().equals(postalCode)){
-                    toReturn.add(property.getPropertyId());
-                }
-            }
-        }
-        if (minPrice != -1.0f && maxPrice != -1.0f){
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                if (minPrice <= property.getPrice() && property.getPrice() <= maxPrice){
-                    toReturn.add(property.getPropertyId());
-                }
-            }
-        }
-        if (minSqft != -1 && maxSqft != -1){
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                if (minSqft <= property.getSqft() && property.getSqft() <= maxSqft){
-                    toReturn.add(property.getPropertyId());
-                }
-            }
-        }
-        if (numberOfRoom != -1){
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                if (property.getNumberOfRoom() == numberOfRoom){
-                    toReturn.add(property.getPropertyId());
-                }
-            }
-        }
-        if (numberOfBathrooms != -1){
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                if (property.getNumberOfBathrooms() == numberOfBathrooms){
-                    toReturn.add(property.getPropertyId());
-                }
-            }
-        }
-        else{
-            for (Integer key : keys) {
-                Property property = this.propertyStorage.get(key);
-                toReturn.add(property.getPropertyId());
-        }*/
         return toReturn;
-
-
-
-        /*Map<Integer, Property> toReturn = new HashMap<Integer, Property>();
-        Set<Integer> keys = this.propertyStorage.keySet();
-        for (Integer key : keys) {
-            Property property = this.propertyStorage.get(key);
-            if (property.getPostalCode().equals(postalCode)) {
-                toReturn.put(key, property);
-            }
-        }
-        return toReturn;*/
     }
 
     public void addProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
