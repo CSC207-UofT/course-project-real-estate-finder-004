@@ -49,7 +49,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         clearButton.addActionListener(this);
         signUpFormLabel.setBounds(100, 30, 400, 30);
         nameLabel.setBounds(80, 70, 200, 30);
-        userTypeLabel.setBounds(80, 110, 200, 30);
+        userTypeLabel.setBounds(80, 350, 200, 30);
         emailLabel.setBounds(80, 110, 200, 30);
         createPasswordLabel.setBounds(80, 150, 200, 30);
         confirmPasswordLabel.setBounds(80, 190, 200, 30);
@@ -65,8 +65,8 @@ public class SignupFrame extends JFrame implements ActionListener {
         usernameTextField.setBounds(300, 230, 200, 30);
         countryTextField.setBounds(300, 270, 200, 30);
         phoneNumberTextField.setBounds(300, 310, 200, 30);
-        submitButton.setBounds(50, 350, 100, 30);
-        clearButton.setBounds(170, 350, 100, 30);
+        submitButton.setBounds(50, 400, 100, 30);
+        clearButton.setBounds(170, 400, 100, 30);
         add(signUpFormLabel);
         add(nameLabel);
         add(nameTextField);
@@ -113,6 +113,7 @@ public class SignupFrame extends JFrame implements ActionListener {
                     }
                 } catch (Exception ex) {
                     System.out.println(ex);
+                    JOptionPane.showMessageDialog(submitButton, ex.getMessage());
                 }
             } else {
                 JOptionPane.showMessageDialog(submitButton, "Password Does Not Match");

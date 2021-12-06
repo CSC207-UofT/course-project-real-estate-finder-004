@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class BuyerFrame extends JFrame {
     private final DatabaseManager manager;
     private final Buyer buyer;
+    private final GUI gui;
 
     private JPanel BuyerPanel;
     private JButton viewFilteredListings;
@@ -19,9 +20,10 @@ public class BuyerFrame extends JFrame {
     private JPanel myPanel;
     private JButton viewWishLists;
 
-    public BuyerFrame(Buyer buyer, DatabaseManager manager) {
+    public BuyerFrame(Buyer buyer, GUI gui, DatabaseManager manager) {
         this.buyer = buyer;
         this.manager = manager;
+        this.gui = gui;
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
         setContentPane(BuyerPanel);
         setSize(600, 600);
@@ -35,11 +37,11 @@ public class BuyerFrame extends JFrame {
             viewShortListProperties();
         });
         signOut.addActionListener(e -> {
-            this.dispose();
+            gui.signOut();
         });
     }
 
-    public void addFilteredListings(){
+    public void addFilteredListings() {
         myPanel.removeAll();
 
         JLabel postalCode = new JLabel("Postal Code");
@@ -82,16 +84,16 @@ public class BuyerFrame extends JFrame {
 
         int minSqftVar = 50;
         int maxSqftVar = 200;
-        int numberOfRoomVar = 2;
-        int numberOfBathroomsVar = 2;
+        int numberOfRoomVar = -1;
+        int numberOfBathroomsVar = -1;
 
-        JButton filterButton = new JButton ("Filter");
+        JButton filterButton = new JButton("Filter");
         myPanel.add(filterButton);
         filterButton.addActionListener(e -> {
             String postalCodeVar = postalCodeInput.getText();
             float minPriceVar = Float.parseFloat(minPriceInput.getText());
             float maxPriceVar = Float.parseFloat(maxPriceInput.getText());
-            viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar,numberOfBathroomsVar );
+            viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
         });
 
         repaint();
@@ -105,23 +107,24 @@ public class BuyerFrame extends JFrame {
 
     }
 
-    public void viewFilteredListings(String postalCodeVar, float minPriceVar, float maxPriceVar, int minSqftVar, int maxSqftVar, int numberOfRoomVar, int numberOfBathroomsVar){
+    public void viewFilteredListings(String postalCodeVar, float minPriceVar, float maxPriceVar, int minSqftVar, int maxSqftVar, int numberOfRoomVar, int numberOfBathroomsVar) {
         myPanel.removeAll();
 
         ArrayList<Integer> propertyIDs = this.manager.searchProperties(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
-        for (int propertyID: propertyIDs){
+        for (int propertyID : propertyIDs) {
             Property property = manager.getProperty(propertyID);
             JPanel propertyPanel = new JPanel();
             JLabel propertyText = new JLabel(property.getStreetAddress());
             propertyPanel.add(propertyText);
 
             JButton AddToWishListButton = new JButton("Add");
-            AddToWishListButton.addActionListener(e ->{
+            AddToWishListButton.addActionListener(e -> {
                 buyer.shortListProperty(propertyID);
 
                 //Need to check the code below
-                viewFilteredListings(postalCodeVar, minPriceVar,maxPriceVar,minSqftVar,maxSqftVar, numberOfRoomVar,numberOfBathroomsVar);
-                    });
+                viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
+            });
+            propertyPanel.add(AddToWishListButton);
             myPanel.add(propertyPanel);
         }
 
@@ -129,6 +132,7 @@ public class BuyerFrame extends JFrame {
         validate();
 
     }
+
     public void showText(String stuff) {
 //        for (int i = 0; i < 10; i++) {
 //            JLabel text = new JLabel("TEST");
@@ -138,21 +142,50 @@ public class BuyerFrame extends JFrame {
         //myPanel.add(listOne);
     }
 
-    public void viewShortListProperties(){
+    public void viewShortListProperties() {
         myPanel.removeAll();
 
         ArrayList<Integer> shortListIDs = this.buyer.getInterestedProperties();
-        for (int shortListID: shortListIDs){
+        for (int shortListID : shortListIDs) {
             Property property = manager.getProperty(shortListID);
             JPanel propertyPanel = new JPanel();
-            JLabel getShortList = new JLabel(property.getStreetAddress());
-            propertyPanel.add(getShortList);
-            JButton deleteButton = new JButton("Delete");
-            deleteButton.addActionListener(e -> {
+            JLabel text = new JLabel(property.getStreetAddress());
+            propertyPanel.add(text);
+            JButton button = new JButton("Delete");
+            button.addActionListener(e -> {
                 buyer.removeShortListProperty(shortListID);
                 viewShortListProperties();
             });
+            propertyPanel.add(button);
+            JButton viewButton = new JButton("Details");
+            viewButton.addActionListener(e -> {
+                JPanel testPanel = new JPanel();
+                testPanel.setLayout(new BoxLayout(testPanel, BoxLayout.PAGE_AXIS));
+                testPanel.add(new JLabel("Address: " + property.getStreetAddress()));
+                testPanel.add(new JLabel("City: " + property.getCity()));
+                testPanel.add(new JLabel("Province: " + property.getProvince()));
+                testPanel.add(new JLabel("Country: " + property.getCountry()));
+                testPanel.add(new JLabel("Postal Code: " + property.getPostalCode()));
+                testPanel.add(new JLabel("Price: " + property.getPrice()));
+                testPanel.add(new JLabel("Square Feet: " + property.getSqft()));
+                JOptionPane.showMessageDialog(this, testPanel);
+            });
+            propertyPanel.add(viewButton);
+
+            myPanel.add(propertyPanel);
         }
+        if (shortListIDs.size() == 0) {
+            JPanel propertyPanel = new JPanel();
+            propertyPanel.setLayout(new BoxLayout(propertyPanel, BoxLayout.PAGE_AXIS));
+            JLabel text = new JLabel("You have no shortlisted properties.");
+            propertyPanel.add(text);
+            JLabel text2 = new JLabel("Add one with the View Listing button.");
+            propertyPanel.add(text2);
+            myPanel.add(propertyPanel);
+        }
+
+        repaint();
+        validate();
     }
 
     public static void main(String[] args) {
@@ -160,8 +193,8 @@ public class BuyerFrame extends JFrame {
         Buyer user = (Buyer) manager.loginUser("ame", "0000");
 
 
-        BuyerFrame frame = new BuyerFrame(user, manager);
-        frame.showText("TEST1 \n .TEST2");
+//        BuyerFrame frame = new BuyerFrame(user, manager);
+//        frame.showText("TEST1 \n .TEST2");
 //        JFrame frame = new JFrame();
 //
 //        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
