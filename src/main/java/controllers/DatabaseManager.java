@@ -149,5 +149,6 @@ public class DatabaseManager {
         this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
         this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
         this.agentCreator.create((Seller) this.userStorage.get("jsmith"));
+        this.userCreator.create("Amelie Zhang","b", "ame", "ame@gmail.com", "0000000000", "0000");
     }
 }
