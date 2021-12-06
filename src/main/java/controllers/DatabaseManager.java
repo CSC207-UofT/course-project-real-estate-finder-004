@@ -57,7 +57,30 @@ public class DatabaseManager {
     public ArrayList<Integer> searchProperties(String postalCode, float minPrice, float maxPrice, int minSqft, int maxSqft, int numberOfRoom, int numberOfBathrooms) {
         ArrayList<Integer> toReturn = new ArrayList<>();
         Set<Integer> keys = this.propertyStorage.keySet();
-        if (postalCode != null){
+        for (Integer key : keys) {
+            Property property = this.propertyStorage.get(key);
+            toReturn.add(property.getPropertyId());
+        }
+        for (Integer key : toReturn){
+            Property property = this.propertyStorage.get(key);
+            if (postalCode != null && !property.getPostalCode().equals(postalCode)){
+                toReturn.remove(key);
+            }
+            else if (minPrice != -1.0f && maxPrice != -1.0f && (minPrice > property.getPrice() || property.getPrice() > maxPrice)){
+                toReturn.remove(key);
+            }
+            else if (minSqft != -1 && maxSqft != -1 && (minSqft > property.getSqft() || property.getSqft() > maxSqft)){
+                toReturn.remove(key);
+            }
+            else if (numberOfRoom != -1 && property.getNumberOfRoom() != numberOfRoom){
+                toReturn.remove(key);
+            }
+            else if (numberOfBathrooms != -1 && property.getNumberOfBathrooms() != numberOfBathrooms){
+                toReturn.remove(key);
+            }
+        }
+
+        /*if (postalCode != null){
             for (Integer key : keys) {
                 Property property = this.propertyStorage.get(key);
                 if (property.getPostalCode().equals(postalCode)){
@@ -97,6 +120,11 @@ public class DatabaseManager {
                 }
             }
         }
+        else{
+            for (Integer key : keys) {
+                Property property = this.propertyStorage.get(key);
+                toReturn.add(property.getPropertyId());
+        }*/
         return toReturn;
 
 
