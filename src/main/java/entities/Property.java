@@ -17,7 +17,7 @@ public class Property implements Serializable {
     private int sqft;
     private int numberOfRoom;
     private int numberOfBathrooms;
-    private Map<String, Boolean> Amenities;
+    private Map<String, Boolean> amenities;
     private boolean availability;
     private Seller owner;
 
@@ -49,7 +49,7 @@ public class Property implements Serializable {
         this.sqft = sqft;
         this.numberOfRoom = numberOfRoom;
         this.numberOfBathrooms = numberOfBathrooms;
-        this.Amenities = amenities;
+        this.amenities = amenities;
         this.owner = owner;
         this.availability = availability;
         this.agent = new RealEstateAgent(this.owner);
@@ -187,12 +187,12 @@ public class Property implements Serializable {
      *
      * @return A Map of all amenities, where the value of the amenity is True if the property has the amenity.
      */
-    public Map<String, Boolean> getAmenities() { return Amenities; }
+    public Map<String, Boolean> getAmenities() { return amenities; }
 
     public ArrayList<String> getAvailableAmenities() {
         ArrayList<String> availableAmenities = new ArrayList<>();
-        for (String amenity : Amenities.keySet()) {
-            if (Amenities.get(amenity)) {
+        for (String amenity : amenities.keySet()) {
+            if (amenities.get(amenity)) {
                 availableAmenities.add(amenity);
             }
         }
@@ -304,7 +304,7 @@ public class Property implements Serializable {
      * @param amenities The amenities the property features.
      */
     public void setAmenities(Map<String, Boolean> amenities) {
-        Amenities = amenities;
+        this.amenities = amenities;
     }
 
     /**
@@ -332,13 +332,20 @@ public class Property implements Serializable {
     }
 
     public String toStringLong() {
+        String amenitiesStr;
+        if (amenities == null) {
+            amenitiesStr = "NA";
+        } else {
+            amenitiesStr = getAvailableAmenities().toString();
+        }
+
         return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
                 "Postal code: " + postalCode + "\n" +
                 "Floor area: " + sqft + " square feet\n" +
                 "Price: $" + price + "\n" +
                 "Number of rooms: " + numberOfRoom + "\n" +
                 "Number of bathrooms: " + numberOfBathrooms + "\n" +
-                "Available amenities: " + getAvailableAmenities().toString() + "\n";
+                "Available amenities: " + amenitiesStr + "\n";
     }
 
 }

@@ -153,6 +153,7 @@ public class CommandLineBuyer extends CommandLine {
                 viewSpecificProperty(filteredProperties);
                 break;
         }
+        choicesUser(currUser);
     }
 
     public void viewInterestedProperties(Buyer user) throws IOException {

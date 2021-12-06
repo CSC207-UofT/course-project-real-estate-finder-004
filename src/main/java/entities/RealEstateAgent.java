@@ -26,7 +26,7 @@ public class RealEstateAgent implements Serializable {
      * The function sends a message to the seller that contains the entities.Buyer's contact details and
      * informs the entities.Seller that the entities.Buyer is interested.
      *
-     * @param custom_message A String with the message that the buyer wants to be passed along.
+     * @param customMessage A String with the message that the buyer wants to be passed along.
      * @param buyer          The Buyer that wants this message passed to the client.
      */
     public void connectBuyersAndSeller(String customMessage, Buyer buyer) {

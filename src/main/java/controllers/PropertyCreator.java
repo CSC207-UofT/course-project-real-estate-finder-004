@@ -18,7 +18,6 @@ public class PropertyCreator extends Creator {
     public void create(Seller user, String streetAddress, String city, String province, String country,
                        String postalCode, float price, int sqft, boolean availability) {
 
-
         int propertyId = propertyStorage.getNewId();
         Property property = new Property(propertyId, streetAddress, city, province, country, postalCode, price, sqft, user, availability);
         user.addProperty(property.getPropertyId());
