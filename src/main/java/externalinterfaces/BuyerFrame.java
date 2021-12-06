@@ -105,8 +105,8 @@ public class BuyerFrame extends JFrame {
     public void viewFilteredListings(String postalCodeVar, float minPriceVar, float maxPriceVar, int minSqftVar, int maxSqftVar, int numberOfRoomVar, int numberOfBathroomsVar){
         myPanel.removeAll();
 
-        ArrayList<Integer> propertIDs = this.manager.searchProperties(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
-        for (int propertyID: propertIDs){
+        ArrayList<Integer> propertyIDs = this.manager.searchProperties(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
+        for (int propertyID: propertyIDs){
             Property property = manager.getProperty(propertyID);
             JPanel propertyPanel = new JPanel();
             JLabel propertyText = new JLabel(property.getStreetAddress());
