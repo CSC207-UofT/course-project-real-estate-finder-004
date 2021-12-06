@@ -17,7 +17,7 @@ public class BuyerFrame extends JFrame {
     private JButton viewFilteredListings;
     private JButton signOut;
     private JPanel myPanel;
-    private JButton viewLists;
+    private JButton viewWishLists;
 
     public BuyerFrame(Buyer buyer, DatabaseManager manager) {
         this.buyer = buyer;
@@ -30,6 +30,9 @@ public class BuyerFrame extends JFrame {
 
         viewFilteredListings.addActionListener(e -> {
             addFilteredListings();
+        });
+        viewWishLists.addActionListener(e -> {
+            viewShortListProperties();
         });
         signOut.addActionListener(e -> {
             this.dispose();
@@ -111,6 +114,14 @@ public class BuyerFrame extends JFrame {
             JPanel propertyPanel = new JPanel();
             JLabel propertyText = new JLabel(property.getStreetAddress());
             propertyPanel.add(propertyText);
+
+            JButton AddToWishListButton = new JButton("Add");
+            AddToWishListButton.addActionListener(e ->{
+                buyer.shortListProperty(propertyID);
+
+                //Need to check the code below
+                viewFilteredListings(postalCodeVar, minPriceVar,maxPriceVar,minSqftVar,maxSqftVar, numberOfRoomVar,numberOfBathroomsVar);
+                    });
             myPanel.add(propertyPanel);
         }
 
@@ -127,7 +138,7 @@ public class BuyerFrame extends JFrame {
         //myPanel.add(listOne);
     }
 
-    public void addWishLists(){
+    public void viewShortListProperties(){
 
     }
 
