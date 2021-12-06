@@ -23,7 +23,7 @@ public class SellerFrame extends JFrame {
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
         setContentPane(SellerPanel);
         setSize(600, 600);
-        // Default operation:
+
         viewListings();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -91,21 +91,25 @@ public class SellerFrame extends JFrame {
 
         JPanel AvailabilityPane = new JPanel();
         JLabel AvailabilityText = new JLabel("Available?");
-//        JTextField AvailabilityInput = new JTextField(10);
         JRadioButton AvailabilityInput = new JRadioButton();
         AvailabilityPane.add(AvailabilityText);
         AvailabilityPane.add(AvailabilityInput);
         myPanel.add(AvailabilityPane);
 
 
-
-
-
-        JButton submitButton  = new JButton("Add Property");
+        JButton submitButton = new JButton("Add Property");
         myPanel.add(submitButton);
         submitButton.addActionListener(e -> {
-            manager.addProperty(seller, addressInput.getText(), cityInput.getText(), provinceInput.getText(),
-                    countryInput.getText(), postalCodeInput.getText(), Float.parseFloat(priceInput.getText()), Integer.parseInt(sqftInput.getText()), AvailabilityInput.isSelected());
+            try {
+                int sqftInteger = Integer.parseInt(sqftInput.getText());
+                float priceFloat = Float.parseFloat(priceInput.getText());
+                manager.addProperty(seller, addressInput.getText(), cityInput.getText(), provinceInput.getText(),
+                        countryInput.getText(), postalCodeInput.getText(), priceFloat, sqftInteger, AvailabilityInput.isSelected());
+                addListings();
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(this, "Incorrect values for listing.");
+            }
+
         });
 
         repaint();
@@ -142,8 +146,7 @@ public class SellerFrame extends JFrame {
         validate();
     }
 
-
-    public void viewMessages(){
+    public void viewMessages() {
         myPanel.removeAll();
         ArrayList<String> messages = seller.getUnreadMessages();
         for (String message : messages) {
@@ -180,7 +183,7 @@ public class SellerFrame extends JFrame {
         DatabaseManager manager = new DatabaseManager();
         Seller user = (Seller) manager.loginUser("jsmith", "1234");
         user.addMessage("You have mail! - anon");
-        manager.addProperty(user, "eqr3w4te",  "afdsgdh", "afdsgdh", "afdsgdh", "afdsgdh", 0.0f, 0, true);
+        manager.addProperty(user, "eqr3w4te", "afdsgdh", "afdsgdh", "afdsgdh", "afdsgdh", 0.0f, 0, true);
         SellerFrame frame = new SellerFrame(user, manager);
 
     }
