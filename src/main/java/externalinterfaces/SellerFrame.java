@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class SellerFrame extends JFrame {
     private final DatabaseManager manager;
     private final Seller seller;
+    private final GUI gui;
     private JPanel SellerPanel;
     private JButton viewListingsButton;
     private JButton viewMessagesButton;
@@ -17,8 +18,9 @@ public class SellerFrame extends JFrame {
     private JButton signOutButton;
     private JPanel myPanel;
 
-    public SellerFrame(Seller seller, DatabaseManager manager) {
+    public SellerFrame(Seller seller, GUI gui, DatabaseManager manager) {
         this.seller = seller;
+        this.gui = gui;
         this.manager = manager;
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
         setContentPane(SellerPanel);
@@ -37,7 +39,7 @@ public class SellerFrame extends JFrame {
             addListings();
         });
         signOutButton.addActionListener(e -> {
-            this.dispose();
+
         });
     }
 
@@ -103,8 +105,7 @@ public class SellerFrame extends JFrame {
             try {
                 int sqftInteger = Integer.parseInt(sqftInput.getText());
                 float priceFloat = Float.parseFloat(priceInput.getText());
-                manager.addProperty(seller, addressInput.getText(), cityInput.getText(), provinceInput.getText(),
-                        countryInput.getText(), postalCodeInput.getText(), priceFloat, sqftInteger, AvailabilityInput.isSelected());
+                manager.addProperty(seller, addressInput.getText(), cityInput.getText(), provinceInput.getText(), countryInput.getText(), postalCodeInput.getText(), priceFloat, sqftInteger, AvailabilityInput.isSelected());
                 addListings();
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(this, "Incorrect values for listing.");
@@ -172,19 +173,5 @@ public class SellerFrame extends JFrame {
 
         repaint();
         validate();
-
-    }
-
-
-    public static void main(String[] args) {
-        InitDatabaseProperty.main(new String[]{});
-        InitDatabaseUser.main(new String[]{});
-
-        DatabaseManager manager = new DatabaseManager();
-        Seller user = (Seller) manager.loginUser("jsmith", "1234");
-        user.addMessage("You have mail! - anon");
-        manager.addProperty(user, "eqr3w4te", "afdsgdh", "afdsgdh", "afdsgdh", "afdsgdh", 0.0f, 0, true);
-        SellerFrame frame = new SellerFrame(user, manager);
-
     }
 }
