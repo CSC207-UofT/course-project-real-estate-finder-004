@@ -139,7 +139,20 @@ public class BuyerFrame extends JFrame {
     }
 
     public void viewShortListProperties(){
+        myPanel.removeAll();
 
+        ArrayList<Integer> shortListIDs = this.buyer.getInterestedProperties();
+        for (int shortListID: shortListIDs){
+            Property property = manager.getProperty(shortListID);
+            JPanel propertyPanel = new JPanel();
+            JLabel getShortList = new JLabel(property.getStreetAddress());
+            propertyPanel.add(getShortList);
+            JButton deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(e -> {
+                buyer.removeShortListProperty(shortListID);
+                viewShortListProperties();
+            });
+        }
     }
 
     public static void main(String[] args) {
