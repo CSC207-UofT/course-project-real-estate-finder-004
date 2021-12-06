@@ -1,5 +1,7 @@
 package externalinterfaces;
 
+import controllers.AgentStorageReadWriter;
+
 import java.io.IOException;
 
 public class InitDatabseAgent {

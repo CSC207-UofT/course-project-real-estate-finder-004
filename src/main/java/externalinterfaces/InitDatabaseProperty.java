@@ -1,5 +1,7 @@
 package externalinterfaces;
 
+import controllers.PropertyStorageReadWriter;
+
 import java.io.IOException;
 
 public class InitDatabaseProperty {

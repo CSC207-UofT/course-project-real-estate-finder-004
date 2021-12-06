@@ -1,10 +1,10 @@
 import controllers.PropertyCreator;
 import entities.Seller;
-import externalinterfaces.AgentStorageReadWriter;
+import controllers.AgentStorageReadWriter;
 import externalinterfaces.HashMapAgentStorage;
-import externalinterfaces.PropertyStorageReadWriter;
+import controllers.PropertyStorageReadWriter;
 import externalinterfaces.HashMapPropertyStorage;
-import externalinterfaces.UserStorageReadWriter;
+import controllers.UserStorageReadWriter;
 import externalinterfaces.HashMapUserStorage;
 import org.junit.*;
 
