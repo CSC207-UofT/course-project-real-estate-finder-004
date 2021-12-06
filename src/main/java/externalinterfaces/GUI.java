@@ -45,7 +45,7 @@ public class GUI extends UserInterface {
 
     public void startSeller(Seller seller){
         this.frame.dispose();
-        this.frame = new SellerFrame(seller, this.manager);
+        this.frame = new SellerFrame(seller, this, this.manager);
     }
 
     public void startBuyer(Buyer buyer){
