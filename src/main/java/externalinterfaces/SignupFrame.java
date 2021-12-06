@@ -5,9 +5,8 @@ import controllers.DatabaseManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
 
-public class SignupGUI extends JFrame implements ActionListener {
+public class SignupFrame extends JFrame implements ActionListener {
     private final GUI Gui;
     static DatabaseManager manager;
     JLabel signUpFormLabel, nameLabel, userTypeLabel, emailLabel, createPasswordLabel, confirmPasswordLabel, usernameLabel, countryLabel, phoneNumberLabel;
@@ -16,7 +15,7 @@ public class SignupGUI extends JFrame implements ActionListener {
     JRadioButton buyerButton, sellerButton;
     JPasswordField createPasswordTextField, confirmPasswordTextField;
 
-    public SignupGUI(GUI Gui) {
+    public SignupFrame(GUI Gui) {
         setSize(700, 700);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,9 +137,4 @@ public class SignupGUI extends JFrame implements ActionListener {
 
         }
     }
-
-    public static void main(String args[]) {
-//        SignupGUI signupGUI = new SignupGUI(new GUI(manager));
-    }
-
 }

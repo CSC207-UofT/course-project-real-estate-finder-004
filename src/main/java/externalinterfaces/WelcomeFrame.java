@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.channels.SelectionKey;
 
-public class WelcomeGUI extends JFrame implements ActionListener {
+public class WelcomeFrame extends JFrame implements ActionListener {
     private final GUI gui;
     Container container = getContentPane();
 
@@ -15,7 +14,7 @@ public class WelcomeGUI extends JFrame implements ActionListener {
     JButton welcomeSignupButton = new JButton ("Signup");
 
 
-    WelcomeGUI(GUI gui) {
+    WelcomeFrame(GUI gui) {
         this.gui = gui;
         setLayoutManager();
         setLocationAndSize();
@@ -69,7 +68,7 @@ public class WelcomeGUI extends JFrame implements ActionListener {
 
 
     public static void main(String[] a) {
-//        WelcomeGUI frame = new WelcomeGUI();
+//        WelcomeFrame frame = new WelcomeFrame();
 //        frame.setTitle("Login Form");
 //        frame.setVisible(true);
 //        frame.setBounds(10, 10, 370, 600);

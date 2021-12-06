@@ -5,9 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
-public class loginGUI extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame implements ActionListener {
     private final GUI Gui;
     Container container = getContentPane();
     JLabel userLabel = new JLabel("USERNAME");
@@ -18,7 +17,7 @@ public class loginGUI extends JFrame implements ActionListener {
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show Password");
 
-    public loginGUI(GUI Gui) {
+    public LoginFrame(GUI Gui) {
         this.Gui = Gui;
         setLayoutManager();
         setLocationAndSize();
@@ -90,8 +89,8 @@ public class loginGUI extends JFrame implements ActionListener {
     }
 
 //    public static ArrayList<String> main() {
-//        // Create object for loginGUI class and set properties
-//        loginGUI frame = new loginGUI();
+//        // Create object for LoginFrame class and set properties
+//        LoginFrame frame = new LoginFrame();
 //        frame.setTitle("Login Form");
 //        frame.setVisible(true);
 //        frame.setBounds(10, 10, 370, 600);

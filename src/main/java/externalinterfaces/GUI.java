@@ -17,22 +17,22 @@ public class GUI extends UserInterface {
     JFrame frame;
 
     @Override
-    void runInterface() throws IOException {
+    void runInterface() {
         startWelcomeGui();
     }
 
     public void startWelcomeGui() {
-        this.frame = new WelcomeGUI(this);
+        this.frame = new WelcomeFrame(this);
     }
 
     public void startSignUp(){
         this.frame.dispose();
-        this.frame = new SignupGUI(this);
+        this.frame = new SignupFrame(this);
     }
 
     public void startLogin() {
         this.frame.dispose();
-        this.frame = new loginGUI(this);
+        this.frame = new LoginFrame(this);
     }
 
     public void startUser(User user){
@@ -55,13 +55,13 @@ public class GUI extends UserInterface {
 
     public GUI(DatabaseManager manager) {
         this.manager = manager;
-//        this.frame = new WelcomeGUI(this);
+//        this.frame = new WelcomeFrame(this);
     }
 
     public void signOut(){
         this.frame.dispose();
         this.currUser = null;
-        this.frame = new WelcomeGUI(this);
+        this.frame = new WelcomeFrame(this);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class GUI extends UserInterface {
     void signUp() throws IOException {
 //        if (hasChosen) {
 //            if (!signupFrameActive) {
-//                this.frame = new SignupGUI(this);
+//                this.frame = new SignupFrame(this);
 //                signupFrameActive  = true;
 //            }
 //
