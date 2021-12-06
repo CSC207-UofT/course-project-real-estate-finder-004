@@ -4,8 +4,10 @@ import Exceptions.*;
 import entities.*;
 import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.HashMapAgentStorage;
 import externalinterfaces.PropertyStorageReadWriter;
 import externalinterfaces.UserStorageReadWriter;
+import externalinterfaces.AgentStorageReadWriter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,11 +18,14 @@ import java.util.ArrayList;
 public class DatabaseManager {
 
     private HashMapUserStorage userStorage;
-    public HashMapPropertyStorage propertyStorage;
+    private HashMapPropertyStorage propertyStorage;
+    private HashMapAgentStorage agentStorage;
     private UserCreator userCreator;
     private PropertyCreator propertyCreator;
+    private AgentCreator agentCreator;
     private UserStorageReadWriter userStorageReadWriter;
     private PropertyStorageReadWriter propertyStorageReadWriter;
+    private AgentStorageReadWriter agentStorageReadWriter;
 
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if (!password.equals(password_confirm)) {
@@ -35,8 +40,18 @@ public class DatabaseManager {
             throw new SignUpUserTypeException();
         }
 
-        // TODO: check if username/email/phone number already exist or not
-        // TODO: check if email is valid or not
+        // check if username/email/phone number already exist or not
+        for(User user: userStorage.getUsers().values()) {
+            if (user.getUsername() == username) {
+                throw new SignUpUserNameInUseException();
+            }
+            if (user.getEmail() == email) {
+                throw new SignUpEmailInUseException();
+            }
+            if (user.getPhone() == phone) {
+                throw new SignUpPhoneNumberInUseException();
+            }
+        }
     }
 
     public void signUp(String name, String user_type, String username, String email, String phone, String password) {
@@ -84,6 +99,7 @@ public class DatabaseManager {
 
     public void addProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
         this.propertyCreator.create(user, streetAddress, city, province, country, postalCode, price, sqft, availability);
+        this.agentCreator.create(user);
     }
 
     public String propertiesToString(ArrayList<Integer> propertyIds) {
@@ -116,16 +132,22 @@ public class DatabaseManager {
     public DatabaseManager() {
         this.userStorageReadWriter = new UserStorageReadWriter(null);
         this.propertyStorageReadWriter = new PropertyStorageReadWriter(null);
+        this.agentStorageReadWriter = new AgentStorageReadWriter(null);
+
         try {
             this.userStorage = (HashMapUserStorage) userStorageReadWriter.readFromFile();
-            this.propertyStorage = (HashMapPropertyStorage) this.propertyStorageReadWriter.readFromFile();
-        } catch (IOException | ClassNotFoundException e) {
+            this.propertyStorage = (HashMapPropertyStorage) propertyStorageReadWriter.readFromFile();
+            this.agentStorage = (HashMapAgentStorage) agentStorageReadWriter.readFromFile();
+        } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
 
-        this.propertyCreator = new PropertyCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
-        this.userCreator = new UserCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
-        this.userCreator.create("John Smith", "s", "jsmith", "1234@gmail.com", "1234567890", "1234");
+        this.propertyCreator = new PropertyCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
+        this.agentCreator = new AgentCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
+        this.userCreator = new UserCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
+
+        this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
         this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        this.agentCreator.create((Seller) this.userStorage.get("jsmith"));
     }
 }

@@ -52,7 +52,7 @@ public class Property implements Serializable {
         this.amenities = amenities;
         this.owner = owner;
         this.availability = availability;
-        this.agent = new RealEstateAgent(this.owner);
+        this.agent = new RealEstateAgent(owner, propertyId);
     }
 
     /**
@@ -79,7 +79,7 @@ public class Property implements Serializable {
         this.price = price;
         this.sqft = sqft;
         this.owner = owner;
-        this.agent = new RealEstateAgent(this.owner);
+        this.agent = new RealEstateAgent(owner, propertyId);
         this.availability = availability;
     }
 

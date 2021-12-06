@@ -3,17 +3,24 @@ package controllers;
 import entities.Buyer;
 import entities.Seller;
 import entities.User;
-import externalinterfaces.HashMapPropertyStorage;
-import externalinterfaces.HashMapUserStorage;
+import externalinterfaces.AgentStorageReadWriter;
+import externalinterfaces.HashMapAgentStorage;
 import externalinterfaces.PropertyStorageReadWriter;
+import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.UserStorageReadWriter;
+import externalinterfaces.HashMapUserStorage;
 
 import java.io.IOException;
 
 public class UserCreator extends Creator {
 
-    public UserCreator(HashMapUserStorage userStorage, UserStorageReadWriter userStorageReadWriter, HashMapPropertyStorage propertyStorage, PropertyStorageReadWriter propertyStorageReadWriter) {
-        super(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter);
+    public UserCreator(HashMapUserStorage userStorage,
+                       UserStorageReadWriter userStorageReadWriter,
+                       HashMapPropertyStorage propertyStorage,
+                       PropertyStorageReadWriter propertyStorageReadWriter,
+                       HashMapAgentStorage agentStorage,
+                       AgentStorageReadWriter agentStorageReadWriter) {
+        super(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
     }
 
     public void create(String name, String user_type, String username, String email, String phone, String password){
@@ -27,6 +34,7 @@ public class UserCreator extends Creator {
                 newUser = new Seller(name, username, email, phone, password);
                 break;
         }
+
         if (newUser != null){
             this.userStorage.add(newUser);
             if(Creator.writeToFile) {
