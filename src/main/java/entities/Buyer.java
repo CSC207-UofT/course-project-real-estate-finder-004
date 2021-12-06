@@ -22,18 +22,16 @@ public class Buyer extends User {
     /**
      * Adds a property to the user's list of interested properties.
      *
-     * @param property The property the buyer is interested in.
+     * @param propertyId The property the buyer is interested in.
      */
-    public void shortListProperty(Property property) {
-        interestedProperties.add(property);
-    }
+    public void shortListProperty(Integer propertyId) { interestedProperties.add(propertyId); }
 
     /**
      * Gets the list of user's interested properties.
      *
      * @return An ArrayList of the user's interested properties.
      */
-    public ArrayList<Property> getInterestedProperties() {
+    public ArrayList<Integer> getInterestedProperties() {
         return interestedProperties;
     }
 
