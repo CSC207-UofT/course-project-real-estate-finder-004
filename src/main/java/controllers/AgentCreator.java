@@ -18,7 +18,7 @@ public class AgentCreator extends Creator {
         super(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
     }
 
-    public void create(Seller client, Property property) {
+    public void create(Seller client) {
         int agentId = agentStorage.getNewId();
         RealEstateAgent agent = new RealEstateAgent(client, agentId);
 

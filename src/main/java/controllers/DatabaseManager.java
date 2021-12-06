@@ -69,6 +69,7 @@ public class DatabaseManager {
 
     public void addProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
         this.propertyCreator.create(user, streetAddress, city, province, country, postalCode, price, sqft, availability);
+        this.agentCreator.create(user);
     }
 
     public String propertiesToString(Seller seller) {
@@ -102,6 +103,6 @@ public class DatabaseManager {
 
         this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
         this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
-        this.agentCreator.create((Seller) this.userStorage.get("jsmith"), this.propertyStorage.get(1));
+        this.agentCreator.create((Seller) this.userStorage.get("jsmith"));
     }
 }
