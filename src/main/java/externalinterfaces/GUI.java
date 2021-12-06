@@ -5,53 +5,119 @@ import Exceptions.SignUpPhoneNumberLengthException;
 import Exceptions.SignUpUserTypeException;
 import controllers.DatabaseManager;
 import entities.Buyer;
+import entities.Seller;
 import entities.User;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class GUI extends UserInterface {
     public DatabaseManager manager;
     User currUser;
-    boolean loginFrameActive = false;
-    loginGUI frame;
+    JFrame frame;
+
+    @Override
+    void runInterface() throws IOException {
+        startWelcomeGui();
+    }
+
+    public void startWelcomeGui() {
+        this.frame = new WelcomeGUI(this);
+    }
+
+    public void startSignUp(){
+        this.frame.dispose();
+        this.frame = new SignupGUI(this);
+    }
+
+    public void startLogin() {
+        this.frame.dispose();
+        this.frame = new loginGUI(this);
+    }
+
+    public void startUser(User user){
+        if(user instanceof Seller) {
+            startSeller((Seller) user);
+        } else if (user instanceof Buyer) {
+            startBuyer((Buyer) user);
+        }
+    }
+
+    public void startSeller(Seller seller){
+        this.frame.dispose();
+        this.frame = new SellerFrame(seller, this.manager);
+    }
+
+    public void startBuyer(Buyer buyer){
+        // TODO: Implement
+    }
+
 
     public GUI(DatabaseManager manager) {
         this.manager = manager;
-        this.frame = new loginGUI(this);
+//        this.frame = new WelcomeGUI(this);
+    }
+
+    public void signOut(){
+        this.frame.dispose();
+        this.currUser = null;
+        this.frame = new WelcomeGUI(this);
     }
 
     @Override
     boolean choose() {
-        if (!this.loginFrameActive) {
-            this.frame.start();
-            this.loginFrameActive = true;
-        }
-        return false; // TODO: to be implemented
+//        if (hasChosen) {
+//            return choseLogin;
+//        } else {
+//            return false;
+//        }
+////        if (!this.loginFrameActive) {
+////
+////            this.loginFrameActive = true;
+////        }
+       return false; // TODO: to be implemented
     }
 
     @Override
     void signUp() throws IOException {
-        // TODO: to be implemented
+//        if (hasChosen) {
+//            if (!signupFrameActive) {
+//                this.frame = new SignupGUI(this);
+//                signupFrameActive  = true;
+//            }
+//
+//        }
     }
 
     @Override
     User logIn() throws IOException {
-        return this.currUser;
+//        if (hasChosen) {
+//            return this.currUser;
+//
+//        } else {
+            return null;
+//        }
     }
 
     @Override
     void chooseAfterLogin(User user) throws IOException {
+    }
 
+    public void doAfterChoose(boolean loginChosen) {
+//        hasChosen = true;
+//        this.choseLogin = loginChosen;
     }
 
     public boolean signUpSuccess(String name, String userType, String username, String email, String phone, String password, String passwordConfirm) {
         try {
             manager.signUpVerify(name, userType, username, email, phone, password, passwordConfirm);
             manager.signUp(name, userType, username, email, phone, password);
-            return true;
+            startLogin();
         } catch (SignUpPasswordMatchException | SignUpPhoneNumberLengthException | SignUpUserTypeException e) {
+            // TODO: Add error message.
             return false;
         }
+        return true;
     }
 
     public boolean loginSuccess(String username, String password) {
@@ -70,12 +136,8 @@ public class GUI extends UserInterface {
     }
 
     public void startAfterLogin() {
-        this.frame.close(); // Close the old frame, start the next frame:
+        this.frame.dispose(); // Close the old frame, start the next frame:
         assert this.currUser != null;  // This should only be called after currUser is set to a specific user.
-        if (this.currUser instanceof Buyer) {
-            // Call the BuyerGUI file to start stuff.
-        } else {
-            // Call the SellerGUI to start stuff.
-        }
+        startUser(currUser);
     }
 }

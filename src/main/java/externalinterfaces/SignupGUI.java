@@ -1,12 +1,14 @@
 package externalinterfaces;
 
 import controllers.DatabaseManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 public class SignupGUI extends JFrame implements ActionListener {
-    private final GUI Gui; 
+    private final GUI Gui;
     static DatabaseManager manager;
     JLabel signUpFormLabel, nameLabel, userTypeLabel, emailLabel, createPasswordLabel, confirmPasswordLabel, usernameLabel, countryLabel, phoneNumberLabel;
     JTextField nameTextField, emailTextField, usernameTextField, countryTextField, phoneNumberTextField;
@@ -15,7 +17,6 @@ public class SignupGUI extends JFrame implements ActionListener {
     JPasswordField createPasswordTextField, confirmPasswordTextField;
 
     public SignupGUI(GUI Gui) {
-        setVisible(true);
         setSize(700, 700);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,11 +90,11 @@ public class SignupGUI extends JFrame implements ActionListener {
         add(clearButton);
 
         this.Gui = Gui;
+        setVisible(true);
     }
-    public void actionPerformed(ActionEvent e)
-    {
-        if (e.getSource() == submitButton)
-        {
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
             String name = nameTextField.getText();
             String userType = userTypeSelection();
             String email = emailTextField.getText();
@@ -104,37 +105,20 @@ public class SignupGUI extends JFrame implements ActionListener {
             String username = usernameTextField.getText();
             String country = countryTextField.getText();
             String phoneNumber = phoneNumberTextField.getText();
-            if (password.equals(confirmPassword))
-            {
-                try
-                {
-                    Class.forName("oracle.jdbc.driver.OracleDriver");
-                    Connection con = DriverManager.getConnection("jdbc:oracle:thin:@mcndesktop07:1521:xe", "sandeep", "welcome");
-                    PreparedStatement ps = con.prepareStatement("insert into reg values(?,?,?,?,?,?)");
-                    ps.setString(1, name);
-                    ps.setString(2, email);
-                    ps.setString(3, password);
-                    ps.setString(4, username);
-                    ps.setString(5, country);
-                    ps.setString(6, phoneNumber);
-                    ResultSet rs = ps.executeQuery();
-                    if (Gui.signUpSuccess(name, userType, username, email, phoneNumber, password, confirmPassword))
-                    {
+            if (password.equals(confirmPassword)) {
+                try {
+                    if (Gui.signUpSuccess(name, userType, username, email, phoneNumber, password, confirmPassword)) {
                         JOptionPane.showMessageDialog(submitButton, "Data Saved Successfully");
+                    } else {
+                        JOptionPane.showMessageDialog(submitButton, "Failed to save information.");
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     System.out.println(ex);
                 }
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(submitButton, "Password Does Not Match");
             }
-        }
-        else
-        {
+        } else {
             nameTextField.setText("");
             emailTextField.setText("");
             createPasswordTextField.setText("");
@@ -144,18 +128,19 @@ public class SignupGUI extends JFrame implements ActionListener {
             phoneNumberTextField.setText("");
         }
     }
+
     // helper method
     public String userTypeSelection() {
         if (buyerButton.isSelected()) {
             return new String("b");
-        }else{
+        } else {
             return new String("s");
 
         }
     }
-    public static void main(String args[])
-    {
-        SignupGUI signupGUI = new SignupGUI(new GUI(manager));
+
+    public static void main(String args[]) {
+//        SignupGUI signupGUI = new SignupGUI(new GUI(manager));
     }
 
 }

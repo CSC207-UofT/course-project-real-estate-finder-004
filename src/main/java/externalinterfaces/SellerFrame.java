@@ -37,7 +37,7 @@ public class SellerFrame extends JFrame {
             addListings();
         });
         signOutButton.addActionListener(e -> {
-            this.dispose();
+
         });
     }
 
@@ -177,8 +177,8 @@ public class SellerFrame extends JFrame {
 
 
     public static void main(String[] args) {
-        InitDatabaseProperty.main(new String[]{});
-        InitDatabaseUser.main(new String[]{});
+//        InitDatabaseProperty.main(new String[]{});
+//        InitDatabaseUser.main(new String[]{});
 
         DatabaseManager manager = new DatabaseManager();
         Seller user = (Seller) manager.loginUser("jsmith", "1234");

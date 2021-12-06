@@ -24,6 +24,7 @@ public class loginGUI extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
+        start();
     }
 
     public void setLayoutManager() {
