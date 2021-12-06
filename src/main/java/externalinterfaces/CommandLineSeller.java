@@ -79,7 +79,7 @@ public class CommandLineSeller extends CommandLine {
         String postalCode = reader.readLine();
         System.out.println("Enter Price:");
         float price = Float.parseFloat(reader.readLine());
-        System.out.println("Enter Street Total Square Feet:");
+        System.out.println("Total Square Feet:");
         int sqft = Integer.parseInt(reader.readLine());
 
         manager.addProperty(user, streetAddress, city, province, country, postalCode, price, sqft, false);
@@ -91,8 +91,12 @@ public class CommandLineSeller extends CommandLine {
             System.out.println("You have no unread messages.");
         } else {
             System.out.println(user.getUnreadMessagesString(user.getUnreadMessages()));
-            System.out.println("Enter the corresponding message number if you would like to mark it as read.");
+            System.out.println("Enter the corresponding message number if you would like to mark it as read. " +
+                    "Enter 0 if you would not like to mark any messages as read.");
             int messageNumber = Integer.parseInt(reader.readLine());
+            if (messageNumber == 0) {
+                choicesUser(currUser);
+            }
             user.messageRead(user.getUnreadMessages().get(messageNumber - 1));
         }
     }
