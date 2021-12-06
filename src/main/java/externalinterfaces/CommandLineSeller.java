@@ -1,7 +1,7 @@
 package externalinterfaces;
 
 import controllers.DatabaseManager;
-import controllers.PropertyViewer;
+;
 import entities.Seller;
 import externalinterfaces.CommandLine;
 

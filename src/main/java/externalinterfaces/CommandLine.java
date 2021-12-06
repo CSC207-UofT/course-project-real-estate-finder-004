@@ -5,7 +5,6 @@ import Exceptions.LoginWrongPasswordException;
 import Exceptions.SignUpPasswordMatchException;
 import Exceptions.SignUpPhoneNumberLengthException;
 import controllers.DatabaseManager;
-import controllers.PropertyViewer;
 import entities.Buyer;
 import entities.Seller;
 import entities.User;

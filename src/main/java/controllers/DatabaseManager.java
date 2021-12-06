@@ -126,7 +126,7 @@ public class DatabaseManager {
         Property property = propertyStorage.get(propertyId);
         RealEstateAgent agent = property.agent;
         agent.addBuyer(buyerUsername);
-        agent.connectBuyersAndSeller(customMessage, (Buyer) userStorage.get(buyerUsername));
+        agent.connectBuyersAndSeller(customMessage, (Buyer) userStorage.get(buyerUsername), property);
     }
 
     public DatabaseManager() {

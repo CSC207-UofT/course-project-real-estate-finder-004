@@ -53,7 +53,5 @@ public class RealEstateAgent implements Serializable {
         this.buyers.add(buyerId);
     }
 
-    public void addBuyer(String buyer) { buyers.add(buyer); }
-
     public boolean removeBuyer(String Buyer) { return buyers.remove(Buyer); }
 }

@@ -1,7 +1,6 @@
 package externalinterfaces;
 
 import controllers.DatabaseManager;
-import controllers.PropertyViewer;
 
 import java.io.IOException;
 

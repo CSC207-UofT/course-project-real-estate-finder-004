@@ -5,6 +5,7 @@ import entities.RealEstateAgent;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMapAgentStorage implements Storage<Integer, RealEstateAgent>, Serializable {
     private static final long serialVersionUID = 7853553001351490713L;
@@ -19,6 +20,11 @@ public class HashMapAgentStorage implements Storage<Integer, RealEstateAgent>, S
     @Override
     public RealEstateAgent get(Integer agentId) {
         return agents.get(agentId);
+    }
+
+    @Override
+    public Set<Integer> keySet() {
+        return agents.keySet();
     }
 
     @Override
