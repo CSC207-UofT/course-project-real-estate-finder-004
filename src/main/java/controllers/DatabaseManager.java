@@ -97,6 +97,10 @@ public class DatabaseManager {
         return returnString.toString();
     }
 
+    public Property getProperty(Integer propertyID){
+        return propertyStorage.get(propertyID);
+    }
+
     public String specificPropertyToString(Integer propertyId) {
         Property property = propertyStorage.get(propertyId);
         return property.toStringLong();
