@@ -35,4 +35,5 @@ public class Buyer extends User {
         return interestedProperties;
     }
 
+    public void removeShortListProperty(Integer propertyId){ interestedProperties.remove(propertyId);}
 }
