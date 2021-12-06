@@ -29,14 +29,14 @@ public class BuyerFrame extends JFrame {
         setVisible(true);
 
         viewFilteredListings.addActionListener(e -> {
-            viewFilteredListings();
+            addFilteredListings();
         });
         signOut.addActionListener(e -> {
             this.dispose();
         });
     }
 
-    public void viewFilteredListings(){
+    public void addFilteredListings(){
         myPanel.removeAll();
 
         JLabel postalCode = new JLabel("Postal Code");
@@ -48,13 +48,47 @@ public class BuyerFrame extends JFrame {
         postalCodePane.add(postalCodeInput);
         myPanel.add(postalCodePane);
 
-        //JLabel = new JLabel();
+        JLabel minPrice = new JLabel("Min Price");
+        myPanel.add(minPrice);
+        JPanel minPricePane = new JPanel();
+        JLabel minPriceText = new JLabel("Min Price");
+        JTextField minPriceInput = new JTextField(10);
+        minPricePane.add(minPriceText);
+        minPricePane.add(minPriceInput);
+        myPanel.add(minPricePane);
+
+
+        JLabel maxPrice = new JLabel("Max Price");
+        myPanel.add(maxPrice);
+        JPanel maxPricePane = new JPanel();
+        JLabel maxPriceText = new JLabel("Min Price");
+        JTextField maxPriceInput = new JTextField(10);
+        maxPricePane.add(maxPriceText);
+        maxPricePane.add(maxPriceInput);
+        myPanel.add(maxPricePane);
+
+//        JLabel minSqft = new JLabel("Min Square Feet");
+//        myPanel.add(minSqft);
+//        JPanel minSqftPane = new JPanel();
+//        JLabel minSqftText = new JLabel("Min Square Feet");
+//        JTextField minSqftInput = new JTextField(10);
+//        minSqftPane.add(minSqft);
+//        minSqftPane.add(minSqft);
+//        myPanel.add(minSqft);
+
+
+        int minSqftVar = 50;
+        int maxSqftVar = 200;
+        int numberOfRoomVar = 2;
+        int numberOfBathroomsVar = 2;
+
         JButton filterButton = new JButton ("Filter");
         myPanel.add(filterButton);
         filterButton.addActionListener(e -> {
-//            ArrayList<Integer> filteredProperties = this.buyer.searchProperties();
-//            for(int properties: properties){
-//            }
+            String postalCodeVar = postalCodeInput.getText();
+            float minPriceVar = Float.parseFloat(minPriceInput.getText());
+            float maxPriceVar = Float.parseFloat(maxPriceInput.getText());
+            viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar,numberOfBathroomsVar );
         });
 
         repaint();
@@ -68,16 +102,34 @@ public class BuyerFrame extends JFrame {
 
     }
 
+    public void viewFilteredListings(String postalCodeVar, float minPriceVar, float maxPriceVar, int minSqftVar, int maxSqftVar, int numberOfRoomVar, int numberOfBathroomsVar){
+        myPanel.removeAll();
+
+        ArrayList<Integer> propertIDs = this.manager.searchProperties(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
+        for (int propertyID: propertIDs){
+            Property property = manager.getProperty(propertyID);
+            JPanel propertyPanel = new JPanel();
+            JLabel propertyText = new JLabel(property.getStreetAddress());
+            propertyPanel.add(propertyText);
+            myPanel.add(propertyPanel);
+        }
+
+        repaint();
+        validate();
+
+    }
     public void showText(String stuff) {
 //        for (int i = 0; i < 10; i++) {
 //            JLabel text = new JLabel("TEST");
 //            myPanel.add(text);
 //        }
-        JLabel listOne = new JLabel("8719 St.George Street");
-        myPanel.add(listOne);
+        //JLabel listOne = new JLabel("8719 St.George Street");
+        //myPanel.add(listOne);
     }
 
+    public void addWishLists(){
 
+    }
 
     public static void main(String[] args) {
         DatabaseManager manager = new DatabaseManager();
