@@ -1,15 +1,11 @@
 package externalinterfaces;
 
 import controllers.DatabaseManager;
-;
 import entities.Seller;
-import externalinterfaces.CommandLine;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CommandLineSeller extends CommandLine {
@@ -23,8 +19,8 @@ public class CommandLineSeller extends CommandLine {
         this.currUser = user;
         BufferedReader reader = new BufferedReader(new InputStreamReader(this.input));
 
-        System.out.println("Select 1 to add a listing, select 2 to view your listings. You have"
-                + user.noOfUnreadMessages() + "unread messages. Select 3 to view your messages. " +
+        System.out.println("Select 1 to add a listing, select 2 to view your listings. You have "
+                + user.noOfUnreadMessages() + " unread message(s). Select 3 to view your messages. " +
                 "Select 4 to log out");
         String sellerMode = reader.readLine();
         switch (sellerMode) {

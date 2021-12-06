@@ -43,7 +43,7 @@ public class CommandLine extends UserInterface {
         String name = reader.readLine();
 
         // Input user type
-        System.out.println("Are you a buyer or seller? enter B/S");
+        System.out.println("Are you a buyer (B) or seller (S)? Please enter B/S");
         String user_type = reader.readLine().toLowerCase();
 
         //Input username
