@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
+
 public class Buyer extends User {
     private ArrayList<Integer> interestedProperties = new ArrayList<>();
 
