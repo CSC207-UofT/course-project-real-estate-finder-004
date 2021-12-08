@@ -5,8 +5,8 @@ import java.util.Map;
 import java.io.Serializable;
 
 public class Property implements Serializable {
-    public final int propertyId;
-    public final RealEstateAgent agent;
+    private final int propertyId;
+    private final RealEstateAgent agent;
 
     private String streetAddress;
     private String city;
@@ -90,6 +90,15 @@ public class Property implements Serializable {
      */
     public int getPropertyId() {
         return propertyId;
+    }
+
+    /**
+     * Returns the agent uniquely associated with the property.
+     *
+     * @return An RealEstateAgent representing the agent uniquely associated with the property.
+     */
+    public RealEstateAgent getAgent() {
+        return agent;
     }
 
     /**

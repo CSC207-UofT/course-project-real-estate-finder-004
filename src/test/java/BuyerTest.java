@@ -29,10 +29,10 @@ public class BuyerTest {
         Property p2 = new Property(2, "85 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 350000, 400, s, true);
         assertTrue(b.getInterestedProperties().isEmpty());
-        b.shortListProperty(p1.propertyId);
-        assertTrue(b.getInterestedProperties().contains(p1.propertyId));
-        b.shortListProperty(p2.propertyId);
-        assertTrue(b.getInterestedProperties().contains(p2.propertyId));
+        b.shortListProperty(p1.getPropertyId());
+        assertTrue(b.getInterestedProperties().contains(p1.getPropertyId()));
+        b.shortListProperty(p2.getPropertyId());
+        assertTrue(b.getInterestedProperties().contains(p2.getPropertyId()));
     }
 
     @Test(timeout = 500)
@@ -46,10 +46,10 @@ public class BuyerTest {
                 "M5S 2E5", 450000, 350, 1, 1, a, true, s);
         Property p2 = new Property(4, "85 St. George St", "Toronto", "Ontario", "Canada",
                 "M5S 2E5", 350000, 400, s, true);
-        b.shortListProperty(p1.propertyId);
-        assertTrue(b.getInterestedProperties().contains(p1.propertyId));
-        b.shortListProperty(p2.propertyId);
-        assertTrue(b.getInterestedProperties().contains(p2.propertyId));
+        b.shortListProperty(p1.getPropertyId());
+        assertTrue(b.getInterestedProperties().contains(p1.getPropertyId()));
+        b.shortListProperty(p2.getPropertyId());
+        assertTrue(b.getInterestedProperties().contains(p2.getPropertyId()));
     }
 
 }

@@ -124,7 +124,7 @@ public class DatabaseManager {
 
     public void joinRealEstateAgent(Integer propertyId, String buyerUsername, String customMessage) {
         Property property = propertyStorage.get(propertyId);
-        RealEstateAgent agent = property.agent;
+        RealEstateAgent agent = property.getAgent();
         agent.addBuyer(buyerUsername);
         agent.connectBuyersAndSeller(customMessage, (Buyer) userStorage.get(buyerUsername), property);
     }
@@ -146,9 +146,8 @@ public class DatabaseManager {
         this.agentCreator = new AgentCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
         this.userCreator = new UserCreator(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
 
-//        this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
-//        this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
-//        this.agentCreator.create((Seller) this.userStorage.get("jsmith"));
-//        this.userCreator.create("Amelie Zhang","b", "ame", "amelie@gmail.com", "0000000000", "0000");
+        this.userCreator.create("John Smith","s", "jsmith", "1234@gmail.com", "1234567890", "1234");
+        this.propertyCreator.create((Seller) this.userStorage.get("jsmith"), "6 Hoskin Avenue", "Toronto", "Ontario", "CA", "M5T 2HY", 16000F, 1000, true);
+        this.agentCreator.create((Seller) this.userStorage.get("jsmith"));
     }
 }
