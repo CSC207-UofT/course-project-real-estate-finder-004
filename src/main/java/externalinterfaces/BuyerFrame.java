@@ -24,6 +24,7 @@ public class BuyerFrame extends JFrame {
         this.buyer = buyer;
         this.manager = manager;
         this.gui = gui;
+
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
         setContentPane(BuyerPanel);
         setSize(600, 600);
@@ -66,7 +67,7 @@ public class BuyerFrame extends JFrame {
         JLabel maxPrice = new JLabel("Max Price");
         myPanel.add(maxPrice);
         JPanel maxPricePane = new JPanel();
-        JLabel maxPriceText = new JLabel("Min Price");
+        JLabel maxPriceText = new JLabel("Max Price");
         JTextField maxPriceInput = new JTextField(10);
         maxPricePane.add(maxPriceText);
         maxPricePane.add(maxPriceInput);
@@ -121,7 +122,9 @@ public class BuyerFrame extends JFrame {
             AddToWishListButton.addActionListener(e -> {
                 buyer.shortListProperty(propertyID);
 
-                //Need to check the code below
+                //Add message system
+                property.addWishListedBuyer(buyer);
+                property.getOwner().addMessage(buyer.getUsername() + " is interested in " + property.getStreetAddress());
                 viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
             });
             propertyPanel.add(AddToWishListButton);
@@ -188,6 +191,11 @@ public class BuyerFrame extends JFrame {
         validate();
     }
 
+    public void SendMessage(){
+        myPanel.removeAll();
+
+
+    }
     public static void main(String[] args) {
         DatabaseManager manager = new DatabaseManager();
         Buyer user = (Buyer) manager.loginUser("ame", "0000");

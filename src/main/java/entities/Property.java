@@ -1,5 +1,6 @@
 package entities;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ public class Property implements Serializable {
     public final int propertyId;
     public final RealEstateAgent agent;
 
+    private ArrayList<Buyer> wishListedBuyers;
     private String streetAddress;
     private String city;
     private String province;
@@ -348,4 +350,15 @@ public class Property implements Serializable {
                 "Available amenities: " + amenitiesStr + "\n";
     }
 
+    public ArrayList<String> getWishListedBuyer(){
+        ArrayList<String> buyerUsernames = new ArrayList<String>();
+        for (Buyer buyer: wishListedBuyers) {
+            buyerUsernames.add(buyer.getUsername());
+        }
+        return buyerUsernames;
+    }
+
+    public void addWishListedBuyer(Buyer buyer) {
+        wishListedBuyers.add(buyer);
+    }
 }
