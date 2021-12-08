@@ -35,5 +35,10 @@ public class Buyer extends User {
         return interestedProperties;
     }
 
+    /**
+     * Removes the property with the given property Id from the user's interested properties.
+     *
+     * @param propertyId The property Id of the property to be removed from the user's interested properties.
+     */
     public void removeShortListProperty(Integer propertyId){ interestedProperties.remove(propertyId);}
 }
