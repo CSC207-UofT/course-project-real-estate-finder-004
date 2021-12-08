@@ -123,7 +123,7 @@ public class BuyerFrame extends JFrame {
                 buyer.shortListProperty(propertyID);
 
                 //Add message system
-                property.addWishListedBuyer(buyer);
+                //property.addWishListedBuyer(buyer);
                 property.getOwner().addMessage(buyer.getUsername() + " is interested in " + property.getStreetAddress());
                 viewFilteredListings(postalCodeVar, minPriceVar, maxPriceVar, minSqftVar, maxSqftVar, numberOfRoomVar, numberOfBathroomsVar);
             });
@@ -191,11 +191,6 @@ public class BuyerFrame extends JFrame {
         validate();
     }
 
-    public void SendMessage(){
-        myPanel.removeAll();
-
-
-    }
     public static void main(String[] args) {
         DatabaseManager manager = new DatabaseManager();
         Buyer user = (Buyer) manager.loginUser("ame", "0000");
