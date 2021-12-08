@@ -34,6 +34,11 @@ public class RealEstateAgent implements Serializable {
                 buyer.getPhone() + ". Here is a message from the interested buyer: " + customMessage);
     }
 
+    /**
+     * Get the RealEstateAgent's agent Id.
+     *
+     * @return The agent Id of the RealEstateAgent.
+     */
     public int getAgentId() {
         return agentId;
     }
@@ -56,6 +61,12 @@ public class RealEstateAgent implements Serializable {
         this.buyers.add(buyerId);
     }
 
+    /**
+     * Removes a buyer from the list of buyers associated with this RealEstateAgent.
+     *
+     * @param Buyer The username of the Buyer to be removed.
+     * @return True if the Buyer was successfully removed, False otherwise.
+     */
     public boolean removeBuyer(String Buyer) {
         return buyers.remove(Buyer);
     }

@@ -325,12 +325,22 @@ public class Property implements Serializable {
         this.availability = availability;
     }
 
+    /**
+     * Return a string representation for the property with the relevant details.
+     *
+     * @return A String representation for the property.
+     */
     public String toString() {
         return "Address: " + streetAddress + ", " + city + ", " + province + "\n" +
                 "Floor area: " + sqft + " square feet\n" +
                 "Price: $" + price + "\n\n";
     }
 
+    /**
+     * Return a string representation for the property with the relevant details.
+     *
+     * @return A String representation for the property.
+     */
     public String toStringLong() {
         String amenitiesStr;
         if (amenities == null) {
