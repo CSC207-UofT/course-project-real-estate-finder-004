@@ -132,13 +132,15 @@ public class DatabaseManager {
 
     public void updateUser(User user){
         HashMap<String, Boolean> messages = new HashMap<>();
+        ArrayList<Integer> properties = new ArrayList<>();
         String type = "b";
         if (user instanceof Seller) {
             type = "s";
             Seller seller = (Seller) user;
             messages = seller.getMessages();
+            properties = seller.getProperties();
         }
-        userCreator.create(user.getName(), type, user.getUsername(), user.getEmail(), user.getPhone(), user.getPassword(), messages);
+        userCreator.create(user.getName(), type, user.getUsername(), user.getEmail(), user.getPhone(), user.getPassword(), messages, properties);
 
     }
 
