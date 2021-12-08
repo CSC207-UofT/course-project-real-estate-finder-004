@@ -7,6 +7,7 @@ import externalinterfaces.HashMapUserStorage;
 import externalinterfaces.HashMapAgentStorage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.ArrayList;
 
@@ -127,6 +128,18 @@ public class DatabaseManager {
         RealEstateAgent agent = property.agent;
         agent.addBuyer(buyerUsername);
         agent.connectBuyersAndSeller(customMessage, (Buyer) userStorage.get(buyerUsername), property);
+    }
+
+    public void updateUser(User user){
+        HashMap<String, Boolean> messages = new HashMap<>();
+        String type = "b";
+        if (user instanceof Seller) {
+            type = "s";
+            Seller seller = (Seller) user;
+            messages = seller.getMessages();
+        }
+        userCreator.create(user.getName(), type, user.getUsername(), user.getEmail(), user.getPhone(), user.getPassword(), messages);
+
     }
 
     public DatabaseManager() {

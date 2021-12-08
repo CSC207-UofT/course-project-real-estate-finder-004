@@ -8,6 +8,7 @@ import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class UserCreator extends Creator {
 
@@ -29,6 +30,37 @@ public class UserCreator extends Creator {
                 break;
             case "s":
                 newUser = new Seller(name, username, email, phone, password);
+                break;
+        }
+
+        if (newUser != null){
+            this.userStorage.add(newUser);
+            if(Creator.writeToFile) {
+                try {
+                    userStorageReadWriter.saveToFile();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    public void create(String name, String user_type, String username, String email, String phone, String password, HashMap<String, Boolean> messages){
+        User newUser = null;
+
+        switch (user_type){
+            case "b":
+                newUser = new Buyer(name, username, email, phone, password);
+                break;
+            case "s":
+                Seller newSeller = new Seller(name, username, email, phone, password);
+                for (String key : messages.keySet()){
+                    newSeller.addMessage(key);
+                    if (messages.get(key)) {
+                        newSeller.messageRead(key);
+                    }
+                }
+                newUser = newSeller;
                 break;
         }
 
