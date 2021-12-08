@@ -9,7 +9,7 @@ public class Property implements Serializable {
     public final int propertyId;
     public final RealEstateAgent agent;
 
-    private ArrayList<Buyer> wishListedBuyers;
+    // private ArrayList<Buyer> wishListedBuyers;
     private String streetAddress;
     private String city;
     private String province;
@@ -55,6 +55,7 @@ public class Property implements Serializable {
         this.owner = owner;
         this.availability = availability;
         this.agent = new RealEstateAgent(owner, propertyId);
+        // this.wishListedBuyers = new ArrayList<>();
     }
 
     /**
@@ -83,6 +84,7 @@ public class Property implements Serializable {
         this.owner = owner;
         this.agent = new RealEstateAgent(owner, propertyId);
         this.availability = availability;
+        // this.wishListedBuyers = new ArrayList<>();
     }
 
     /**
@@ -350,15 +352,15 @@ public class Property implements Serializable {
                 "Available amenities: " + amenitiesStr + "\n";
     }
 
-    public ArrayList<String> getWishListedBuyer(){
-        ArrayList<String> buyerUsernames = new ArrayList<String>();
-        for (Buyer buyer: wishListedBuyers) {
-            buyerUsernames.add(buyer.getUsername());
-        }
-        return buyerUsernames;
-    }
+//    public ArrayList<String> getWishListedBuyer(){
+//        ArrayList<String> buyerUsernames = new ArrayList<String>();
+//        for (Buyer buyer: wishListedBuyers) {
+//            buyerUsernames.add(buyer.getUsername());
+//        }
+//        return buyerUsernames;
+//    }
 
-    public void addWishListedBuyer(Buyer buyer) {
-        wishListedBuyers.add(buyer);
-    }
+//    public void addWishListedBuyer(Buyer buyer) {
+//        wishListedBuyers.add(buyer);
+//    }
 }
