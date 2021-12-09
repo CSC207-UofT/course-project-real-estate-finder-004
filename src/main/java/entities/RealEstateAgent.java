@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RealEstateAgent implements Serializable {
-    public final int agentId;
+    private final int agentId;
     private final ArrayList<String> buyers;
     private final Seller client;
 

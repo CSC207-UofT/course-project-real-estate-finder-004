@@ -7,6 +7,8 @@ import externalinterfaces.*;
 
 import java.io.IOException;
 
+// Parses *.ser files into readable format for debugging purposes.
+
 public class ShowDatabase {
     public static void main(String[] args) {
         StorageReadWriter<String, User> userStorageReadWriter = new UserStorageReadWriter(null);
@@ -17,6 +19,7 @@ public class ShowDatabase {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         StorageReadWriter<Integer, Property> propertyStorageReadWriter = new PropertyStorageReadWriter(null);
         HashMapPropertyStorage propertyStorage = null;
         try {
@@ -25,6 +28,7 @@ public class ShowDatabase {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         StorageReadWriter<Integer, RealEstateAgent> agentStorageReadWriter = new AgentStorageReadWriter(null);
         HashMapAgentStorage agentStorage = null;
         try {
@@ -33,6 +37,5 @@ public class ShowDatabase {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
