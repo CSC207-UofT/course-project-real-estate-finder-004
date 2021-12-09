@@ -23,6 +23,12 @@ public class LoginFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
+        JButton signoutButton = new JButton("Home");
+        signoutButton.addActionListener(e -> {
+            this.Gui.signOut();
+        });
+        add(signoutButton);
+        signoutButton.setBounds(0,0, 60, 20);
         start();
     }
 

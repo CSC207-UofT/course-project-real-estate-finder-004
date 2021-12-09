@@ -89,7 +89,14 @@ public class SignupFrame extends JFrame implements ActionListener {
         add(clearButton);
 
         this.Gui = Gui;
+        JButton signoutButton = new JButton("Home");
+        signoutButton.addActionListener(e -> {
+            this.Gui.signOut();
+        });
+        add(signoutButton);
+        signoutButton.setBounds(0,0, 60, 20);
         setVisible(true);
+
     }
 
     public void actionPerformed(ActionEvent e) {

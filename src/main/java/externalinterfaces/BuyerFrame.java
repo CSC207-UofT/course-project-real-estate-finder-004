@@ -66,14 +66,14 @@ public class BuyerFrame extends JFrame {
         JLabel maxPrice = new JLabel("Max Price");
         myPanel.add(maxPrice);
         JPanel maxPricePane = new JPanel();
-        JLabel maxPriceText = new JLabel("Min Price");
+        JLabel maxPriceText = new JLabel("Max Price");
         JTextField maxPriceInput = new JTextField(10);
         maxPricePane.add(maxPriceText);
         maxPricePane.add(maxPriceInput);
         myPanel.add(maxPricePane);
 
-        int minSqftVar = 50;
-        int maxSqftVar = 200;
+        int minSqftVar = -1;
+        int maxSqftVar = -1;
         int numberOfRoomVar = -1;
         int numberOfBathroomsVar = -1;
 
