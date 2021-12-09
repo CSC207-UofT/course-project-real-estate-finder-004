@@ -4,13 +4,15 @@ import externalinterfaces.Storage;
 
 import java.io.*;
 
+// Adapted from https://github.com/CSC207-UofT/CleanArchLoginSample/blob/main/src/edu/toronto/csc207/UserReadWriter.java
+
 public class StorageReadWriter<T, K> implements ReadWriter {
 
     private final String filePath;
     private Storage<T, K> storage;
 
     /**
-     * Writes the users to file at filePath.
+     * Writes storage at filePath.
      *
      * @throws IOException Throws an IOException when the file is not found.
      */
@@ -21,14 +23,14 @@ public class StorageReadWriter<T, K> implements ReadWriter {
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
 
-        // serialize the Map
+        // serialize the storage
         output.writeObject(storage);
         output.close();
     }
 
 
     /**
-     * Store the users to file at filePath.
+     * Read storage at filePath.
      *
      * @return object in the file
      * @throws IOException Throws an IOException when the file is not found.
