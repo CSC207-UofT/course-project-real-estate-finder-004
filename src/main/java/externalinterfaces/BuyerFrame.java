@@ -170,7 +170,26 @@ public class BuyerFrame extends JFrame {
                 testPanel.add(new JLabel("Square Feet: " + property.getSqft()));
                 JOptionPane.showMessageDialog(this, testPanel);
             });
+
+            // Added send message to seller function
+            JButton connectButton = new JButton("Connect");
+            connectButton.addActionListener(e -> {
+                JPanel connectPanel = new JPanel();
+                JTextField connectMessage = new JTextField();
+
+                connectPanel.setLayout(new BoxLayout(connectPanel, BoxLayout.PAGE_AXIS));
+                connectPanel.add(connectMessage);
+
+                //String username = userTextField.getText();
+
+                //Store message
+                property.getOwner().addMessage(connectMessage.getText());
+
+                JOptionPane.showMessageDialog(this, connectPanel);
+            });
+
             propertyPanel.add(viewButton);
+            propertyPanel.add(connectButton);
 
             myPanel.add(propertyPanel);
         }
