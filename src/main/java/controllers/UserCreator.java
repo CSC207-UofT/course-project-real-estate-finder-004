@@ -20,6 +20,16 @@ public class UserCreator extends Creator {
         super(userStorage, userStorageReadWriter, propertyStorage, propertyStorageReadWriter, agentStorage, agentStorageReadWriter);
     }
 
+    /**
+     * Creates a new User with the given parameters and depending on the user_type it creates either a Buyer or
+     * a Seller as the new User. And then saves the User in the user storage.
+     * @param name  name of the user
+     * @param user_type Buyer or Seller
+     * @param username  username of the user
+     * @param email email of the user
+     * @param phone phone of the user
+     * @param password  password of the user
+     */
     public void create(String name, String user_type, String username, String email, String phone, String password){
         User newUser = null;
 

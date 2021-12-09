@@ -22,6 +22,16 @@ public class DatabaseManager {
     private final PropertyStorageReadWriter propertyStorageReadWriter;
     private final AgentStorageReadWriter agentStorageReadWriter;
 
+    /**
+     * Throws the relevant exception if the user enters incorrect information upon signing up
+     * @param name  name of the user
+     * @param user_type Buyer or Seller
+     * @param username  username of the user
+     * @param email email of the user
+     * @param phone phone of the user
+     * @param password  password of the user
+     * @throws IllegalArgumentException Relevant sign up exception
+     */
     public void signUpVerify(String name, String user_type, String username, String email, String phone, String password, String password_confirm) throws IllegalArgumentException {
         if (!password.equals(password_confirm)) {
             throw new SignUpPasswordMatchException();
@@ -49,10 +59,26 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Creates a new User when user signs up.
+     * @param name  name of the user
+     * @param user_type Buyer or Seller
+     * @param username  username of the user
+     * @param email email of the user
+     * @param phone phone of the user
+     * @param password  password of the user
+     */
     public void signUp(String name, String user_type, String username, String email, String phone, String password) {
         userCreator.create(name, user_type, username, email, phone, password);
     }
 
+    /**
+     * Throws the relevant exception if the user enters incorrect information upon login
+     * @param username  username of the user
+     * @param password   password of the user
+     * @return  the user stored in userStorage given its username
+     * @throws IllegalArgumentException Relevant login exception
+     */
     public User loginUser(String username, String password) throws IllegalArgumentException {
         User user = userStorage.get(username);
         if (user == null) {
@@ -97,11 +123,27 @@ public class DatabaseManager {
         return toReturn;
     }
 
+    /**
+     * Adds a property by creating it and creating an agent for it.
+     * @param user  The user who owns the property.
+     * @param streetAddress The property's street address.
+     * @param city  The city in which the property is located.
+     * @param province  The province in which the property is located.
+     * @param country   The country in which the property is located.
+     * @param postalCode    The property's postal code.
+     * @param price The price of the property.
+     * @param sqft   The square footage of the property.
+     * @param availability  The property's availability.
+     */
     public void addProperty(Seller user, String streetAddress, String city, String province, String country, String postalCode, float price, int sqft, boolean availability) {
         this.propertyCreator.create(user, streetAddress, city, province, country, postalCode, price, sqft, availability);
         this.agentCreator.create(user);
     }
 
+    /**
+     * @param propertyIds   integers which are keys in propertyStorage
+     * @return  a String representation of properties in propertyStorage given theirs PropertyIds
+     */
     public String propertiesToString(ArrayList<Integer> propertyIds) {
         StringBuilder returnString = new StringBuilder();
         int propertyNumber = 1;
@@ -113,10 +155,17 @@ public class DatabaseManager {
         return returnString.toString();
     }
 
+    /**
+     * @param propertyID    an integer which is a key in propertyStorage
+     * @return  the property associated with the propertyID stored in propertyStorage
+     */
     public Property getProperty(Integer propertyID){
         return propertyStorage.get(propertyID);
     }
-
+    /**
+     * @param propertyId   integer which is a key in propertyStorage
+     * @return  a String representation of a property in propertyStorage given its PropertyId
+     */
     public String specificPropertyToString(Integer propertyId) {
         Property property = propertyStorage.get(propertyId);
         return property.toStringLong();
