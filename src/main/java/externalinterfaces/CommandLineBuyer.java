@@ -35,7 +35,7 @@ public class CommandLineBuyer extends CommandLine {
                 viewInterestedProperties(user);
                 break;
             case "3":
-                logOut();
+                signOut();
                 break;
         }
     }
