@@ -27,8 +27,10 @@ public class Seller extends User {
      */
     public void addMessage(String message) {
         messages.put(message, false);
-    }
 
+        // Using print statement to test
+        //System.out.println(message);
+    }
     /**
      * Marks a message as read, so it will not be displayed to the user when checking their unread messages.
      *
@@ -114,6 +116,7 @@ public class Seller extends User {
 
     /**
      * Removes a property from the user's list of properties.
+     *
      * @param propertyId The property ID to be removed from the user.
      * @return A boolean value, true if properties contained the property.
      */

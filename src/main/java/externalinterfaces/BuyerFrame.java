@@ -72,16 +72,6 @@ public class BuyerFrame extends JFrame {
         maxPricePane.add(maxPriceInput);
         myPanel.add(maxPricePane);
 
-//        JLabel minSqft = new JLabel("Min Square Feet");
-//        myPanel.add(minSqft);
-//        JPanel minSqftPane = new JPanel();
-//        JLabel minSqftText = new JLabel("Min Square Feet");
-//        JTextField minSqftInput = new JTextField(10);
-//        minSqftPane.add(minSqft);
-//        minSqftPane.add(minSqft);
-//        myPanel.add(minSqft);
-
-
         int minSqftVar = 50;
         int maxSqftVar = 200;
         int numberOfRoomVar = -1;
@@ -98,12 +88,7 @@ public class BuyerFrame extends JFrame {
 
         repaint();
         validate();
-//        JLabel minPrice = new JLabel("Min Price");
-//        JLabel maxPrice = new JLabel("Max Price");
-//        JLabel minSqft = new JLabel("Min Square Feet");
-//        JLabel maxSqft = new JLabel("Max Square Feet");
-//        JLabel noOfRooms = new JLabel("No. of Rooms");
-//        JLabel noOfBathrooms = new JLabel("No. of Bathrooms");
+
 
     }
 
@@ -133,14 +118,6 @@ public class BuyerFrame extends JFrame {
 
     }
 
-    public void showText(String stuff) {
-//        for (int i = 0; i < 10; i++) {
-//            JLabel text = new JLabel("TEST");
-//            myPanel.add(text);
-//        }
-        //JLabel listOne = new JLabel("8719 St.George Street");
-        //myPanel.add(listOne);
-    }
 
     public void viewShortListProperties() {
         myPanel.removeAll();
@@ -170,7 +147,27 @@ public class BuyerFrame extends JFrame {
                 testPanel.add(new JLabel("Square Feet: " + property.getSqft()));
                 JOptionPane.showMessageDialog(this, testPanel);
             });
+
+            // Added send message to seller function
+            JButton connectButton = new JButton("Connect");
+            connectButton.addActionListener(e -> {
+//                JFrame connectFrame = new JFrame();
+                JPanel connectPanel = new JPanel();
+                JTextField connectMessage = new JTextField();
+
+                connectPanel.setLayout(new BoxLayout(connectPanel, BoxLayout.PAGE_AXIS));
+                connectPanel.add(connectMessage);
+
+                //String username = userTextField.getText();
+
+                //Store message
+                String result = JOptionPane.showInputDialog("Please input a value");
+                property.getOwner().addMessage(result);
+                manager.updateUser(property.getOwner());
+            });
+
             propertyPanel.add(viewButton);
+            propertyPanel.add(connectButton);
 
             myPanel.add(propertyPanel);
         }
@@ -192,28 +189,6 @@ public class BuyerFrame extends JFrame {
         DatabaseManager manager = new DatabaseManager();
         Buyer user = (Buyer) manager.loginUser("ame", "0000");
 
-
-//        BuyerFrame frame = new BuyerFrame(user, manager);
-//        frame.showText("TEST1 \n .TEST2");
-//        JFrame frame = new JFrame();
-//
-//        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-//
-//
-//        for (int i = 0; i < 10; i++) {
-//            JLabel label = new JLabel("Label" + i);
-//            frame.add(label);
-//        }
-//
-//        frame.setVisible(true);
-//
-//        // optional, but nice to have.
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
     }
 
-//    private void createUIComponents() {
-//        // TODO: place custom component creation code here
-//    }
 }
