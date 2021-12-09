@@ -43,13 +43,16 @@ public class HashMapPropertyStorage implements Storage<Integer, Property>, Seria
     }
 
     /**
-     * @return a String representation of the properties HashMap.
+     * @return  the keys in the properties HashMap
      */
     @Override
     public Set<Integer> keySet() {
         return properties.keySet();
     }
 
+    /**
+     * @return a String representation of the properties HashMap.
+     */
     @Override
     public String toString() {
         return "externalinterfaces.HashMapPropertyStorage{" +

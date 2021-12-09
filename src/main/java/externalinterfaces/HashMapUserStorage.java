@@ -41,13 +41,15 @@ public class HashMapUserStorage implements Storage<String, User>, Serializable {
         users.remove(username);
     }
     /**
-     * @return a String representation of the users HashMap.
+     * @return  the keys in the users HashMap
      */
     @Override
     public Set<String> keySet(){
         return users.keySet();
     }
-
+    /**
+     * @return a String representation of the users HashMap.
+     */
     @Override
     public String toString() {
         return "externalinterfaces.HashMapUserStorage{" +
