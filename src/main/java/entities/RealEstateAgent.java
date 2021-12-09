@@ -7,7 +7,6 @@ public class RealEstateAgent implements Serializable {
     private final int agentId;
     private final ArrayList<String> buyers;
     private final Seller client;
-
     /**
      * Constructor for the RealEstateAgent.
      *
