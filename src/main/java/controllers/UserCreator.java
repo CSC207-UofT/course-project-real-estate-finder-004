@@ -8,6 +8,8 @@ import externalinterfaces.HashMapPropertyStorage;
 import externalinterfaces.HashMapUserStorage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserCreator extends Creator {
 
@@ -30,10 +32,10 @@ public class UserCreator extends Creator {
      * @param phone phone of the user
      * @param password  password of the user
      */
-    public void create(String name, String user_type, String username, String email, String phone, String password){
+    public void create(String name, String user_type, String username, String email, String phone, String password) {
         User newUser = null;
 
-        switch (user_type){
+        switch (user_type) {
             case "b":
                 newUser = new Buyer(name, username, email, phone, password);
                 break;
@@ -42,9 +44,44 @@ public class UserCreator extends Creator {
                 break;
         }
 
-        if (newUser != null){
+        if (newUser != null) {
             this.userStorage.add(newUser);
-            if(Creator.writeToFile) {
+            if (Creator.writeToFile) {
+                try {
+                    userStorageReadWriter.saveToFile();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    public void create(String name, String user_type, String username, String email, String phone, String password, HashMap<String, Boolean> messages, ArrayList<Integer> properties) {
+        User newUser = null;
+
+        switch (user_type) {
+            case "b":
+                newUser = new Buyer(name, username, email, phone, password);
+                break;
+            case "s":
+                Seller newSeller = new Seller(name, username, email, phone, password);
+                for (String key : messages.keySet()) {
+                    newSeller.addMessage(key);
+                    if (messages.get(key)) {
+                        newSeller.messageRead(key);
+                    }
+                }
+                for (Integer propertyID : properties) {
+                    newSeller.addProperty(propertyID);
+                }
+                newUser = newSeller;
+                break;
+        }
+
+
+        if (newUser != null) {
+            this.userStorage.add(newUser);
+            if (Creator.writeToFile) {
                 try {
                     userStorageReadWriter.saveToFile();
                 } catch (IOException e) {

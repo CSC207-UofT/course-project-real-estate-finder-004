@@ -30,6 +30,6 @@ public class DatabaseManagerTest {
     @Test(timeout = 50)
     public void testSearchProperties() {
         ArrayList<Integer> results = manager.searchProperties("M5S 1H8", -1.0f,-1.0f, -1, -1, -1, -1);
-        assertTrue(results.contains(4));
+        assertTrue(results.contains(3));
     }
 }
