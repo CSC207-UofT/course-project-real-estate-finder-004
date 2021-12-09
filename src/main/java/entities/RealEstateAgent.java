@@ -1,39 +1,45 @@
 package entities;
 
-import entities.Buyer;
-import entities.Property;
-import entities.Seller;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RealEstateAgent implements Serializable {
-    private ArrayList<Buyer> buyers = new ArrayList<Buyer>();
-    private Seller client;
-    private Property property;
-
+    private final int agentId;
+    private final ArrayList<String> buyers;
+    private final Seller client;
     /**
      * Constructor for the RealEstateAgent.
      *
      * @param client The Seller object that this RealEstateAgent corresponds to.
      */
-    public RealEstateAgent(Seller client) {
+    public RealEstateAgent(Seller client, int propertyId) {
         this.client = client;
+        this.agentId = propertyId;
+        this.buyers = new ArrayList<>();
     }
 
     /**
-     * This function is called when a entities.Buyer is interested in a property and would like to speak to the entities.Seller.
-     * The function sends a message to the seller that contains the entities.Buyer's contact details and
-     * informs the entities.Seller that the entities.Buyer is interested.
+     * This function is called when a Buyer is interested in a property and would like to speak to the Seller.
+     * The function sends a message to the seller that contains the Buyer's contact details and
+     * informs the Seller that the Buyer is interested.
      *
-     * @param custom_message A String with the message that the buyer wants to be passed along.
-     * @param buyer          The Buyer that wants this message passed to the client.
+     * @param customMessage A String with the message that the buyer wants to be passed along.
+     * @param buyer         The Buyer that wants this message passed to the client.
+     * @param property      The property that the buyer wishes to contact the seller for
      */
-    public void connectBuyersAndSeller(String custom_message, Buyer buyer) {
-        // Not yet working.... Need to figure out how to communicate with it.
-        client.addMessage("New notification! A buyer is interested in your property at"
-                + property.getStreetAddress() + ". You can contact them at" + buyer.getEmail() + " or " +
-                buyer.getPhone() + ". Here is a message from the prospective buyer: " + custom_message);
+    public void connectBuyersAndSeller(String customMessage, Buyer buyer, Property property) {
+        client.addMessage("New notification! A buyer is interested in your property at "
+                + property.getStreetAddress() + ". You can contact them at " + buyer.getEmail() + " or " +
+                buyer.getPhone() + ". Here is a message from the interested buyer: " + customMessage);
+    }
+
+    /**
+     * Get the RealEstateAgent's agent Id.
+     *
+     * @return The agent Id of the RealEstateAgent.
+     */
+    public int getAgentId() {
+        return agentId;
     }
 
     /**
@@ -48,11 +54,19 @@ public class RealEstateAgent implements Serializable {
     /**
      * Adds a buyer to the list of buyers associated with this RealEstateAgent.
      *
-     * @param buyer The Buyer instance to be added.
+     * @param buyerId The username of the Buyer to be added.
      */
-    public void addBuyer(Buyer buyer) {
-        this.buyers.add(buyer);
+    public void addBuyer(String buyerId) {
+        this.buyers.add(buyerId);
     }
 
-
+    /**
+     * Removes a buyer from the list of buyers associated with this RealEstateAgent.
+     *
+     * @param Buyer The username of the Buyer to be removed.
+     * @return True if the Buyer was successfully removed, False otherwise.
+     */
+    public boolean removeBuyer(String Buyer) {
+        return buyers.remove(Buyer);
+    }
 }

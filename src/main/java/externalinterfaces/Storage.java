@@ -1,5 +1,7 @@
 package externalinterfaces;
 
+import java.util.Set;
+
 public interface Storage<T, K> {
     /**
      * Adds an object to the storage.
@@ -19,4 +21,5 @@ public interface Storage<T, K> {
      * @return  an object in the storage
      */
     K get(T id);
+    Set<T> keySet();
 }

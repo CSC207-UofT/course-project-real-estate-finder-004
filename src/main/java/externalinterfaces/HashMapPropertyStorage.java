@@ -5,6 +5,7 @@ import entities.Property;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMapPropertyStorage implements Storage<Integer, Property>, Serializable {
     private static final long serialVersionUID = 486455786544765478L;
@@ -39,6 +40,14 @@ public class HashMapPropertyStorage implements Storage<Integer, Property>, Seria
     @Override
     public void remove(Integer propertyId) {
         properties.remove(propertyId);
+    }
+
+    /**
+     * @return  the keys in the properties HashMap
+     */
+    @Override
+    public Set<Integer> keySet() {
+        return properties.keySet();
     }
 
     /**

@@ -1,5 +1,7 @@
 package externalinterfaces;
 
+import controllers.UserStorageReadWriter;
+
 import java.io.IOException;
 
 public class InitDatabaseUser {

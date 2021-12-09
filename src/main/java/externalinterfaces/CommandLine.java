@@ -11,36 +11,30 @@ import entities.User;
 
 import java.io.*;
 
-// Edits:
-/*
-1. Need a username
- */
 public class CommandLine extends UserInterface {
-    /*
-     */
     final InputStream input;
-    final DatabaseManager manager;
 
     public CommandLine(InputStream input, DatabaseManager manager) {
         this.input = input;
         this.manager = manager;
     }
 
-    protected InputStream getInput() { return input; }
-
-    public boolean choose() throws IOException {
-
+    @Override
+    public void startWelcome() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
         System.out.println("Hi! If you would like to signup, please type in 1. If you would like to login, " +
                 "please type in 2.");
-
         String choice = reader.readLine();
 
-        return !choice.equals("1");
+        if (choice.equals("1")) {
+            startSignUp();
+        } else if (choice.equals("2")) {
+            startLogin();
+        }
     }
 
-    public void signUp() throws IOException {
+    @Override
+    public void startSignUp() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         System.out.println("Sign up here!");
 
@@ -49,7 +43,7 @@ public class CommandLine extends UserInterface {
         String name = reader.readLine();
 
         // Input user type
-        System.out.println("Are you a buyer or seller? enter B/S");
+        System.out.println("Are you a buyer (B) or seller (S)? Please enter B/S");
         String user_type = reader.readLine().toLowerCase();
 
         //Input username
@@ -64,7 +58,7 @@ public class CommandLine extends UserInterface {
         System.out.println("Please enter your phone number");
         String phone = reader.readLine();
 
-        // Input password"
+        // Input password
         System.out.println("To create this account, please enter your password");
         String password = reader.readLine();
 
@@ -77,38 +71,65 @@ public class CommandLine extends UserInterface {
             manager.signUpVerify(name, user_type, username, email , phone, password, password_confirm);
             manager.signUp(name, user_type, username, email, phone, password);
             System.out.println("Thank you for signing up, " + name + " login to begin");
+            startLogin();
         } catch (SignUpPasswordMatchException | SignUpPhoneNumberLengthException e) {
             System.out.println(e.getMessage());
-            choose();
+            startWelcome();
         }
     }
 
-    public User logIn() throws IOException {
+    @Override
+    public void startLogin() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
         System.out.println("Welcome back! Please enter your username");
-        String login_username = reader.readLine();
+        String loginUsername = reader.readLine();
 
         System.out.println("Please enter your password.");
-        String login_password = reader.readLine();
+        String loginPassword = reader.readLine();
 
-        try {
-            User user = manager.loginUser(login_username, login_password);
-            System.out.println("Login successful!");
-            return user;
-        } catch (LoginUserNotFoundException | LoginWrongPasswordException e){
-            System.out.println(e.getMessage());
-            return null;
+        if (loginSuccess(loginUsername, loginPassword)) {
+            startAfterLogin();
+        } else {
+            System.out.println("Invalid Username or Password");
+            startWelcome();
         }
     }
 
-    public void chooseAfterLogin(User user) throws IOException {
-        if (user instanceof Seller) {
-            CommandLineSeller cLSeller = new CommandLineSeller(input,manager);
-            cLSeller.choicesUser((Seller) user);
-        } else if (user instanceof Buyer) {
-            CommandLineBuyer cLBuyer = new CommandLineBuyer(input, manager);
-            cLBuyer.choicesUser((Buyer) user);
+    @Override
+    public boolean loginSuccess(String username, String password) {
+        try {
+            this.currUser = manager.loginUser(username, password);
+            return true;
+        } catch (LoginUserNotFoundException | LoginWrongPasswordException e) {
+            return false;
         }
+    }
+
+    @Override
+    public void startAfterLogin() throws IOException {
+        assert this.currUser != null;  // This should only be called after currUser is set to a specific user.
+        startUser(currUser);
+    }
+
+    @Override
+    public void startUser(User user) throws IOException {
+        if (user instanceof Seller) {
+            startSeller((Seller) user);
+        } else if (user instanceof Buyer) {
+            startBuyer((Buyer) user);
+        }
+    }
+
+    @Override
+    void startSeller(Seller seller) throws IOException {
+        CommandLineSeller cLSeller = new CommandLineSeller(input,manager);
+        cLSeller.choicesUser(seller);
+    }
+
+    @Override
+    void startBuyer(Buyer buyer) throws IOException {
+        CommandLineBuyer cLBuyer = new CommandLineBuyer(input, manager);
+        cLBuyer.choicesUser(buyer);
     }
 }
