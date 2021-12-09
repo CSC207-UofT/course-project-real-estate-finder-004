@@ -38,7 +38,7 @@ public class CommandLineSeller extends CommandLine {
                 choicesUser(currUser);
                 break;
             case "4":
-                logOut();
+                signOut();
                 break;
         }
     }

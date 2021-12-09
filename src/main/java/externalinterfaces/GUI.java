@@ -12,30 +12,39 @@ import java.io.IOException;
 public class GUI extends UserInterface {
     JFrame frame;
 
+    /**
+     * Constructor for the GUI class.
+     * @param manager       A DatabaseManager object.
+     */
     public GUI(DatabaseManager manager) {
         this.manager = manager;
     }
 
+    @Override
     public void startWelcome() {
         this.frame = new WelcomeFrame(this);
     }
 
-    public void startSignUp(){
+    @Override
+    public void startSignUp() {
         this.frame.dispose();
         this.frame = new SignupFrame(this);
     }
 
+    @Override
     public void startLogin() {
         this.frame.dispose();
         this.frame = new LoginFrame(this);
     }
 
+    @Override
     public void startAfterLogin() {
         this.frame.dispose(); // Close the old frame, start the next frame:
         assert this.currUser != null;  // This should only be called after currUser is set to a specific user.
         startUser(currUser);
     }
 
+    @Override
     public boolean loginSuccess(String username, String password) {
         try {
             this.currUser = manager.loginUser(username, password);
@@ -54,20 +63,23 @@ public class GUI extends UserInterface {
         }
     }
 
-    public void startSeller(Seller seller){
+    @Override
+    public void startSeller(Seller seller) {
         this.frame.dispose();
         this.frame = new SellerFrame(seller, this, this.manager);
     }
 
-    public void startBuyer(Buyer buyer){
+    @Override
+    public void startBuyer(Buyer buyer) {
         this.frame.dispose();
         this.frame = new BuyerFrame(buyer, this, this.manager);
     }
 
-    public void signOut(){
+    @Override
+    public void signOut() {
         this.frame.dispose();
         this.currUser = null;
-        this.frame = new WelcomeFrame(this);
+        startWelcome();
     }
 
     public static void main(String[] args) throws IOException {

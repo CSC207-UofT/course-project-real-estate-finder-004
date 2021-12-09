@@ -14,6 +14,11 @@ import java.io.*;
 public class CommandLine extends UserInterface {
     final InputStream input;
 
+    /**
+     * Constructor for the Commandline class
+     * @param input         An InputStream object for taking in inputs from the command line.
+     * @param manager       A DatabaseManager object.
+     */
     public CommandLine(InputStream input, DatabaseManager manager) {
         this.input = input;
         this.manager = manager;
@@ -104,6 +109,12 @@ public class CommandLine extends UserInterface {
         } catch (LoginUserNotFoundException | LoginWrongPasswordException e) {
             return false;
         }
+    }
+
+    @Override
+    void signOut() throws IOException {
+        this.currUser = null;
+        startWelcome();
     }
 
     @Override
